@@ -7,13 +7,13 @@ import Skills from '../components/Skills/Skills';
 import Services from '../components/Services/Services';
 import Projects from '../components/Projects/Projects';
 import Contact from '../components/Contact/Contact';
-import ScrollProgress from '../components/ScrollProgress/ScrollProgress';
+import SectionDots from '../components/SectionDots/SectionDots';
 import { LanguageSwitch } from '../components/LanguageSwitch';
 
 export default function Home() {
   return (
     <>
-      <ScrollProgress />
+      <SectionDots />
       <LanguageSwitch />
       <Header />
       <main>
