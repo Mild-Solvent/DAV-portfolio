@@ -171,7 +171,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       transition: {
         duration: 0.8,
         delay: animationDelay,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1] as const
       }
     }
   };
@@ -184,7 +184,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       transition: {
         duration: 0.6,
         delay: animationDelay + 0.2,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1] as const
       }
     }
   };
@@ -197,7 +197,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       transition: {
         duration: 0.6,
         delay: animationDelay + 0.4,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1] as const
       }
     }
   };
@@ -210,7 +210,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       transition: {
         duration: 0.8,
         delay: animationDelay + 0.6,
-        ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1] as const
       }
     }
   };

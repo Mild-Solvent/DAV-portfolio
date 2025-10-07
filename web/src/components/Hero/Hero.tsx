@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -195,7 +195,7 @@ const Hero: React.FC = () => {
           transition={{ 
             duration: 0.8, 
             delay: 0.5,
-            ease: "easeOut"
+        ease: [0.25, 0.1, 0.25, 1] as const
           }}
         >
           {t('hero.title').replace(t('hero.title.highlight'), '').trim()}{' '}
@@ -206,7 +206,7 @@ const Hero: React.FC = () => {
         <HeroSubtitle
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
           {t('hero.subtitle')}
         </HeroSubtitle>
@@ -214,7 +214,7 @@ const Hero: React.FC = () => {
         <HeroButtons
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
           <PrimaryButton
             onClick={() => scrollToSection('projects')}

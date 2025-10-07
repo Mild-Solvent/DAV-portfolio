@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { LanguageProvider } from '../contexts/LanguageContext';
