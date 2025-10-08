@@ -38,14 +38,43 @@ const LanguageButton = styled.button<{ $isActive: boolean }>`
   }
 `;
 
-const Flag = styled.span`
-  font-size: 16px;
-  margin-right: 4px;
+const Flag = styled.img`
+  width: 20px;
+  height: 15px;
+  margin-right: 6px;
+  border-radius: 2px;
+  object-fit: cover;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Fallback for broken images */
+  &::before {
+    content: attr(alt);
+    position: absolute;
+    font-size: 10px;
+    color: #94a3b8;
+  }
 `;
 
 const languages = [
-  { code: 'sk' as Language, label: 'SK', flag: '🇸🇰' },
-  { code: 'en' as Language, label: 'EN', flag: '🇺🇸' }
+  { 
+    code: 'sk' as Language, 
+    label: 'SK', 
+    flag: 'https://flagcdn.com/w40/sk.png',
+    alt: 'Slovak flag'
+  },
+  { 
+    code: 'en' as Language, 
+    label: 'EN', 
+    flag: 'https://flagcdn.com/w40/us.png',
+    alt: 'US flag'
+  }
 ];
 
 export const LanguageSwitch: React.FC = () => {
@@ -63,7 +92,7 @@ export const LanguageSwitch: React.FC = () => {
           $isActive={language === lang.code}
           onClick={() => setLanguage(lang.code)}
         >
-          <Flag>{lang.flag}</Flag>
+          <Flag src={lang.flag} alt={lang.alt} />
           {lang.label}
         </LanguageButton>
       ))}
