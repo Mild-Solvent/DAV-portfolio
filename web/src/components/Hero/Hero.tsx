@@ -184,7 +184,9 @@ const Hero: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Account for the hero offset - sections start after 100vh
+      const elementTop = element.offsetTop + window.innerHeight;
+      window.scrollTo({ top: elementTop, behavior: 'smooth' });
     }
   };
 

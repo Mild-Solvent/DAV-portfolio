@@ -106,14 +106,28 @@ const SectionDots: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'skills', 'services', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      
+      // If we're in the first viewport (hero section)
+      if (scrollY < viewportHeight * 0.5) {
+        setActiveSection('hero');
+        return;
+      }
+      
+      // For other sections, adjust for the hero offset
+      const sections = ['about', 'skills', 'services', 'projects', 'contact'];
+      const scrollPosition = scrollY - viewportHeight + (viewportHeight / 3);
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
+        if (section) {
+          // Get the section's position relative to the main container
+          const sectionTop = section.offsetTop;
+          if (sectionTop <= scrollPosition) {
+            setActiveSection(sections[i]);
+            return;
+          }
         }
       }
     };
@@ -125,9 +139,16 @@ const SectionDots: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (sectionId === 'hero') {
+      // Scroll to top for hero section
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        // For other sections, scroll to their position accounting for the hero offset
+        const elementTop = element.offsetTop + window.innerHeight;
+        window.scrollTo({ top: elementTop, behavior: 'smooth' });
+      }
     }
   };
 
