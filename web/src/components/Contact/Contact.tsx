@@ -6,7 +6,9 @@ import SectionHeading from '../shared/SectionHeading';
 
 const ContactSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
-  background: ${props => props.theme.colors.backgroundLight};
+  background: ${props => props.theme.colors.backgroundSolid};
+  min-height: 100vh;
+  position: relative;
 `;
 
 const Container = styled.div`
