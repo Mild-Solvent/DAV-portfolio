@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -171,8 +171,90 @@ const GradientEllipse = styled.div<{ width: string; height: string; position: st
   opacity: 0.4;
 `;
 
+// Cursor trail container
+const CursorTrailContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+`;
+
+// Individual trail dot
+const TrailDot = styled.div<{ x: number; y: number; opacity: number; scale: number }>`
+  position: absolute;
+  left: ${props => props.x}px;
+  top: ${props => props.y}px;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, ${props => props.opacity});
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(${props => props.scale});
+  box-shadow: 0 0 6px rgba(255, 255, 255, ${props => props.opacity * 0.8}), 
+              0 0 12px rgba(255, 255, 255, ${props => props.opacity * 0.4});
+  transition: opacity 0.1s ease, transform 0.1s ease;
+`;
+
+// Glowing point when cursor stops
+const GlowPoint = styled.div<{ x: number; y: number; opacity: number; scale: number }>`
+  position: absolute;
+  left: ${props => props.x}px;
+  top: ${props => props.y}px;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, ${props => props.opacity});
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(${props => props.scale});
+  box-shadow: 0 0 10px rgba(255, 255, 255, ${props => props.opacity}), 
+              0 0 20px rgba(255, 255, 255, ${props => props.opacity * 0.6}),
+              0 0 30px rgba(255, 255, 255, ${props => props.opacity * 0.3});
+  animation: glow-pulse 2s ease-in-out infinite;
+  
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(255, 255, 255, ${props => props.opacity}), 
+                  0 0 20px rgba(255, 255, 255, ${props => props.opacity * 0.6}),
+                  0 0 30px rgba(255, 255, 255, ${props => props.opacity * 0.3});
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(255, 255, 255, ${props => props.opacity}), 
+                  0 0 30px rgba(255, 255, 255, ${props => props.opacity * 0.8}),
+                  0 0 45px rgba(255, 255, 255, ${props => props.opacity * 0.5});
+    }
+  }
+`;
+
+// Types for trail elements
+interface TrailElement {
+  id: number;
+  x: number;
+  y: number;
+  opacity: number;
+  scale: number;
+  timestamp: number;
+}
+
+interface GlowElement {
+  id: number;
+  x: number;
+  y: number;
+  opacity: number;
+  scale: number;
+  timestamp: number;
+}
+
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const heroRef = useRef<HTMLElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [trailElements, setTrailElements] = useState<TrailElement[]>([]);
+  const [glowElements, setGlowElements] = useState<GlowElement[]>([]);
+  const lastMousePos = useRef({ x: 0, y: 0 });
+  const mouseStopTimeout = useRef<NodeJS.Timeout | null>(null);
+  const nextId = useRef(0);
   
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -183,8 +265,147 @@ const Hero: React.FC = () => {
     }
   };
 
+  // Add trail dot
+  const addTrailDot = useCallback((x: number, y: number) => {
+    const newDot: TrailElement = {
+      id: nextId.current++,
+      x,
+      y,
+      opacity: 0.8,
+      scale: 1,
+      timestamp: Date.now()
+    };
+    
+    setTrailElements(prev => [...prev.slice(-20), newDot]); // Keep max 20 trail dots
+  }, []);
+
+  // Add glow point
+  const addGlowPoint = useCallback((x: number, y: number) => {
+    const newGlow: GlowElement = {
+      id: nextId.current++,
+      x,
+      y,
+      opacity: 1,
+      scale: 1,
+      timestamp: Date.now()
+    };
+    
+    setGlowElements(prev => [...prev.slice(-5), newGlow]); // Keep max 5 glow points
+  }, []);
+
+  // Handle mouse move
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isHovering || !heroRef.current) return;
+    
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Only add trail dots if mouse moved significantly
+    const distance = Math.sqrt(
+      Math.pow(x - lastMousePos.current.x, 2) + 
+      Math.pow(y - lastMousePos.current.y, 2)
+    );
+    
+    if (distance > 5) {
+      addTrailDot(x, y);
+      lastMousePos.current = { x, y };
+    }
+    
+    // Clear existing timeout
+    if (mouseStopTimeout.current) {
+      clearTimeout(mouseStopTimeout.current);
+    }
+    
+    // Set timeout for when mouse stops
+    mouseStopTimeout.current = setTimeout(() => {
+      addGlowPoint(x, y);
+    }, 200); // 200ms delay after mouse stops
+  }, [isHovering, addTrailDot, addGlowPoint]);
+
+  // Handle mouse enter/leave
+  const handleMouseEnter = useCallback(() => {
+    setIsHovering(true);
+  }, []);
+  
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
+    if (mouseStopTimeout.current) {
+      clearTimeout(mouseStopTimeout.current);
+    }
+  }, []);
+
+  // Setup event listeners
+  useEffect(() => {
+    const heroElement = heroRef.current;
+    if (!heroElement) return;
+    
+    heroElement.addEventListener('mouseenter', handleMouseEnter);
+    heroElement.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      heroElement.removeEventListener('mouseenter', handleMouseEnter);
+      heroElement.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
+
+  // Animate and clean up trail elements
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      
+      setTrailElements(prev => 
+        prev.map(dot => ({
+          ...dot,
+          opacity: Math.max(0, dot.opacity - 0.05),
+          scale: Math.max(0.1, dot.scale - 0.02)
+        })).filter(dot => dot.opacity > 0.1)
+      );
+      
+      setGlowElements(prev => 
+        prev.map(glow => {
+          const age = now - glow.timestamp;
+          const maxAge = 3000; // 3 seconds
+          const progress = Math.min(age / maxAge, 1);
+          
+          return {
+            ...glow,
+            opacity: Math.max(0, 1 - progress),
+            scale: Math.min(1.5, 1 + progress * 0.5)
+          };
+        }).filter(glow => glow.opacity > 0.1)
+      );
+    }, 16); // ~60fps
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <HeroSection id="hero">
+    <HeroSection id="hero" ref={heroRef}>
+      {/* Cursor trail effects */}
+      <CursorTrailContainer>
+        {trailElements.map(dot => (
+          <TrailDot
+            key={dot.id}
+            x={dot.x}
+            y={dot.y}
+            opacity={dot.opacity}
+            scale={dot.scale}
+          />
+        ))}
+        {glowElements.map(glow => (
+          <GlowPoint
+            key={glow.id}
+            x={glow.x}
+            y={glow.y}
+            opacity={glow.opacity}
+            scale={glow.scale}
+          />
+        ))}
+      </CursorTrailContainer>
+      
       {/* Rainbow gradient circles */}
       <GradientCircle 
         size="400px" 
