@@ -16,8 +16,13 @@ export default function Home() {
       <SectionDots />
       <LanguageSwitch />
       <Header />
-      <main>
-        <Hero />
+      <Hero />
+      <main style={{ 
+        position: 'relative', 
+        zIndex: 10, 
+        marginTop: '100vh',
+        background: 'transparent'
+      }}>
         <About />
         <Skills />
         <Services />

@@ -5,10 +5,15 @@ import { useLanguage } from '../../contexts/LanguageContext';
 
 const HeroSection = styled.section`
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   overflow: hidden;
   background: radial-gradient(ellipse at center, #0B1426 0%, #020617 50%, #000000 100%);
   width: 100%;
