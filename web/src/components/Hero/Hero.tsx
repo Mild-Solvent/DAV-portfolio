@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -240,16 +240,36 @@ const Particle = styled(motion.div)<{ $delay: number; $duration: number; $x: num
 
 // Floating particle component
 const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
-  const x = Math.random() * 100;
-  const size = Math.random() * 4 + 2; // 2-6px
-  const duration = Math.random() * 8 + 12; // 12-20 seconds
+  const [particleProps, setParticleProps] = useState({
+    x: 50,
+    size: 4,
+    duration: 15,
+    driftX1: 0,
+    driftX2: 0
+  });
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+    setParticleProps({
+      x: Math.random() * 100,
+      size: Math.random() * 4 + 2, // 2-6px
+      duration: Math.random() * 8 + 12, // 12-20 seconds
+      driftX1: Math.random() * 100 - 50,
+      driftX2: Math.random() * 150 - 75
+    });
+  }, []);
+  
+  if (!isClient) {
+    return null; // Don't render on server
+  }
   
   return (
     <Particle
       $delay={delay}
-      $duration={duration}
-      $x={x}
-      $size={size}
+      $duration={particleProps.duration}
+      $x={particleProps.x}
+      $size={particleProps.size}
       initial={{ 
         y: 0, 
         opacity: 0,
@@ -259,10 +279,10 @@ const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
         y: [-10, -300, -400],
         opacity: [0, 0.8, 0],
         scale: [0, 1, 0.8],
-        x: [0, Math.random() * 100 - 50, Math.random() * 150 - 75]
+        x: [0, particleProps.driftX1, particleProps.driftX2]
       }}
       transition={{
-        duration: duration,
+        duration: particleProps.duration,
         delay: delay,
         repeat: Infinity,
         ease: "easeOut"
