@@ -1,9 +1,16 @@
 "use client";
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Inter } from 'next/font/google';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
 import StyledComponentsRegistry from '../lib/styled-components-registry';
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap'
+});
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -26,11 +33,8 @@ export default function RootLayout({
       <head>
         <title>Portfolio - David</title>
         <meta name="description" content="David's professional portfolio showcasing web development skills" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className={inter.className}>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
             <GlobalStyle />

@@ -275,9 +275,9 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3>Let's work together</h3>
+            <h3>Let&apos;s work together</h3>
             <p>
-              Do you have an interesting project or need help with web development? Don't hesitate to contact me. I'd be happy to discuss your ideas and create something amazing together.
+              Do you have an interesting project or need help with web development? Don&apos;t hesitate to contact me. I&apos;d be happy to discuss your ideas and create something amazing together.
             </p>
 
             <ContactDetails>
