@@ -74,7 +74,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
   align = 'center',
   variant = 'gradient',
   className,
-  showUnderline = true,
+  showUnderline = false,
   animationDelay = 0
 }) => {
   const containerVariants = {
