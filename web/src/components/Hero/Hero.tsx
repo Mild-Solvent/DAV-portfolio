@@ -164,6 +164,113 @@ const SecondaryButton = styled(motion.button)`
   }
 `;
 
+// Bottom glow effect
+const BottomGlow = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 255, 136, 0.15) 0%,
+    rgba(64, 224, 255, 0.12) 25%,
+    rgba(0, 200, 255, 0.08) 50%,
+    rgba(88, 166, 255, 0.04) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 5;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.6) 20%,
+      rgba(64, 224, 255, 0.8) 50%,
+      rgba(0, 255, 136, 0.6) 80%,
+      transparent 100%
+    );
+    box-shadow: 
+      0 0 20px rgba(0, 255, 136, 0.4),
+      0 0 40px rgba(64, 224, 255, 0.3),
+      0 0 60px rgba(0, 200, 255, 0.2);
+  }
+`;
+
+// Particle container
+const ParticlesContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 6;
+`;
+
+// Individual particle
+const Particle = styled(motion.div)<{ $delay: number; $duration: number; $x: number; $size: number }>`
+  position: absolute;
+  width: ${props => props.$size}px;
+  height: ${props => props.$size}px;
+  background: radial-gradient(
+    circle,
+    rgba(64, 224, 255, 0.8) 0%,
+    rgba(0, 255, 136, 0.6) 40%,
+    rgba(0, 200, 255, 0.3) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  bottom: -10px;
+  left: ${props => props.$x}%;
+  filter: blur(0.5px);
+  box-shadow: 
+    0 0 10px rgba(64, 224, 255, 0.4),
+    0 0 20px rgba(0, 255, 136, 0.2);
+`;
+
+// Floating particle component
+const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
+  const x = Math.random() * 100;
+  const size = Math.random() * 4 + 2; // 2-6px
+  const duration = Math.random() * 8 + 12; // 12-20 seconds
+  
+  return (
+    <Particle
+      $delay={delay}
+      $duration={duration}
+      $x={x}
+      $size={size}
+      initial={{ 
+        y: 0, 
+        opacity: 0,
+        scale: 0
+      }}
+      animate={{
+        y: [-10, -300, -400],
+        opacity: [0, 0.8, 0],
+        scale: [0, 1, 0.8],
+        x: [0, Math.random() * 100 - 50, Math.random() * 150 - 75]
+      }}
+      transition={{
+        duration: duration,
+        delay: delay,
+        repeat: Infinity,
+        ease: "easeOut"
+      }}
+    />
+  );
+};
+
 
 const Hero: React.FC = () => {
   
@@ -178,6 +285,15 @@ const Hero: React.FC = () => {
 
   return (
     <HeroSection id="hero">
+      {/* Bottom glow effect */}
+      <BottomGlow />
+      
+      {/* Floating particles */}
+      <ParticlesContainer>
+        {Array.from({ length: 15 }, (_, i) => (
+          <FloatingParticle key={i} delay={i * 1.2} />
+        ))}
+      </ParticlesContainer>
       
       <HeroContainer>
         <HeroTitle
