@@ -43,7 +43,6 @@ const SkillsContainer = styled(motion.div)`
     opacity: 0.9;
     filter: blur(25px);
     z-index: -2;
-    animation: pulse 2s ease-in-out infinite alternate;
     pointer-events: none;
   }
   
@@ -59,21 +58,7 @@ const SkillsContainer = styled(motion.div)`
     opacity: 0.7;
     filter: blur(15px);
     z-index: -2;
-    animation: pulse 2.5s ease-in-out infinite alternate-reverse;
     pointer-events: none;
-  }
-  
-  @keyframes pulse {
-    0% { 
-      opacity: 0.7; 
-      transform: scale(0.95);
-      filter: blur(25px);
-    }
-    100% { 
-      opacity: 1; 
-      transform: scale(1.05);
-      filter: blur(30px);
-    }
   }
 `;
 
