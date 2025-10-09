@@ -249,49 +249,49 @@ const Hero: React.FC = () => {
         visible={isHovering}
       />
       
-      {/* Rainbow gradient circles */}
+      {/* Gradient decorative elements */}
       <GradientCircle 
-        size="400px" 
-        position="top: -100px; left: -100px" 
+        size="500px" 
+        position="top: -150px; right: -150px" 
         color="linear-gradient(135deg, #ff006e 0%, #fb5607 100%)" 
-        blur="100px"
+        blur="120px"
       />
       <GradientCircle 
-        size="300px" 
-        position="top: 20%; right: -80px" 
+        size="350px" 
+        position="bottom: -120px; left: -100px" 
         color="linear-gradient(135deg, #8338ec 0%, #3a86ff 100%)" 
-        blur="80px"
+        blur="90px"
       />
       <GradientCircle 
         size="250px" 
-        position="bottom: 10%; left: 5%" 
+        position="top: 40%; left: 10%" 
         color="linear-gradient(135deg, #06ffa5 0%, #ffbe0b 100%)" 
-        blur="70px"
+        blur="80px"
       />
       
-      {/* Rainbow gradient ellipses */}
+      {/* Gradient ellipses */}
       <GradientEllipse 
-        width="600px" 
-        height="200px" 
-        position="top: 30%; right: -200px" 
+        width="650px" 
+        height="220px" 
+        position="top: -100px; left: -300px" 
         color="linear-gradient(90deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%)" 
-        blur="120px"
-        rotation="rotate(45deg)"
+        blur="140px"
+        rotation="rotate(30deg)"
       />
       <GradientEllipse 
-        width="500px" 
-        height="150px" 
-        position="bottom: -50px; left: -150px" 
-        color="linear-gradient(90deg, #06ffa5 0%, #ffbe0b 50%, #fb5607 100%)" 
-        blur="90px"
-        rotation="rotate(-30deg)"
-      />
-      <GradientEllipse 
-        width="400px" 
+        width="550px" 
         height="180px" 
-        position="top: 60%; left: 70%" 
+        position="bottom: -80px; right: -250px" 
+        color="linear-gradient(90deg, #06ffa5 0%, #ffbe0b 50%, #fb5607 100%)" 
+        blur="110px"
+        rotation="rotate(-25deg)"
+      />
+      <GradientEllipse 
+        width="450px" 
+        height="200px" 
+        position="top: 55%; right: -200px" 
         color="linear-gradient(90deg, #3a86ff 0%, #06ffa5 50%, #ff006e 100%)" 
-        blur="100px"
+        blur="110px"
         rotation="rotate(60deg)"
       />
       
