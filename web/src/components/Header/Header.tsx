@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface HeaderContainerProps {
   isScrolled: boolean;
@@ -12,40 +13,70 @@ const HeaderContainer = styled(motion.header)<HeaderContainerProps>`
   left: 0;
   right: 0;
   z-index: ${props => props.theme.zIndex.navbar};
-  background: ${props => props.isScrolled ? 'rgba(13, 17, 23, 0.95)' : 'rgba(13, 17, 23, 0.8)'};
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid ${props => props.theme.colors.border};
-  transition: all 0.2s ease;
-  padding: ${props => props.theme.spacing.md} 0;
+  background: ${props => props.isScrolled ? 'rgba(13, 17, 23, 0.98)' : 'rgba(13, 17, 23, 0.85)'};
+  backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: ${props => props.theme.spacing.lg} 0;
+  
+  /* Modern glass-morphism effect */
+  box-shadow: ${props => props.isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.3)' : 'none'};
 `;
 
 const Nav = styled.nav`
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 ${props => props.theme.spacing.xl};
+  padding: 0 ${props => props.theme.spacing['2xl']};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: ${props => props.theme.spacing.lg};
+  gap: ${props => props.theme.spacing['2xl']};
+  
+  @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    padding: 0 ${props => props.theme.spacing.xl};
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    padding: 0 ${props => props.theme.spacing.lg};
+  }
 `;
 
 const Logo = styled.div`
-  font-family: ${props => props.theme.fonts.display};
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: ${props => props.theme.colors.textEmphasis};
-  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: ${props => props.theme.spacing.sm};
-  transition: color 0.2s ease;
+  gap: ${props => props.theme.spacing.md};
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: ${props => props.theme.spacing.sm};
+  border-radius: ${props => props.theme.borderRadius.lg};
   
   &:hover {
-    color: ${props => props.theme.colors.text};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(88, 166, 255, 0.2);
   }
+`;
+
+const LogoImage = styled(Image)`
+  border-radius: ${props => props.theme.borderRadius.md};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
-  svg {
-    fill: currentColor;
+  ${Logo}:hover & {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+`;
+
+const LogoText = styled.span`
+  font-family: ${props => props.theme.fonts.display};
+  font-size: ${props => props.theme.fontSizes.xl};
+  font-weight: 700;
+  background: ${props => props.theme.gradients.blue};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  
+  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    font-size: ${props => props.theme.fontSizes.lg};
   }
 `;
 
@@ -56,65 +87,103 @@ interface NavListProps {
 const NavList = styled.ul<NavListProps>`
   display: flex;
   list-style: none;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.xl};
   align-items: center;
   flex: 1;
+  justify-content: center;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     display: ${props => props.$isOpen ? 'flex' : 'none'};
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    background: ${props => props.theme.colors.backgroundLight};
+    left: ${props => props.theme.spacing.lg};
+    right: ${props => props.theme.spacing.lg};
+    background: rgba(22, 27, 34, 0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: ${props => props.theme.spacing.lg};
-    border-bottom: 1px solid ${props => props.theme.colors.border};
-    gap: ${props => props.theme.spacing.xs};
+    padding: ${props => props.theme.spacing['2xl']};
+    border-radius: ${props => props.theme.borderRadius.xl};
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    gap: ${props => props.theme.spacing.md};
+    margin-top: ${props => props.theme.spacing.md};
+    border: 1px solid rgba(48, 54, 61, 0.5);
   }
 `;
 
 const NavItem = styled.li``;
 
 const NavLink = styled.a`
-  color: ${props => props.theme.colors.textEmphasis};
+  color: ${props => props.theme.colors.text};
   font-weight: 500;
-  font-size: ${props => props.theme.fontSizes.sm};
+  font-size: ${props => props.theme.fontSizes.base};
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  padding: ${props => props.theme.spacing.sm};
-  border-radius: ${props => props.theme.borderRadius.sm};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  text-decoration: none;
+  letter-spacing: 0.01em;
 
   &:hover {
     color: ${props => props.theme.colors.textEmphasis};
-    background: rgba(255, 255, 255, 0.05);
-    text-decoration: none;
+    background: rgba(88, 166, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: ${props => props.theme.gradients.blue};
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+    border-radius: ${props => props.theme.borderRadius.full};
+  }
+  
+  &:hover::after {
+    width: 80%;
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    padding: ${props => props.theme.spacing.lg};
+    width: 100%;
+    text-align: center;
+    
+    &::after {
+      display: none;
+    }
   }
 `;
 
 const MobileMenuButton = styled.button`
   display: none;
   background: none;
-  color: ${props => props.theme.colors.textEmphasis};
-  font-size: ${props => props.theme.fontSizes.xl};
-  padding: ${props => props.theme.spacing.sm};
-  border-radius: ${props => props.theme.borderRadius.sm};
+  border: 2px solid transparent;
+  color: ${props => props.theme.colors.text};
+  font-size: ${props => props.theme.fontSizes['2xl']};
+  padding: ${props => props.theme.spacing.md};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
   
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(88, 166, 255, 0.1);
+    border-color: rgba(88, 166, 255, 0.3);
+    color: ${props => props.theme.colors.textEmphasis};
+    transform: scale(1.05);
   }
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
-const GitHubLogo = () => (
-  <svg height="32" width="32" viewBox="0 0 16 16" fill="currentColor">
-    <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-  </svg>
-);
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -153,8 +222,14 @@ const Header: React.FC = () => {
     >
       <Nav>
         <Logo onClick={() => scrollToSection('hero')}>
-          <GitHubLogo />
-          Portfolio
+          <LogoImage 
+            src="/logo/logo.png" 
+            alt="Portfolio Logo" 
+            width={40} 
+            height={40}
+            priority
+          />
+          <LogoText>Portfolio</LogoText>
         </Logo>
         
         <NavList $isOpen={isMobileMenuOpen}>
@@ -182,7 +257,7 @@ const Header: React.FC = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
-          {isMobileMenuOpen ? '✕' : '☰'}
+          {isMobileMenuOpen ? '×' : '☰'}
         </MobileMenuButton>
       </Nav>
     </HeaderContainer>
