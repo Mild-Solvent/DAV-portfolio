@@ -38,7 +38,7 @@ const SkillsContainer = styled(motion.div)`
     left: -20px;
     right: -20px;
     bottom: -20px;
-    background: ${props => props.theme.gradients.hero};
+    background: linear-gradient(135deg, #2ea043 0%, #56d364 25%, #58a6ff 50%, #7c3aed 75%, #a855f7 100%);
     border-radius: ${props => props.theme.borderRadius.xl};
     opacity: 0.9;
     filter: blur(25px);
@@ -53,7 +53,7 @@ const SkillsContainer = styled(motion.div)`
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background: ${props => props.theme.gradients.hero};
+    background: linear-gradient(225deg, #3fb950 0%, #1f6feb 30%, #6366f1 60%, #8b5cf6 100%);
     border-radius: ${props => props.theme.borderRadius.xl};
     opacity: 0.7;
     filter: blur(15px);
