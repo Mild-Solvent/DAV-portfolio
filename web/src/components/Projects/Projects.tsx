@@ -165,53 +165,54 @@ const SecondaryLink = styled.a`
 const Projects: React.FC = () => {
   const { t } = useLanguage();
   
+  // Hardcoded projects data
   const projects = [
     {
-      title: t('projects.ecommerce.title'),
-      description: t('projects.ecommerce.description'),
+      title: "E-commerce Platform",
+      description: "Modern e-commerce platform with advanced features like order management, payments and inventory management.",
       tech: ["React", "Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-ecommerce-demo.com",
+      githubUrl: "https://github.com/yourusername/ecommerce-platform",
       icon: "🛒"
     },
     {
-      title: t('projects.dashboard.title'),
-      description: t('projects.dashboard.description'),
+      title: "Dashboard Analytics",
+      description: "Interactive dashboard for data analysis with real-time charts and reports for business intelligence.",
       tech: ["React", "D3.js", "Node.js", "MongoDB", "Socket.io"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-dashboard-demo.com",
+      githubUrl: "https://github.com/yourusername/dashboard-analytics",
       icon: "📊"
     },
     {
-      title: t('projects.social.title'),
-      description: t('projects.social.description'),
+      title: "Social Media App",
+      description: "Social network with content sharing, comments and real-time chat between users.",
       tech: ["React Native", "Firebase", "Redux", "GraphQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-social-app-demo.com",
+      githubUrl: "https://github.com/yourusername/social-media-app",
       icon: "📱"
     },
     {
-      title: t('projects.portfolio.title'),
-      description: t('projects.portfolio.description'),
+      title: "Portfolio Website",
+      description: "Beautiful portfolio websites for creative professionals with animations and modern design.",
       tech: ["React", "Styled Components", "Framer Motion", "Gatsby"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-portfolio-demo.com",
+      githubUrl: "https://github.com/yourusername/portfolio-website",
       icon: "🎨"
     },
     {
-      title: t('projects.task.title'),
-      description: t('projects.task.description'),
+      title: "Task Management Tool",
+      description: "Comprehensive tool for project and task management with real-time collaboration capabilities.",
       tech: ["Vue.js", "Express", "MySQL", "WebSocket"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-task-manager-demo.com",
+      githubUrl: "https://github.com/yourusername/task-management-tool",
       icon: "✅"
     },
     {
-      title: t('projects.weather.title'),
-      description: t('projects.weather.description'),
+      title: "Weather App",
+      description: "Elegant weather application with weather forecast, maps and personalized notifications.",
       tech: ["React", "OpenWeather API", "PWA", "Chart.js"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://your-weather-app-demo.com",
+      githubUrl: "https://github.com/yourusername/weather-app",
       icon: "🌤️"
     }
   ];
@@ -220,7 +221,7 @@ const Projects: React.FC = () => {
     <ProjectsSection id="projects">
       <Container>
         <SectionHeading
-          title={t('projects.title')}
+          title="My Projects"
         />
 
         <ProjectsGrid>
@@ -248,10 +249,10 @@ const Projects: React.FC = () => {
                 
                 <ProjectLinks>
                   <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    {t('projects.demo')}
+                    Demo
                   </ProjectLink>
                   <SecondaryLink href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                    {t('projects.github')}
+                    GitHub
                   </SecondaryLink>
                 </ProjectLinks>
               </ProjectContent>
