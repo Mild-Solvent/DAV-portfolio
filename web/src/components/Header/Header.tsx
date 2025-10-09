@@ -156,13 +156,13 @@ const Header: React.FC = () => {
             <NavLink onClick={() => scrollToSection('about')}>{t('nav.about')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('skills')}>{t('nav.skills')}</NavLink>
+            <NavLink onClick={() => scrollToSection('projects')}>{t('nav.projects')}</NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={() => scrollToSection('services')}>{t('nav.services')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('projects')}>{t('nav.projects')}</NavLink>
+            <NavLink onClick={() => scrollToSection('skills')}>{t('nav.skills')}</NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={() => scrollToSection('contact')}>{t('nav.contact')}</NavLink>

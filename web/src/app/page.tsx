@@ -26,9 +26,9 @@ export default function Home() {
         background: 'transparent'
       }}>
         <About />
-        <Skills />
-        <Services />
         <Projects />
+        <Services />
+        <Skills />
         <Contact />
       </main>
     </>

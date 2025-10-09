@@ -98,9 +98,9 @@ const SectionDots: React.FC = () => {
   const sections: Section[] = [
     { id: 'hero', labelKey: 'nav.home' },
     { id: 'about', labelKey: 'nav.about' },
-    { id: 'skills', labelKey: 'nav.skills' },
-    { id: 'services', labelKey: 'nav.services' },
     { id: 'projects', labelKey: 'nav.projects' },
+    { id: 'services', labelKey: 'nav.services' },
+    { id: 'skills', labelKey: 'nav.skills' },
     { id: 'contact', labelKey: 'nav.contact' }
   ];
 
@@ -116,7 +116,7 @@ const SectionDots: React.FC = () => {
       }
       
       // For other sections, adjust for the hero offset
-      const sections = ['about', 'skills', 'services', 'projects', 'contact'];
+      const sections = ['about', 'projects', 'services', 'skills', 'contact'];
       const scrollPosition = scrollY - viewportHeight + (viewportHeight / 3);
 
       for (let i = sections.length - 1; i >= 0; i--) {
