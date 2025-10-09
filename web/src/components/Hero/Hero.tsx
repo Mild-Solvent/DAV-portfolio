@@ -172,7 +172,9 @@ const GradientEllipse = styled.div<{ width: string; height: string; position: st
 `;
 
 // Simple cursor gradient follower
-const CursorGradient = styled.div<{ x: number; y: number; visible: boolean }>`
+const CursorGradient = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['visible'].includes(prop),
+})<{ x: number; y: number; visible: boolean }>`
   position: absolute;
   width: 200px;
   height: 200px;
