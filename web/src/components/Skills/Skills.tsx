@@ -9,28 +9,6 @@ const SkillsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
   background: ${props => props.theme.colors.primary};
   position: relative;
-  overflow: hidden;
-  
-  /* GitHub Security section gradient - blue glow from right side */
-  &::before {
-    content: '';
-    position: absolute;
-    width: 1400px;
-    height: 1400px;
-    top: 50%;
-    right: -500px;
-    transform: translateY(-50%);
-    background: radial-gradient(
-      ellipse 60% 60% at 70% 50%,
-      rgba(31, 111, 235, 0.3),
-      rgba(56, 139, 253, 0.2) 30%,
-      rgba(88, 166, 255, 0.12) 50%,
-      transparent 70%
-    );
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
 `;
 
 const Container = styled.div`

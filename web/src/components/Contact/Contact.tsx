@@ -9,46 +9,6 @@ const ContactSection = styled.section`
   background: ${props => props.theme.colors.primary};
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
-  
-  /* GitHub mixed gradient - purple from left, blue from right */
-  &::before {
-    content: '';
-    position: absolute;
-    width: 1000px;
-    height: 1000px;
-    top: 50%;
-    left: -300px;
-    transform: translateY(-50%);
-    background: radial-gradient(
-      ellipse 60% 60% at 30% 50%,
-      rgba(139, 92, 246, 0.25),
-      rgba(165, 113, 247, 0.15) 35%,
-      transparent 70%
-    );
-    filter: blur(100px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 1000px;
-    height: 1000px;
-    top: 50%;
-    right: -300px;
-    transform: translateY(-50%);
-    background: radial-gradient(
-      ellipse 60% 60% at 70% 50%,
-      rgba(31, 111, 235, 0.25),
-      rgba(56, 139, 253, 0.15) 35%,
-      transparent 70%
-    );
-    filter: blur(100px);
-    pointer-events: none;
-    z-index: 0;
-  }
 `;
 
 const Container = styled.div`
