@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -156,7 +155,6 @@ const SecondaryButton = styled(motion.button)`
 
 
 const Hero: React.FC = () => {
-  const { t } = useLanguage();
   
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -180,9 +178,7 @@ const Hero: React.FC = () => {
         ease: [0.25, 0.1, 0.25, 1] as const
           }}
         >
-          {t('hero.title').replace(t('hero.title.highlight'), '').trim()}{' '}
-          <span>{t('hero.title.highlight')}</span>{' '}
-          {t('hero.title').includes('budúcnosti') ? 'budúcnosti' : 'of the future'}
+          Creating <span>digital experiences</span> of the future
         </HeroTitle>
         
         <HeroSubtitle
@@ -190,7 +186,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          {t('hero.subtitle')}
+          I specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.
         </HeroSubtitle>
         
         <HeroButtons
@@ -201,13 +197,13 @@ const Hero: React.FC = () => {
           <PrimaryButton
             onClick={() => scrollToSection('projects')}
           >
-            {t('hero.cta.projects')}
+            View Projects
           </PrimaryButton>
           
           <SecondaryButton
             onClick={() => scrollToSection('contact')}
           >
-            {t('hero.cta.contact')}
+            Contact
           </SecondaryButton>
         </HeroButtons>
       </HeroContainer>

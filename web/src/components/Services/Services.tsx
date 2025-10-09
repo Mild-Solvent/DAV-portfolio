@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeading from '../shared/SectionHeading';
 
 const ServicesSection = styled.section`
@@ -182,7 +181,6 @@ const CardContent = styled.div<{ $show: boolean }>`
 `;
 
 const Services: React.FC = () => {
-  const { t } = useLanguage();
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
@@ -204,8 +202,8 @@ const Services: React.FC = () => {
   const services = [
     {
       icon: '💻',
-      title: t('services.web.title'),
-      description: t('services.web.description'),
+      title: 'Web Development',
+      description: 'Modern, responsive web applications with latest technologies',
       features: [
         'React & TypeScript',
         'Progressive Web Apps',
@@ -213,12 +211,12 @@ const Services: React.FC = () => {
         'API Integration',
         'Performance Optimization'
       ],
-      price: 'Od 500€'
+      price: 'From $500'
     },
     {
       icon: '📱',
-      title: t('services.mobile.title'),
-      description: t('services.mobile.description'),
+      title: 'Mobile Applications',
+      description: 'Cross-platform mobile applications for iOS and Android',
       features: [
         'React Native Development',
         'Native Performance',
@@ -226,12 +224,12 @@ const Services: React.FC = () => {
         'Offline Functionality',
         'App Store Deployment'
       ],
-      price: 'Od 875€'
+      price: 'From $875'
     },
     {
       icon: '🎨',
-      title: t('services.design.title'),
-      description: t('services.design.description'),
+      title: 'UI/UX Design',
+      description: 'User-friendly design with focus on experience',
       features: [
         'User Research',
         'Wireframing & Prototyping',
@@ -239,12 +237,12 @@ const Services: React.FC = () => {
         'Accessibility',
         'Usability Testing'
       ],
-      price: 'Od 375€'
+      price: 'From $375'
     },
     {
       icon: '⚡',
-      title: t('services.audit.title'),
-      description: t('services.audit.description'),
+      title: 'Performance Audit',
+      description: 'Performance and SEO optimization for existing applications',
       features: [
         'Speed Optimization',
         'SEO Analysis',
@@ -252,12 +250,12 @@ const Services: React.FC = () => {
         'Security Audit',
         'Analytics Setup'
       ],
-      price: 'Od 200€'
+      price: 'From $200'
     },
     {
       icon: '☁️',
-      title: t('services.cloud.title'),
-      description: t('services.cloud.description'),
+      title: 'Cloud & DevOps',
+      description: 'Deployment and management of applications in cloud environment',
       features: [
         'AWS/Azure Setup',
         'CI/CD Pipelines',
@@ -265,12 +263,12 @@ const Services: React.FC = () => {
         'Monitoring & Logging',
         'Backup Solutions'
       ],
-      price: 'Od 300€'
+      price: 'From $300'
     },
     {
       icon: '🤖',
-      title: t('services.ai.title'),
-      description: t('services.ai.description'),
+      title: 'AI Integration',
+      description: 'Artificial intelligence integration into web applications',
       features: [
         'ChatGPT Integration',
         'Machine Learning Models',
@@ -278,7 +276,7 @@ const Services: React.FC = () => {
         'Automation Scripts',
         'Custom AI Solutions'
       ],
-      price: 'Od 625€'
+      price: 'From $625'
     }
   ];
 
@@ -308,8 +306,8 @@ const Services: React.FC = () => {
     <ServicesSection id="services" ref={ref}>
       <Container>
         <SectionHeading
-          title={t('services.title')}
-          subtitle={t('services.subtitle')}
+          title="What I Do"
+          subtitle="I specialize in creating digital solutions that help companies achieve their goals using modern technologies and innovative design."
         />
 
         <motion.div

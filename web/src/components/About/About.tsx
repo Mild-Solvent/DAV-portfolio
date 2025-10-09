@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeading from '../shared/SectionHeading';
 
 const AboutSection = styled.section`
@@ -29,14 +28,12 @@ const Content = styled(motion.div)`
 `;
 
 const About: React.FC = () => {
-  const { t } = useLanguage();
-
   return (
     <AboutSection id="about">
       <Container>
         <SectionHeading
-          title={t('about.title')}
-          subtitle={t('about.heading')}
+          title="About Me"
+          subtitle="Web Developer with passion for modern technologies"
         />
         <Content
           initial={{ opacity: 0, y: 50 }}
@@ -44,7 +41,7 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p>{t('about.description')}</p>
+          <p>I create modern and responsive websites with focus on user experience and performance. I specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. I constantly educate myself and follow the latest trends in web development to offer the best solutions for my clients.</p>
         </Content>
       </Container>
     </AboutSection>

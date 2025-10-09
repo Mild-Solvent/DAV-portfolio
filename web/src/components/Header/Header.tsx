@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 interface HeaderContainerProps {
   isScrolled: boolean;
@@ -120,7 +119,6 @@ const GitHubLogo = () => (
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -161,22 +159,22 @@ const Header: React.FC = () => {
         
         <NavList $isOpen={isMobileMenuOpen}>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('hero')}>{t('nav.home')}</NavLink>
+            <NavLink onClick={() => scrollToSection('hero')}>Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('about')}>{t('nav.about')}</NavLink>
+            <NavLink onClick={() => scrollToSection('about')}>About</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('projects')}>{t('nav.projects')}</NavLink>
+            <NavLink onClick={() => scrollToSection('projects')}>Projects</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('services')}>{t('nav.services')}</NavLink>
+            <NavLink onClick={() => scrollToSection('services')}>Services</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('skills')}>{t('nav.skills')}</NavLink>
+            <NavLink onClick={() => scrollToSection('skills')}>Skills</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={() => scrollToSection('contact')}>{t('nav.contact')}</NavLink>
+            <NavLink onClick={() => scrollToSection('contact')}>Contact</NavLink>
           </NavItem>
         </NavList>
 

@@ -9,14 +9,12 @@ import Projects from '../components/Projects/Projects';
 import Contact from '../components/Contact/Contact';
 import SectionDots from '../components/SectionDots/SectionDots';
 import ScrollToTop from '../components/ScrollButton/ScrollButton';
-import { LanguageSwitch } from '../components/LanguageSwitch';
 
 export default function Home() {
   return (
     <>
       <SectionDots />
       <ScrollToTop />
-      <LanguageSwitch />
       <Header />
       <Hero />
       <main style={{ 

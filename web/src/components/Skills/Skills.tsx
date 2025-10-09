@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeading from '../shared/SectionHeading';
 
 const SkillsSection = styled.section`
@@ -157,7 +156,6 @@ const ProgressFill = styled(motion.div)<{ $value: number }>`
 `;
 
 const Skills: React.FC = () => {
-  const { t } = useLanguage();
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -190,22 +188,22 @@ const Skills: React.FC = () => {
   const skillCategories = [
     {
       icon: '⚛️',
-      title: t('skills.frontend'),
+      title: 'Frontend Development',
       techs: ['React', 'TypeScript', 'Next.js', 'Vue.js', 'Tailwind CSS', 'Styled Components', 'Framer Motion']
     },
     {
       icon: '🚀',
-      title: t('skills.backend'),
+      title: 'Backend Development',
       techs: ['Node.js', 'Express', 'Python', 'PostgreSQL', 'MongoDB', 'GraphQL', 'REST APIs']
     },
     {
       icon: '☁️',
-      title: t('skills.devops'),
+      title: 'Cloud & DevOps',
       techs: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'GitHub Actions', 'Vercel', 'Heroku']
     },
     {
       icon: '🎨',
-      title: t('skills.design'),
+      title: 'Design & UX',
       techs: ['Figma', 'Adobe XD', 'Photoshop', 'UI/UX Design', 'Responsive Design', 'Accessibility']
     }
   ];
@@ -245,7 +243,7 @@ const Skills: React.FC = () => {
     <SkillsSection id="skills" ref={ref}>
       <Container>
         <SectionHeading
-          title={t('skills.title')}
+          title="Skills & Technologies"
         />
         
         <motion.div

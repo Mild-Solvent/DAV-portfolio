@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 const DotsContainer = styled.div`
   position: fixed;
@@ -87,21 +86,20 @@ const DotWrapper = styled.div`
 
 interface Section {
   id: string;
-  labelKey: string;
+  label: string;
 }
 
 const SectionDots: React.FC = () => {
-  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState('hero');
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   const sections: Section[] = [
-    { id: 'hero', labelKey: 'nav.home' },
-    { id: 'about', labelKey: 'nav.about' },
-    { id: 'projects', labelKey: 'nav.projects' },
-    { id: 'services', labelKey: 'nav.services' },
-    { id: 'skills', labelKey: 'nav.skills' },
-    { id: 'contact', labelKey: 'nav.contact' }
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'services', label: 'Services' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'contact', label: 'Contact' }
   ];
 
   useEffect(() => {
@@ -161,7 +159,7 @@ const SectionDots: React.FC = () => {
           onMouseLeave={() => setHoveredSection(null)}
         >
           <Tooltip $show={hoveredSection === section.id}>
-            {t(section.labelKey)}
+            {section.label}
           </Tooltip>
           <DotButton
             $isActive={activeSection === section.id}

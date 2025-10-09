@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeading from '../shared/SectionHeading';
 
 const ProjectsSection = styled.section`
@@ -99,7 +98,6 @@ const ProjectLink = styled.a`
 
 
 const Projects: React.FC = () => {
-  const { t } = useLanguage();
   
   // Real projects data
   const projects = [

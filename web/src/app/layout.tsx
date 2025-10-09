@@ -1,7 +1,6 @@
 "use client";
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { LanguageProvider } from '../contexts/LanguageContext';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
 import StyledComponentsRegistry from '../lib/styled-components-registry';
@@ -33,14 +32,12 @@ export default function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <LanguageProvider>
-            <ThemeProvider theme={theme}>
-              <GlobalStyle />
-              <AppContainer>
-                {children}
-              </AppContainer>
-            </ThemeProvider>
-          </LanguageProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <AppContainer>
+              {children}
+            </AppContainer>
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>
