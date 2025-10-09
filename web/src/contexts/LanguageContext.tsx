@@ -82,7 +82,7 @@ const translations = {
     // Contact
     'contact.title': 'Kontaktujte ma',
     'contact.heading': 'Poďme spolupracovať',
-    'contact.description': 'Máte zaujímavý projekt alebo potrebujete pomoc s webovým vývojom? Neváhajte ma kontaktovať. Rád sa s vami porozprávam o vašich nápadoch a spolu vytvoríme niečo úžasné.',
+    'contact.description': 'Máte zaujímavý projekt alebo potrebujete pomoc s webovým vývojom? Neváhajte nás kontaktovať. Prekonzultujeme všetky aspekty vášho nápadu a spolu vytvoríme niečo úžasné.',
     'contact.email': 'Email',
     'contact.phone': 'Telefón',
     'contact.location': 'Lokalizácia',

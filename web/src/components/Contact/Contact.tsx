@@ -305,7 +305,7 @@ const Contact: React.FC = () => {
                 <ContactIcon>📱</ContactIcon>
                 <ContactText>
                   <h4>{t('contact.phone')}</h4>
-                  <p>+421 XXX XXX XXX</p>
+                  <p>+421 914 229 122</p>
                 </ContactText>
               </ContactItem>
 
