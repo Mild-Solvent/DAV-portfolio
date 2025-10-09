@@ -41,9 +41,7 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p>{t('about.description1')}</p>
-          <p>{t('about.description2')}</p>
-          <p>{t('about.description3')}</p>
+          <p>{t('about.description')}</p>
         </Content>
       </Container>
     </AboutSection>

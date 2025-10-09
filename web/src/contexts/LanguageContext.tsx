@@ -28,9 +28,7 @@ const translations = {
     // About
     'about.title': 'O nás',
     'about.heading': 'Weboví vývojári s vášňou pre moderné technológie',
-    'about.description1': 'Vytvoríme Vám moderné a responzívne webové stránky s dôrazom na používateľskú skúsenosť a výkonnosť. Špecializujeme sa na frontend development s použitím najnovších technológií.',
-    'about.description2': 'Máme skúsenosti s navrhovaním a implementáciou komplexných webových aplikácií, od jednoduchých landing pages až po zložité enterprise systémy.',
-    'about.description3': 'Neustále sa vzdelávame a sledujeme najnovšie trendy vo webovom vývoji, aby sme mohli ponúknuť najlepšie riešenia pre svojich klientov.',
+    'about.description': 'Vytvoríme Vám moderné a responzívne webové stránky s dôrazom na používateľskú skúsenosť a výkonnosť. Špecializujeme sa na frontend development s použitím najnovších technológií a máme bohaté skúsenosti s navrhovaním komplexných webových aplikácií - od jednoduchých landing pages až po zložité enterprise systémy. Neustále sa vzdelávame a sledujeme najnovšie trendy vo webovom vývoji, aby sme mohli ponúknuť najlepšie riešenia pre našich klientov.',
     'about.skills.frontend': 'Frontend',
     'about.skills.backend': 'Backend',
     'about.skills.tools': 'Nástroje',
@@ -114,9 +112,7 @@ const translations = {
     // About
     'about.title': 'About Me',
     'about.heading': 'Web Developer with passion for modern technologies',
-    'about.description1': 'I can create modern and responsive websites with focus on user experience and performance. I specialize in frontend development using the latest technologies.',
-    'about.description2': 'I have experience in designing and implementing complex web applications, from simple landing pages to complex enterprise systems.',
-    'about.description3': 'I constantly educate myself and follow the latest trends in web development to offer the best solutions for my clients.',
+    'about.description': 'I create modern and responsive websites with focus on user experience and performance. I specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. I constantly educate myself and follow the latest trends in web development to offer the best solutions for my clients.',
     'about.skills.frontend': 'Frontend',
     'about.skills.backend': 'Backend',
     'about.skills.tools': 'Tools',
