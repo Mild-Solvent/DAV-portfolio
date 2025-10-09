@@ -29,7 +29,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: ${props => props.theme.spacing['2xl']};
+  width: 100%;
   
   @media (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 ${props => props.theme.spacing.xl};
@@ -37,6 +37,23 @@ const Nav = styled.nav`
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     padding: 0 ${props => props.theme.spacing.lg};
+  }
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.lg};
+  flex-shrink: 0;
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    position: relative;
   }
 `;
 
@@ -48,6 +65,7 @@ const Logo = styled.div`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: ${props => props.theme.spacing.sm};
   border-radius: ${props => props.theme.borderRadius.lg};
+  flex-shrink: 0;
   
   &:hover {
     transform: translateY(-2px);
@@ -89,15 +107,14 @@ const NavList = styled.ul<NavListProps>`
   list-style: none;
   gap: ${props => props.theme.spacing.xl};
   align-items: center;
-  flex: 1;
-  justify-content: center;
+  margin: 0;
+  padding: 0;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     display: ${props => props.$isOpen ? 'flex' : 'none'};
     position: absolute;
-    top: 100%;
-    left: ${props => props.theme.spacing.lg};
-    right: ${props => props.theme.spacing.lg};
+    top: calc(100% + ${props => props.theme.spacing.md});
+    right: 0;
     background: rgba(22, 27, 34, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
@@ -105,8 +122,9 @@ const NavList = styled.ul<NavListProps>`
     border-radius: ${props => props.theme.borderRadius.xl};
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     gap: ${props => props.theme.spacing.md};
-    margin-top: ${props => props.theme.spacing.md};
     border: 1px solid rgba(48, 54, 61, 0.5);
+    min-width: 200px;
+    z-index: 1000;
   }
 `;
 
@@ -169,6 +187,7 @@ const MobileMenuButton = styled.button`
   border-radius: ${props => props.theme.borderRadius.lg};
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  flex-shrink: 0;
   
   &:hover {
     background: rgba(88, 166, 255, 0.1);
@@ -221,44 +240,48 @@ const Header: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <Nav>
-        <Logo onClick={() => scrollToSection('hero')}>
-          <LogoImage 
-            src="/logo/logo.png" 
-            alt="Portfolio Logo" 
-            width={40} 
-            height={40}
-            priority
-          />
-          <LogoText>Portfolio</LogoText>
-        </Logo>
+        <LeftSection>
+          <Logo onClick={() => scrollToSection('hero')}>
+            <LogoImage 
+              src="/logo/logo.png" 
+              alt="Portfolio Logo" 
+              width={40} 
+              height={40}
+              priority
+            />
+            <LogoText>Portfolio</LogoText>
+          </Logo>
+        </LeftSection>
         
-        <NavList $isOpen={isMobileMenuOpen}>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('hero')}>Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('about')}>About</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('projects')}>Projects</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('services')}>Services</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('skills')}>Skills</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink onClick={() => scrollToSection('contact')}>Contact</NavLink>
-          </NavItem>
-        </NavList>
+        <RightSection>
+          <NavList $isOpen={isMobileMenuOpen}>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('hero')}>Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('about')}>About</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('projects')}>Projects</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('services')}>Services</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('skills')}>Skills</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={() => scrollToSection('contact')}>Contact</NavLink>
+            </NavItem>
+          </NavList>
 
-        <MobileMenuButton
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-        >
-          {isMobileMenuOpen ? '×' : '☰'}
-        </MobileMenuButton>
+          <MobileMenuButton
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? '×' : '☰'}
+          </MobileMenuButton>
+        </RightSection>
       </Nav>
     </HeaderContainer>
   );
