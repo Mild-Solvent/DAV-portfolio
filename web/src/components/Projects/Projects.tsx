@@ -51,9 +51,12 @@ const ProjectCard = styled(motion.div)`
   }
 `;
 
-const ProjectImage = styled.div`
+const ProjectImage = styled.div<{ $backgroundImage?: string }>`
   height: 200px;
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary}40, ${props => props.theme.colors.accent}40);
+  background: ${props => props.$backgroundImage 
+    ? `url(${props.$backgroundImage}) center/cover no-repeat`
+    : `linear-gradient(135deg, ${props.theme.colors.primary}40, ${props.theme.colors.accent}40)`
+  };
   position: relative;
   display: flex;
   align-items: center;
@@ -82,25 +85,10 @@ const ProjectDescription = styled.p`
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 `;
 
-const TechStack = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${props => props.theme.spacing.xs};
-  margin-bottom: ${props => props.theme.spacing.xl};
-`;
-
-const TechTag = styled.span`
-  background: ${props => props.theme.colors.primary}20;
-  color: ${props => props.theme.colors.primary};
-  padding: ${props => props.theme.spacing.xs} ${props => props.theme.spacing.sm};
-  border-radius: ${props => props.theme.borderRadius.md};
-  font-size: ${props => props.theme.fontSizes.sm};
-  font-weight: 500;
-`;
 
 const ProjectLinks = styled.div`
   display: flex;
-  gap: ${props => props.theme.spacing.md};
+  justify-content: center;
 `;
 
 const ProjectLink = styled.a`
@@ -125,95 +113,47 @@ const ProjectLink = styled.a`
   }
 `;
 
-const SecondaryLink = styled.a`
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
-  border: 2px solid transparent;
-  padding: 0.75rem 1.5rem;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-    border-radius: 10px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-  }
-
-  &:hover {
-    background: rgba(59, 130, 246, 0.1);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-`;
 
 const Projects: React.FC = () => {
   const { t } = useLanguage();
   
-  // Hardcoded projects data
+  // Real projects data
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "Modern e-commerce platform with advanced features like order management, payments and inventory management.",
-      tech: ["React", "Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      liveUrl: "https://your-ecommerce-demo.com",
-      githubUrl: "https://github.com/yourusername/ecommerce-platform",
-      icon: "🛒"
+      title: "Softwareshop",
+      description: "Profesionálny softvér a kurzy pre dizajnérov a architektov",
+      liveUrl: "https://www.softwareshop.sk/",
+      image: "/projects/softwareshop.png"
     },
     {
-      title: "Dashboard Analytics",
-      description: "Interactive dashboard for data analysis with real-time charts and reports for business intelligence.",
-      tech: ["React", "D3.js", "Node.js", "MongoDB", "Socket.io"],
-      liveUrl: "https://your-dashboard-demo.com",
-      githubUrl: "https://github.com/yourusername/dashboard-analytics",
-      icon: "📊"
+      title: "CEA Europe.sk",
+      description: "Reklamná a eventová agentúra - kompletná realizácia služieb a produktov vo všetkých oblastiach reklamy",
+      liveUrl: "https://www.ceaeurope.sk/",
+      image: "/projects/ceaeurope.png"
     },
     {
-      title: "Social Media App",
-      description: "Social network with content sharing, comments and real-time chat between users.",
-      tech: ["React Native", "Firebase", "Redux", "GraphQL"],
-      liveUrl: "https://your-social-app-demo.com",
-      githubUrl: "https://github.com/yourusername/social-media-app",
-      icon: "📱"
+      title: "3D Software",
+      description: "Profesionálne 3D softvérové riešenia a služby",
+      liveUrl: "https://www.3dsoftware.sk/",
+      image: "/projects/3dsoftware.png"
     },
     {
-      title: "Portfolio Website",
-      description: "Beautiful portfolio websites for creative professionals with animations and modern design.",
-      tech: ["React", "Styled Components", "Framer Motion", "Gatsby"],
-      liveUrl: "https://your-portfolio-demo.com",
-      githubUrl: "https://github.com/yourusername/portfolio-website",
-      icon: "🎨"
+      title: "ALLA.SK",
+      description: "Navrhneme a zrealizujeme váš vysnívaný projekt",
+      liveUrl: "https://www.alla.sk/",
+      image: "/projects/alla-sk.png"
     },
     {
-      title: "Task Management Tool",
-      description: "Comprehensive tool for project and task management with real-time collaboration capabilities.",
-      tech: ["Vue.js", "Express", "MySQL", "WebSocket"],
-      liveUrl: "https://your-task-manager-demo.com",
-      githubUrl: "https://github.com/yourusername/task-management-tool",
-      icon: "✅"
+      title: "ACTIVITY DW Club",
+      description: "Objavte úžasné trasy - aktivity a výlety pre všetkých",
+      liveUrl: "https://aktivity.ceaeurope.sk/",
+      image: "/projects/aktivity-ceaeurope.png"
     },
     {
-      title: "Weather App",
-      description: "Elegant weather application with weather forecast, maps and personalized notifications.",
-      tech: ["React", "OpenWeather API", "PWA", "Chart.js"],
-      liveUrl: "https://your-weather-app-demo.com",
-      githubUrl: "https://github.com/yourusername/weather-app",
-      icon: "🌤️"
+      title: "Software Point CZ",
+      description: "Profesionální software a kurzy 3D modelování",
+      liveUrl: "https://www.softwarepoint.cz/",
+      image: "/projects/softwarepoint.png"
     }
   ];
 
@@ -233,27 +173,16 @@ const Projects: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <ProjectImage>
-                {project.icon}
-              </ProjectImage>
+              <ProjectImage $backgroundImage={project.image} />
               
               <ProjectContent>
                 <ProjectTitle>{project.title}</ProjectTitle>
                 <ProjectDescription>{project.description}</ProjectDescription>
                 
-                <TechStack>
-                  {project.tech.map((tech, techIndex) => (
-                    <TechTag key={techIndex}>{tech}</TechTag>
-                  ))}
-                </TechStack>
-                
                 <ProjectLinks>
                   <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    Demo
+                    Visit website
                   </ProjectLink>
-                  <SecondaryLink href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </SecondaryLink>
                 </ProjectLinks>
               </ProjectContent>
             </ProjectCard>
