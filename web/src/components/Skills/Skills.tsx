@@ -64,7 +64,7 @@ const SkillsContainer = styled(motion.div)`
 
 const SkillsWrapper = styled.div`
   background: ${props => props.theme.colors.backgroundLight};
-  border: 2px solid ${props => props.theme.colors.border};
+  border: 2px solid rgba(240, 255, 240, 0.95);
   border-radius: ${props => props.theme.borderRadius.xl};
   padding: ${props => props.theme.spacing['2xl']};
   position: relative;
@@ -74,7 +74,7 @@ const SkillsWrapper = styled.div`
   z-index: 2;
   
   &:hover {
-    border-color: ${props => props.theme.colors.accent};
+    border-color: rgba(220, 240, 255, 0.98);
     transform: translateY(-2px);
   }
   
