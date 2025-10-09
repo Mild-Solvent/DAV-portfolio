@@ -253,7 +253,7 @@ const Hero: React.FC = () => {
       <GradientCircle 
         size="500px" 
         position="top: -150px; right: -150px" 
-        color="linear-gradient(135deg, #ff006e 0%, #fb5607 100%)" 
+        color="linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)" 
         blur="120px"
       />
       <GradientCircle 
@@ -274,7 +274,7 @@ const Hero: React.FC = () => {
         width="650px" 
         height="220px" 
         position="top: -100px; left: -300px" 
-        color="linear-gradient(90deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%)" 
+        color="linear-gradient(90deg, #6366f1 0%, #8338ec 50%, #3a86ff 100%)" 
         blur="140px"
         rotation="rotate(30deg)"
       />
@@ -282,7 +282,7 @@ const Hero: React.FC = () => {
         width="550px" 
         height="180px" 
         position="bottom: -80px; right: -250px" 
-        color="linear-gradient(90deg, #06ffa5 0%, #ffbe0b 50%, #fb5607 100%)" 
+        color="linear-gradient(90deg, #06ffa5 0%, #ffbe0b 50%, #f59e0b 100%)" 
         blur="110px"
         rotation="rotate(-25deg)"
       />
@@ -290,7 +290,7 @@ const Hero: React.FC = () => {
         width="450px" 
         height="200px" 
         position="top: 55%; right: -200px" 
-        color="linear-gradient(90deg, #3a86ff 0%, #06ffa5 50%, #ff006e 100%)" 
+        color="linear-gradient(90deg, #3a86ff 0%, #06ffa5 50%, #6366f1 100%)" 
         blur="110px"
         rotation="rotate(60deg)"
       />
