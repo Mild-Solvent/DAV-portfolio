@@ -19,9 +19,9 @@ const translations = {
     'nav.contact': 'Kontakt',
     
     // Hero
-    'hero.title': 'Vytváranie digitálnych zážitkov budúcnosti',
-    'hero.title.highlight': 'digitálnych zážitkov',
-    'hero.subtitle': 'Špecializujem sa na vývoj moderných webových aplikácií a používateľských rozhraní s dôrazom na výkonnosť, prístupnosť a skvelý dizajn.',
+    'hero.title': 'Vytváram digitálne zážitky budúcnosti',
+    'hero.title.highlight': 'digitálne zážitky',
+    'hero.subtitle': 'Moderné web aplikácie · Inovatívny dizajn · Optimálny výkon',
     'hero.cta.projects': 'Prezrieť projekty',
     'hero.cta.contact': 'Kontakt',
     
@@ -103,9 +103,9 @@ const translations = {
     'nav.contact': 'Contact',
     
     // Hero
-    'hero.title': 'Creating digital experiences of the future',
+    'hero.title': 'Crafting digital experiences of tomorrow',
     'hero.title.highlight': 'digital experiences',
-    'hero.subtitle': 'I specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.',
+    'hero.subtitle': 'Modern Web Apps · Innovative Design · Peak Performance',
     'hero.cta.projects': 'View Projects',
     'hero.cta.contact': 'Contact',
     

@@ -68,16 +68,24 @@ const HeroTitle = styled(motion.h1)`
 
 const HeroSubtitle = styled(motion.p)`
   font-family: ${props => props.theme.fonts.primary};
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: ${props => props.theme.spacing['3xl']};
-  max-width: 600px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  line-height: 1.8;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  
+  /* Professional separator styling */
+  span.separator {
+    color: rgba(59, 130, 246, 0.8);
+    margin: 0 0.8rem;
+    font-weight: 300;
+  }
 `;
 
 const HeroButtons = styled(motion.div)`
@@ -315,7 +323,12 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          {t('hero.subtitle')}
+          {t('hero.subtitle').split(' · ').map((part, index, array) => (
+            <React.Fragment key={index}>
+              {part}
+              {index < array.length - 1 && <span className="separator">·</span>}
+            </React.Fragment>
+          ))}
         </HeroSubtitle>
         
         <HeroButtons
