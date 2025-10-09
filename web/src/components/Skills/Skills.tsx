@@ -26,47 +26,72 @@ const Container = styled.div`
   }
 `;
 
-const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${props => props.theme.spacing.xl};
-  margin-top: ${props => props.theme.spacing['2xl']};
-  
-  @media (max-width: ${props => props.theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-    gap: ${props => props.theme.spacing.lg};
-  }
-`;
-
-const SkillCard = styled(motion.div)`
-  background: ${props => props.theme.colors.backgroundLight};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  padding: ${props => props.theme.spacing.xl};
-  transition: all 0.3s ease;
+const SkillsContainer = styled(motion.div)`
   position: relative;
-  overflow: hidden;
-  
-  &:hover {
-    transform: translateY(-5px);
-    border-color: ${props => props.theme.colors.accent};
-    box-shadow: ${props => props.theme.shadows.lg};
-  }
+  margin-top: ${props => props.theme.spacing['2xl']};
   
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: ${props => props.theme.gradients.blue};
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: ${props => props.theme.gradients.hero};
+    border-radius: ${props => props.theme.borderRadius.xl};
+    opacity: 0.6;
+    filter: blur(8px);
+    z-index: -1;
+    animation: pulse 3s ease-in-out infinite alternate;
   }
   
-  &:hover::before {
-    opacity: 1;
+  @keyframes pulse {
+    0% { opacity: 0.4; transform: scale(0.98); }
+    100% { opacity: 0.8; transform: scale(1.02); }
+  }
+`;
+
+const SkillsWrapper = styled.div`
+  background: ${props => props.theme.colors.backgroundLight};
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.xl};
+  padding: ${props => props.theme.spacing['2xl']};
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: ${props => props.theme.shadows.xl};
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: ${props => props.theme.colors.accent};
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    padding: ${props => props.theme.spacing.xl};
+  }
+`;
+
+const SkillsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${props => props.theme.spacing['2xl']};
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${props => props.theme.spacing.xl};
+  }
+`;
+
+const SkillCard = styled(motion.div)`
+  background: transparent;
+  border: none;
+  border-radius: ${props => props.theme.borderRadius.md};
+  padding: ${props => props.theme.spacing.lg};
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-2px);
   }
 `;
 
@@ -173,38 +198,40 @@ const Skills: React.FC = () => {
           animationDelay={0.1}
         />
         
-        <motion.div
+        <SkillsContainer
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          <SkillsGrid>
-            {skillsArray.map((skillCategory, index) => (
-              <SkillCard key={index} variants={cardVariants}>
-                <SkillHeader>
-                  <SkillIcon>{skillCategory.icon}</SkillIcon>
-                  <SkillTitle>{skillCategory.title}</SkillTitle>
-                </SkillHeader>
-                
-                <SkillTechnologies>
-                  {skillCategory.technologies.map((tech, techIndex) => (
-                    <TechnologyTag
-                      key={techIndex}
-                      variants={tagVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                      transition={{ delay: techIndex * 0.1 }}
-                    >
-                      {tech}
-                    </TechnologyTag>
-                  ))}
-                </SkillTechnologies>
-              </SkillCard>
-            ))}
-          </SkillsGrid>
-        </motion.div>
+          <SkillsWrapper>
+            <SkillsGrid>
+              {skillsArray.map((skillCategory, index) => (
+                <SkillCard key={index} variants={cardVariants}>
+                  <SkillHeader>
+                    <SkillIcon>{skillCategory.icon}</SkillIcon>
+                    <SkillTitle>{skillCategory.title}</SkillTitle>
+                  </SkillHeader>
+                  
+                  <SkillTechnologies>
+                    {skillCategory.technologies.map((tech, techIndex) => (
+                      <TechnologyTag
+                        key={techIndex}
+                        variants={tagVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        transition={{ delay: techIndex * 0.1 }}
+                      >
+                        {tech}
+                      </TechnologyTag>
+                    ))}
+                  </SkillTechnologies>
+                </SkillCard>
+              ))}
+            </SkillsGrid>
+          </SkillsWrapper>
+        </SkillsContainer>
       </Container>
     </SkillsSection>
   );
