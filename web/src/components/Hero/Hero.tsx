@@ -14,25 +14,10 @@ const HeroSection = styled.section`
   right: 0;
   z-index: 1;
   overflow: hidden;
-  background: linear-gradient(180deg, #0d1117 0%, #0a0e14 100%);
+  background: #0d1117;
   width: 100%;
   box-sizing: border-box;
   
-  /* GitHub hero gradient - purple to green sweep */
-  &::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent),
-      radial-gradient(ellipse 100% 80% at 80% 50%, rgba(255, 128, 255, 0.15), transparent),
-      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(0, 255, 135, 0.15), transparent);
-    filter: blur(40px);
-    pointer-events: none;
-  }
 `;
 
 const HeroContainer = styled.div`
@@ -71,10 +56,7 @@ const HeroTitle = styled(motion.h1)`
   text-align: center;
   
   span {
-    background: ${props => props.theme.gradients.hero};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: ${props => props.theme.colors.textEmphasis};
     display: inline-block;
   }
 `;
