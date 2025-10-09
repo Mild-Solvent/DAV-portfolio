@@ -8,12 +8,36 @@ const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
   background: ${props => props.theme.colors.backgroundLight};
   position: relative;
+  overflow: hidden;
+  
+  /* GitHub gradient - centered purple/pink glow */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1200px;
+    height: 1200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      rgba(165, 113, 247, 0.2),
+      rgba(139, 92, 246, 0.12) 35%,
+      rgba(219, 39, 119, 0.08) 55%,
+      transparent 75%
+    );
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
+  position: relative;
+  z-index: 1;
 `;
 
 const ProjectsGrid = styled.div`

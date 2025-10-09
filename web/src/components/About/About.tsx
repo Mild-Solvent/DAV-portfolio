@@ -13,39 +13,23 @@ const AboutSection = styled.section`
   position: relative;
   overflow: hidden;
   
-  /* GitHub-style gradient glow - green theme */
+  /* GitHub Actions section gradient - green/teal sweep from left */
   &::before {
     content: '';
     position: absolute;
-    width: 700px;
-    height: 700px;
-    top: -150px;
-    right: -100px;
+    width: 1200px;
+    height: 1200px;
+    top: 50%;
+    left: -400px;
+    transform: translateY(-50%);
     background: radial-gradient(
-      circle,
-      rgba(63, 185, 80, 0.15) 0%,
-      rgba(46, 160, 67, 0.1) 35%,
+      ellipse 60% 60% at 30% 50%,
+      rgba(16, 185, 129, 0.25),
+      rgba(52, 211, 153, 0.15) 35%,
+      rgba(20, 184, 166, 0.1) 50%,
       transparent 70%
     );
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    bottom: -100px;
-    left: -150px;
-    background: radial-gradient(
-      circle,
-      rgba(86, 211, 100, 0.12) 0%,
-      rgba(63, 185, 80, 0.08) 40%,
-      transparent 70%
-    );
-    filter: blur(70px);
+    filter: blur(100px);
     pointer-events: none;
     z-index: 0;
   }

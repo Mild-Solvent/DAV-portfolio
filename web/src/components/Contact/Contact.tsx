@@ -11,22 +11,22 @@ const ContactSection = styled.section`
   position: relative;
   overflow: hidden;
   
-  /* GitHub-style gradient glow - blue theme */
+  /* GitHub mixed gradient - purple from left, blue from right */
   &::before {
     content: '';
     position: absolute;
-    width: 800px;
-    height: 800px;
+    width: 1000px;
+    height: 1000px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: -300px;
+    transform: translateY(-50%);
     background: radial-gradient(
-      circle,
-      rgba(31, 111, 235, 0.15) 0%,
-      rgba(88, 166, 255, 0.1) 35%,
+      ellipse 60% 60% at 30% 50%,
+      rgba(139, 92, 246, 0.25),
+      rgba(165, 113, 247, 0.15) 35%,
       transparent 70%
     );
-    filter: blur(90px);
+    filter: blur(100px);
     pointer-events: none;
     z-index: 0;
   }
@@ -34,17 +34,18 @@ const ContactSection = styled.section`
   &::after {
     content: '';
     position: absolute;
-    width: 600px;
-    height: 600px;
-    bottom: -100px;
-    right: -100px;
+    width: 1000px;
+    height: 1000px;
+    top: 50%;
+    right: -300px;
+    transform: translateY(-50%);
     background: radial-gradient(
-      circle,
-      rgba(56, 139, 253, 0.12) 0%,
-      rgba(31, 111, 235, 0.08) 40%,
+      ellipse 60% 60% at 70% 50%,
+      rgba(31, 111, 235, 0.25),
+      rgba(56, 139, 253, 0.15) 35%,
       transparent 70%
     );
-    filter: blur(70px);
+    filter: blur(100px);
     pointer-events: none;
     z-index: 0;
   }

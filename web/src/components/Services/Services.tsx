@@ -11,40 +11,23 @@ const ServicesSection = styled.section`
   position: relative;
   overflow: hidden;
   
-  /* GitHub-style gradient glow effect */
+  /* GitHub Copilot section gradient - purple/pink glow in center */
   &::before {
     content: '';
     position: absolute;
-    width: 800px;
-    height: 800px;
-    top: -200px;
+    width: 1400px;
+    height: 1400px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background: radial-gradient(
-      circle,
-      rgba(88, 166, 255, 0.15) 0%,
-      rgba(165, 113, 247, 0.1) 40%,
+      ellipse 50% 50% at 50% 50%,
+      rgba(139, 92, 246, 0.25),
+      rgba(168, 85, 247, 0.15) 30%,
+      rgba(219, 39, 119, 0.1) 50%,
       transparent 70%
     );
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    bottom: -150px;
-    right: -100px;
-    background: radial-gradient(
-      circle,
-      rgba(63, 185, 80, 0.12) 0%,
-      rgba(86, 211, 100, 0.08) 40%,
-      transparent 70%
-    );
-    filter: blur(70px);
+    filter: blur(100px);
     pointer-events: none;
     z-index: 0;
   }

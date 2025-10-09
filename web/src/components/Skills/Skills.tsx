@@ -11,40 +11,23 @@ const SkillsSection = styled.section`
   position: relative;
   overflow: hidden;
   
-  /* GitHub-style gradient glow - purple/blue theme */
+  /* GitHub Security section gradient - blue glow from right side */
   &::before {
     content: '';
     position: absolute;
-    width: 900px;
-    height: 900px;
+    width: 1400px;
+    height: 1400px;
     top: 50%;
-    left: -200px;
+    right: -500px;
     transform: translateY(-50%);
     background: radial-gradient(
-      circle,
-      rgba(165, 113, 247, 0.15) 0%,
-      rgba(139, 92, 246, 0.1) 30%,
+      ellipse 60% 60% at 70% 50%,
+      rgba(31, 111, 235, 0.3),
+      rgba(56, 139, 253, 0.2) 30%,
+      rgba(88, 166, 255, 0.12) 50%,
       transparent 70%
     );
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    bottom: 10%;
-    right: -150px;
-    background: radial-gradient(
-      circle,
-      rgba(219, 168, 255, 0.12) 0%,
-      rgba(165, 113, 247, 0.08) 40%,
-      transparent 70%
-    );
-    filter: blur(80px);
+    filter: blur(120px);
     pointer-events: none;
     z-index: 0;
   }
