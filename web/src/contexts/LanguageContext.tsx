@@ -26,11 +26,11 @@ const translations = {
     'hero.cta.contact': 'Kontakt',
     
     // About
-    'about.title': 'O mne',
-    'about.heading': 'Webový vývojár s vášňou pre moderné technológie',
-    'about.description1': 'Viem vytvoriť moderné a responzívne webové stránky s dôrazom na používateľskú skúsenosť a výkonnosť. Špecializujem sa na frontend development s použitím najnovších technológií.',
-    'about.description2': 'Mám skúsenosti s navrhovaním a implementáciou komplexných webových aplikácií, od jednoduchých landing pages až po zložité enterprise systémy.',
-    'about.description3': 'Neustále sa vzdelávam a sledujem najnovšie trendy vo webovom vývoji, aby som mohol ponúknuť najlepšie riešenia pre svojich klientov.',
+    'about.title': 'O nás',
+    'about.heading': 'Weboví vývojári s vášňou pre moderné technológie',
+    'about.description1': 'Vytvoríme Vám moderné a responzívne webové stránky s dôrazom na používateľskú skúsenosť a výkonnosť. Špecializujeme sa na frontend development s použitím najnovších technológií.',
+    'about.description2': 'Máme skúsenosti s navrhovaním a implementáciou komplexných webových aplikácií, od jednoduchých landing pages až po zložité enterprise systémy.',
+    'about.description3': 'Neustále sa vzdelávame a sledujeme najnovšie trendy vo webovom vývoji, aby sme mohli ponúknuť najlepšie riešenia pre svojich klientov.',
     'about.skills.frontend': 'Frontend',
     'about.skills.backend': 'Backend',
     'about.skills.tools': 'Nástroje',
@@ -42,14 +42,14 @@ const translations = {
     'about.skills.learning': 'Kontinuálne učenie',
     
     // Skills
-    'skills.title': 'Zručnosti & Technológie',
+    'skills.title': 'Technológie',
     'skills.frontend': 'Frontend Development',
     'skills.backend': 'Backend Development',
     'skills.devops': 'Cloud & DevOps',
     'skills.design': 'Design & UX',
     
     // Services
-    'services.title': 'Čo Robím',
+    'services.title': 'Služby',
     'services.subtitle': 'Špecializujem sa na vytvorenie digitálnych riešení, ktoré pomáhajú firmám dosiahnuť ich ciele pomocou moderných technológií a inovatívneho dizajnu.',
     'services.web.title': 'Webový Vývoj',
     'services.web.description': 'Moderné, responzívne webové aplikácie s najnovšími technológiami',
@@ -65,7 +65,7 @@ const translations = {
     'services.ai.description': 'Integrácia umelej inteligencie do webových aplikácií',
     
     // Projects
-    'projects.title': 'Moje Projekty',
+    'projects.title': 'Projekty',
     'projects.ecommerce.title': 'E-commerce Platform',
     'projects.ecommerce.description': 'Moderná e-commerce platforma s pokročilými funkciami ako je správa objednávok, platby a inventory management.',
     'projects.dashboard.title': 'Dashboard Analytics',
