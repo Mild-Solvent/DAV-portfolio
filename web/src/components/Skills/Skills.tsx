@@ -29,25 +29,51 @@ const Container = styled.div`
 const SkillsContainer = styled(motion.div)`
   position: relative;
   margin-top: ${props => props.theme.spacing['2xl']};
+  z-index: 1;
   
   &::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
     background: ${props => props.theme.gradients.hero};
     border-radius: ${props => props.theme.borderRadius.xl};
-    opacity: 0.6;
-    filter: blur(8px);
-    z-index: -1;
-    animation: pulse 3s ease-in-out infinite alternate;
+    opacity: 0.9;
+    filter: blur(25px);
+    z-index: -2;
+    animation: pulse 2s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: ${props => props.theme.gradients.hero};
+    border-radius: ${props => props.theme.borderRadius.xl};
+    opacity: 0.7;
+    filter: blur(15px);
+    z-index: -2;
+    animation: pulse 2.5s ease-in-out infinite alternate-reverse;
+    pointer-events: none;
   }
   
   @keyframes pulse {
-    0% { opacity: 0.4; transform: scale(0.98); }
-    100% { opacity: 0.8; transform: scale(1.02); }
+    0% { 
+      opacity: 0.7; 
+      transform: scale(0.95);
+      filter: blur(25px);
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1.05);
+      filter: blur(30px);
+    }
   }
 `;
 
@@ -60,6 +86,7 @@ const SkillsWrapper = styled.div`
   backdrop-filter: blur(10px);
   box-shadow: ${props => props.theme.shadows.xl};
   transition: all 0.3s ease;
+  z-index: 2;
   
   &:hover {
     border-color: ${props => props.theme.colors.accent};
@@ -89,6 +116,7 @@ const SkillCard = styled(motion.div)`
   padding: ${props => props.theme.spacing.lg};
   transition: all 0.3s ease;
   position: relative;
+  z-index: 3;
   
   &:hover {
     transform: translateY(-2px);
