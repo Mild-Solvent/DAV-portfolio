@@ -7,22 +7,46 @@ import SectionHeading from '../shared/SectionHeading';
 
 const SkillsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  background: ${props => props.theme.colors.primary};
   position: relative;
   overflow: hidden;
   
+  /* GitHub-style gradient glow - purple/blue theme */
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1), transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.08), transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(0, 191, 255, 0.06), transparent 50%);
+    width: 900px;
+    height: 900px;
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+    background: radial-gradient(
+      circle,
+      rgba(165, 113, 247, 0.15) 0%,
+      rgba(139, 92, 246, 0.1) 30%,
+      transparent 70%
+    );
+    filter: blur(90px);
     pointer-events: none;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    bottom: 10%;
+    right: -150px;
+    background: radial-gradient(
+      circle,
+      rgba(219, 168, 255, 0.12) 0%,
+      rgba(165, 113, 247, 0.08) 40%,
+      transparent 70%
+    );
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
   }
 `;
 
@@ -30,6 +54,8 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
+  position: relative;
+  z-index: 1;
 `;
 
 const SkillsGrid = styled.div`
@@ -45,32 +71,37 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background: ${props => props.theme.colors.backgroundLight};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
   padding: ${props => props.theme.spacing['2xl']};
   position: relative;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   
+  /* Gradient border glow effect */
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1));
-    border-radius: 20px;
+    inset: 0;
+    border-radius: ${props => props.theme.borderRadius.lg};
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(165, 113, 247, 0.4),
+      rgba(88, 166, 255, 0.3)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
   }
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-3px);
+    box-shadow: ${props => props.theme.shadows.lg};
+    border-color: ${props => props.theme.colors.surfaceLight};
     
     &::before {
       opacity: 1;

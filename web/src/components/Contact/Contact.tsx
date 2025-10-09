@@ -6,15 +6,56 @@ import SectionHeading from '../shared/SectionHeading';
 
 const ContactSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
-  background: ${props => props.theme.colors.backgroundSolid};
+  background: ${props => props.theme.colors.primary};
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
+  
+  /* GitHub-style gradient glow - blue theme */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle,
+      rgba(31, 111, 235, 0.15) 0%,
+      rgba(88, 166, 255, 0.1) 35%,
+      transparent 70%
+    );
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    bottom: -100px;
+    right: -100px;
+    background: radial-gradient(
+      circle,
+      rgba(56, 139, 253, 0.12) 0%,
+      rgba(31, 111, 235, 0.08) 40%,
+      transparent 70%
+    );
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
+  position: relative;
+  z-index: 1;
 `;
 
 const ContactContent = styled.div`
@@ -81,10 +122,11 @@ const ContactText = styled.div`
 `;
 
 const ContactForm = styled(motion.form)`
-  background: ${props => props.theme.colors.surface};
+  background: ${props => props.theme.colors.backgroundLight};
   padding: ${props => props.theme.spacing['2xl']};
-  border-radius: ${props => props.theme.borderRadius.xl};
-  box-shadow: ${props => props.theme.shadows.lg};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  border: 1px solid ${props => props.theme.colors.border};
+  box-shadow: ${props => props.theme.shadows.md};
 `;
 
 const FormGroup = styled.div`
@@ -143,28 +185,22 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
-  color: ${props => props.theme.colors.white};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  background: ${props => props.theme.colors.success};
+  color: ${props => props.theme.colors.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
-  box-shadow: 
-    0 4px 20px rgba(59, 130, 246, 0.4),
-    0 8px 32px rgba(139, 92, 246, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: ${props => props.theme.shadows.md};
+  transition: all 0.2s ease;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
   
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 8px 30px rgba(59, 130, 246, 0.6),
-      0 16px 60px rgba(139, 92, 246, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: #2ea043;
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.lg};
   }
   
   &:active:not(:disabled) {
@@ -172,16 +208,9 @@ const SubmitButton = styled.button`
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
     transform: none;
-    
-    &:hover {
-      transform: none;
-      box-shadow: 
-        0 4px 20px rgba(59, 130, 246, 0.2),
-        0 8px 32px rgba(139, 92, 246, 0.1);
-    }
   }
 `;
 

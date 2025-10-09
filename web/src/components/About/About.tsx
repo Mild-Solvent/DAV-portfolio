@@ -10,12 +10,53 @@ const AboutSection = styled.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  
+  /* GitHub-style gradient glow - green theme */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    top: -150px;
+    right: -100px;
+    background: radial-gradient(
+      circle,
+      rgba(63, 185, 80, 0.15) 0%,
+      rgba(46, 160, 67, 0.1) 35%,
+      transparent 70%
+    );
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    bottom: -100px;
+    left: -150px;
+    background: radial-gradient(
+      circle,
+      rgba(86, 211, 100, 0.12) 0%,
+      rgba(63, 185, 80, 0.08) 40%,
+      transparent 70%
+    );
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
+  position: relative;
+  z-index: 1;
 `;
 
 const Content = styled(motion.div)`
