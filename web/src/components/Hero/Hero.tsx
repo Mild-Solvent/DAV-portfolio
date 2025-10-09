@@ -54,10 +54,39 @@ const HeroTitle = styled(motion.h1)`
   letter-spacing: -0.04em;
   position: relative;
   text-align: center;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #00ff88;
+  
+  /* Subtle glow effect following letter shapes */
+  text-shadow: 
+    /* Very subtle inner glow */
+    0 0 3px rgba(0, 255, 136, 0.3),
+    0 0 6px rgba(0, 255, 136, 0.2),
+    0 0 10px rgba(0, 200, 255, 0.15),
+    0 0 15px rgba(64, 224, 255, 0.1);
+  
+  /* Very light drop shadow filter */
+  filter: 
+    drop-shadow(0 0 4px rgba(0, 255, 136, 0.2))
+    drop-shadow(0 0 8px rgba(0, 200, 255, 0.1));
+  
   
   span {
     color: ${props => props.theme.colors.textEmphasis};
     display: inline-block;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: #40e0ff;
+    
+    /* Subtle glow for the span text */
+    text-shadow: 
+      0 0 3px rgba(64, 224, 255, 0.4),
+      0 0 6px rgba(64, 224, 255, 0.2),
+      0 0 10px rgba(0, 200, 255, 0.15),
+      0 0 15px rgba(0, 255, 136, 0.1);
+      
+    filter: 
+      drop-shadow(0 0 4px rgba(64, 224, 255, 0.2))
+      drop-shadow(0 0 8px rgba(0, 200, 255, 0.1));
   }
 `;
 
