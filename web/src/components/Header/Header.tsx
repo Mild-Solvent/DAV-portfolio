@@ -17,9 +17,6 @@ const HeaderContainer = styled(motion.header)<HeaderContainerProps>`
   backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: ${props => props.theme.spacing.lg} 0;
-  
-  /* Modern glass-morphism effect */
-  box-shadow: ${props => props.isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.3)' : 'none'};
 `;
 
 const Nav = styled.nav`
