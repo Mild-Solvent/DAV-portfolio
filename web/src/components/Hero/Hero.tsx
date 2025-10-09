@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -15,8 +15,7 @@ const HeroSection = styled.section`
   right: 0;
   z-index: 1;
   overflow: hidden;
-  background: 
-    linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f1119 70%, #0a0a0a 100%);
+  background: ${props => props.theme.colors.primary};
   width: 100%;
   box-sizing: border-box;
 `;
@@ -47,37 +46,35 @@ const HeroContainer = styled.div`
 
 const HeroTitle = styled(motion.h1)`
   font-family: ${props => props.theme.fonts.display};
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 700;
-  margin-bottom: ${props => props.theme.spacing.lg};
-  color: ${props => props.theme.colors.text};
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  margin-bottom: ${props => props.theme.spacing.xl};
+  color: ${props => props.theme.colors.textEmphasis};
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   position: relative;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
   
   span {
-    background: ${props => props.theme.gradients.primary};
+    background: ${props => props.theme.gradients.hero};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    display: inline-block;
   }
 `;
 
 const HeroSubtitle = styled(motion.p)`
   font-family: ${props => props.theme.fonts.primary};
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: ${props => props.theme.spacing['3xl']};
-  max-width: 600px;
+  font-size: clamp(1rem, 2.5vw, 1.375rem);
+  color: ${props => props.theme.colors.textSecondary};
+  margin-bottom: ${props => props.theme.spacing['2xl']};
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
+  line-height: 1.6;
   font-weight: 400;
-  letter-spacing: 0.005em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  text-align: center;
 `;
 
 const HeroButtons = styled(motion.div)`
@@ -94,106 +91,56 @@ const HeroButtons = styled(motion.div)`
 `;
 
 const PrimaryButton = styled(motion.button)`
-  background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);
-  color: ${props => props.theme.colors.white};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 30px;
+  background: ${props => props.theme.colors.textEmphasis};
+  color: ${props => props.theme.colors.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.borderRadius.sm};
   font-family: ${props => props.theme.fonts.primary};
-  font-size: 1rem;
+  font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: ${props => props.theme.shadows.md};
+  transition: all 0.2s ease;
   cursor: pointer;
-  letter-spacing: 0.02em;
-  min-width: 200px;
-  backdrop-filter: blur(10px);
+  min-width: 180px;
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+    background: ${props => props.theme.colors.text};
+    box-shadow: ${props => props.theme.shadows.lg};
+    transform: translateY(-1px);
   }
   
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
 `;
 
 const SecondaryButton = styled(motion.button)`
-  background: linear-gradient(135deg, #10B981 0%, #22C55E 100%);
-  color: ${props => props.theme.colors.white};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 30px;
+  background: transparent;
+  color: ${props => props.theme.colors.textEmphasis};
+  border: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.borderRadius.sm};
   font-family: ${props => props.theme.fonts.primary};
-  font-size: 1rem;
+  font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
-  letter-spacing: 0.02em;
-  min-width: 200px;
-  backdrop-filter: blur(10px);
+  min-width: 180px;
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+    background: ${props => props.theme.colors.surfaceLight};
+    border-color: ${props => props.theme.colors.surfaceLight};
   }
   
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
 `;
 
-// Simple gradient decorative elements
-const GradientCircle = styled.div<{ size: string; position: string; color: string; blur?: string }>`
-  position: absolute;
-  width: ${props => props.size};
-  height: ${props => props.size};
-  ${props => props.position};
-  background: ${props => props.color};
-  border-radius: 50%;
-  filter: blur(${props => props.blur || '60px'});
-  z-index: 1;
-  opacity: 0.6;
-`;
-
-const GradientEllipse = styled.div<{ width: string; height: string; position: string; color: string; blur?: string; rotation?: string }>`
-  position: absolute;
-  width: ${props => props.width};
-  height: ${props => props.height};
-  ${props => props.position};
-  background: ${props => props.color};
-  border-radius: 50%;
-  filter: blur(${props => props.blur || '80px'});
-  transform: ${props => props.rotation || 'rotate(0deg)'};
-  z-index: 1;
-  opacity: 0.4;
-`;
-
-// Simple cursor gradient follower
-const CursorGradient = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['visible'].includes(prop),
-})<{ x: number; y: number; visible: boolean }>`
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  left: ${props => props.x}px;
-  top: ${props => props.y}px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 30%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
-  opacity: ${props => props.visible ? 1 : 0};
-  transition: opacity 0.3s ease;
-`;
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
-  const heroRef = useRef<HTMLElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -204,96 +151,8 @@ const Hero: React.FC = () => {
     }
   };
 
-  // Handle mouse move - update cursor position
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!isHovering || !heroRef.current) return;
-    
-    const rect = heroRef.current.getBoundingClientRect();
-    setCursorPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  }, [isHovering]);
-
-  // Handle mouse enter/leave
-  const handleMouseEnter = useCallback(() => {
-    setIsHovering(true);
-  }, []);
-  
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-  }, []);
-
-  // Setup event listeners
-  useEffect(() => {
-    const heroElement = heroRef.current;
-    if (!heroElement) return;
-    
-    heroElement.addEventListener('mouseenter', handleMouseEnter);
-    heroElement.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      heroElement.removeEventListener('mouseenter', handleMouseEnter);
-      heroElement.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
-
   return (
-    <HeroSection id="hero" ref={heroRef}>
-      {/* Simple cursor gradient follower */}
-      <CursorGradient
-        x={cursorPos.x}
-        y={cursorPos.y}
-        visible={isHovering}
-      />
-      
-      {/* Gradient decorative elements */}
-      <GradientCircle 
-        size="500px" 
-        position="top: -150px; right: -150px" 
-        color="linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)" 
-        blur="120px"
-      />
-      <GradientCircle 
-        size="350px" 
-        position="bottom: -120px; left: -100px" 
-        color="linear-gradient(135deg, #8338ec 0%, #3a86ff 100%)" 
-        blur="90px"
-      />
-      <GradientCircle 
-        size="250px" 
-        position="top: 40%; left: 10%" 
-        color="linear-gradient(135deg, #06ffa5 0%, #ffbe0b 100%)" 
-        blur="80px"
-      />
-      
-      {/* Gradient ellipses */}
-      <GradientEllipse 
-        width="650px" 
-        height="220px" 
-        position="top: -100px; left: -300px" 
-        color="linear-gradient(90deg, #6366f1 0%, #8338ec 50%, #3a86ff 100%)" 
-        blur="140px"
-        rotation="rotate(30deg)"
-      />
-      <GradientEllipse 
-        width="550px" 
-        height="180px" 
-        position="bottom: -80px; right: -250px" 
-        color="linear-gradient(90deg, #06ffa5 0%, #ffbe0b 50%, #f59e0b 100%)" 
-        blur="110px"
-        rotation="rotate(-25deg)"
-      />
-      <GradientEllipse 
-        width="450px" 
-        height="200px" 
-        position="top: 55%; right: -200px" 
-        color="linear-gradient(90deg, #3a86ff 0%, #06ffa5 50%, #6366f1 100%)" 
-        blur="110px"
-        rotation="rotate(60deg)"
-      />
+    <HeroSection id="hero">
       
       <HeroContainer>
         <HeroTitle

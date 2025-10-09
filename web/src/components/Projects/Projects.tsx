@@ -6,21 +6,8 @@ import SectionHeading from '../shared/SectionHeading';
 
 const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  background: ${props => props.theme.colors.backgroundLight};
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.05), transparent 50%),
-      radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.05), transparent 50%);
-    pointer-events: none;
-  }
 `;
 
 const Container = styled.div`
@@ -36,18 +23,17 @@ const ProjectsGrid = styled.div`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background: ${props => props.theme.colors.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   position: relative;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.lg};
+    border-color: ${props => props.theme.colors.surfaceLight};
   }
 `;
 
@@ -70,19 +56,18 @@ const ProjectContent = styled.div`
 `;
 
 const ProjectTitle = styled.h3`
-  color: rgba(255, 255, 255, 0.95);
+  color: ${props => props.theme.colors.textEmphasis};
   margin-bottom: ${props => props.theme.spacing.md};
   font-size: ${props => props.theme.fontSizes['2xl']};
   font-family: ${props => props.theme.fonts.display};
   font-weight: 600;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 `;
 
 const ProjectDescription = styled.p`
-  color: rgba(255, 255, 255, 0.85);
+  color: ${props => props.theme.colors.textSecondary};
   margin-bottom: ${props => props.theme.spacing.lg};
   line-height: 1.6;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  font-size: ${props => props.theme.fontSizes.sm};
 `;
 
 
@@ -92,24 +77,21 @@ const ProjectLinks = styled.div`
 `;
 
 const ProjectLink = styled.a`
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  color: ${props => props.theme.colors.white};
-  padding: 0.75rem 1.5rem;
-  border-radius: 10px;
+  background: transparent;
+  color: ${props => props.theme.colors.accent};
+  padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.lg};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  border: 1px solid ${props => props.theme.colors.border};
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: ${props => props.theme.fontSizes.sm};
+  transition: all 0.2s ease;
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  display: inline-block;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
-  }
-  
-  &:active {
-    transform: translateY(0);
+    background: ${props => props.theme.colors.surfaceLight};
+    border-color: ${props => props.theme.colors.surfaceLight};
+    text-decoration: none;
   }
 `;
 

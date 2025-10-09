@@ -1,99 +1,93 @@
 export const theme = {
   colors: {
-    // Professional primary palette
-    primary: '#0F172A',        // Deep slate
-    primaryDark: '#020617',    // Almost black
-    primaryLight: '#1E293B',   // Lighter slate
-    secondary: '#3B82F6',      // Professional blue
-    secondaryDark: '#1D4ED8',  // Darker blue
-    accent: '#06B6D4',         // Cyan accent
-    accentDark: '#0891B2',     // Darker cyan
+    // GitHub Dark color scheme
+    primary: '#0d1117',        // GitHub dark background
+    primaryDark: '#010409',    // GitHub darker background
+    primaryLight: '#161b22',   // GitHub canvas default
+    secondary: '#1f6feb',      // GitHub blue
+    secondaryDark: '#1158c7',  // GitHub darker blue
+    accent: '#58a6ff',         // GitHub accent blue
+    accentDark: '#388bfd',     // GitHub hover blue
     
-    // Sophisticated backgrounds
-    background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-    backgroundSolid: '#0F172A',
-    backgroundLight: 'rgba(30, 41, 59, 0.95)',
-    surface: 'rgba(51, 65, 85, 0.1)',
-    surfaceLight: 'rgba(71, 85, 105, 0.05)',
+    // GitHub backgrounds
+    background: '#0d1117',
+    backgroundSolid: '#0d1117',
+    backgroundLight: '#161b22',
+    surface: '#21262d',        // GitHub border default
+    surfaceLight: '#30363d',   // GitHub border muted
     
-    // Accent colors (more subtle)
-    nebulaPurple: '#6366F1',
-    nebulaPink: '#EC4899',
-    nebulaCyan: '#06B6D4',
-    nebulaOrange: '#F59E0B',
-    starWhite: '#F8FAFC',
-    starBlue: '#BFDBFE',
+    // GitHub accent colors
+    success: '#3fb950',        // GitHub success
+    attention: '#d29922',      // GitHub attention
+    danger: '#f85149',         // GitHub danger
+    done: '#a371f7',           // GitHub done (purple)
+    sponsors: '#db61a2',       // GitHub sponsors (pink)
     
-    // Professional text colors
-    text: '#F8FAFC',          // Almost white
-    textSecondary: '#CBD5E1',  // Light gray
-    textMuted: '#64748B',      // Medium gray
-    textGlow: '#E2E8F0',       // Very light gray
+    // GitHub text colors
+    text: '#c9d1d9',           // GitHub foreground default
+    textSecondary: '#8b949e',  // GitHub foreground muted
+    textMuted: '#6e7681',      // GitHub foreground subtle
+    textEmphasis: '#ffffff',   // White for emphasis
     
-    // Status colors
-    success: '#10B981',
-    warning: '#F59E0B',
-    error: '#EF4444',
-    info: '#3B82F6',
+    // GitHub borders
+    border: '#30363d',         // GitHub border default
+    borderMuted: '#21262d',    // GitHub border muted
     
     white: '#FFFFFF',
     black: '#000000',
   },
   
   gradients: {
-    primary: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
-    secondary: 'linear-gradient(135deg, #6366F1 0%, #EC4899 100%)',
-    cosmic: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
-    nebula: 'radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
-    aurora: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #10B981 100%)',
-    space: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-    glow: 'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)',
-    glass: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+    primary: 'linear-gradient(135deg, #1f6feb 0%, #58a6ff 100%)',
+    hero: 'linear-gradient(135deg, #d2a8ff 0%, #a371f7 10%, #196c2e 20%, #2ea043 30%, #56d364 85%, #b4f1b4 100%)',
+    purple: 'linear-gradient(135deg, #d2a8ff 0%, #a371f7 100%)',
+    green: 'linear-gradient(135deg, #3fb950 0%, #56d364 100%)',
+    blue: 'linear-gradient(135deg, #1f6feb 0%, #58a6ff 100%)',
   },
   fonts: {
-    primary: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-    mono: "'JetBrains Mono', 'Fira Code', Consolas, monospace",
-    display: "'Cal Sans', 'Inter', sans-serif",
+    primary: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    mono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+    display: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif",
   },
   fontSizes: {
-    xs: '0.75rem',
-    sm: '0.875rem',
-    base: '1rem',
-    lg: '1.125rem',
-    xl: '1.25rem',
-    '2xl': '1.5rem',
-    '3xl': '1.875rem',
-    '4xl': '2.25rem',
-    '5xl': '3rem',
-    '6xl': '3.75rem',
+    xs: '0.75rem',      // 12px
+    sm: '0.875rem',     // 14px
+    base: '1rem',       // 16px
+    lg: '1.125rem',     // 18px
+    xl: '1.25rem',      // 20px
+    '2xl': '1.5rem',    // 24px
+    '3xl': '2rem',      // 32px
+    '4xl': '2.5rem',    // 40px
+    '5xl': '3rem',      // 48px
+    '6xl': '4rem',      // 64px
   },
   spacing: {
-    xs: '0.5rem',
-    sm: '0.75rem',
-    md: '1rem',
-    lg: '1.5rem',
-    xl: '2rem',
-    '2xl': '3rem',
-    '3xl': '4rem',
-    '4xl': '6rem',
+    xs: '0.25rem',   // 4px
+    sm: '0.5rem',    // 8px
+    md: '1rem',      // 16px
+    lg: '1.5rem',    // 24px
+    xl: '2rem',      // 32px
+    '2xl': '3rem',   // 48px
+    '3xl': '4rem',   // 64px
+    '4xl': '6rem',   // 96px
   },
   borderRadius: {
-    sm: '0.25rem',
-    md: '0.5rem',
-    lg: '0.75rem',
-    xl: '1rem',
+    sm: '0.375rem',  // 6px - GitHub default
+    md: '0.5rem',    // 8px
+    lg: '0.75rem',   // 12px
+    xl: '1rem',      // 16px
     full: '9999px',
   },
   shadows: {
-    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    sm: '0 1px 0 rgba(27, 31, 36, 0.04)',
+    md: '0 3px 6px rgba(140, 149, 159, 0.15)',
+    lg: '0 8px 24px rgba(140, 149, 159, 0.2)',
+    xl: '0 12px 48px rgba(140, 149, 159, 0.3)',
   },
   breakpoints: {
-    sm: '640px',
+    sm: '544px',
     md: '768px',
-    lg: '1024px',
+    lg: '1012px',
     xl: '1280px',
   },
   zIndex: {

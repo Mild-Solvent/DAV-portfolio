@@ -13,34 +13,40 @@ const HeaderContainer = styled(motion.header)<HeaderContainerProps>`
   left: 0;
   right: 0;
   z-index: ${props => props.theme.zIndex.navbar};
-  background: ${props => props.isScrolled ? 'rgba(15, 23, 42, 0.95)' : 'transparent'};
-  backdrop-filter: ${props => props.isScrolled ? 'blur(20px)' : 'none'};
-  border-bottom: ${props => props.isScrolled ? '1px solid rgba(59, 130, 246, 0.1)' : 'none'};
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 1rem 0;
+  background: ${props => props.isScrolled ? 'rgba(13, 17, 23, 0.95)' : 'rgba(13, 17, 23, 0.8)'};
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  transition: all 0.2s ease;
+  padding: ${props => props.theme.spacing.md} 0;
 `;
 
 const Nav = styled.nav`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: ${props => props.theme.spacing.lg};
 `;
 
 const Logo = styled.div`
   font-family: ${props => props.theme.fonts.display};
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.text};
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: ${props => props.theme.colors.textEmphasis};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.sm};
+  transition: color 0.2s ease;
   
-  span {
-    background: ${props => props.theme.gradients.primary};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  &:hover {
+    color: ${props => props.theme.colors.text};
+  }
+  
+  svg {
+    fill: currentColor;
   }
 `;
 
@@ -51,7 +57,9 @@ interface NavListProps {
 const NavList = styled.ul<NavListProps>`
   display: flex;
   list-style: none;
-  gap: ${props => props.theme.spacing.xl};
+  gap: ${props => props.theme.spacing.md};
+  align-items: center;
+  flex: 1;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     display: ${props => props.$isOpen ? 'flex' : 'none'};
@@ -62,50 +70,52 @@ const NavList = styled.ul<NavListProps>`
     background: ${props => props.theme.colors.backgroundLight};
     flex-direction: column;
     padding: ${props => props.theme.spacing.lg};
-    box-shadow: ${props => props.theme.shadows.lg};
+    border-bottom: 1px solid ${props => props.theme.colors.border};
+    gap: ${props => props.theme.spacing.xs};
   }
 `;
 
 const NavItem = styled.li``;
 
 const NavLink = styled.a`
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textEmphasis};
   font-weight: 500;
+  font-size: ${props => props.theme.fontSizes.sm};
   position: relative;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease;
   cursor: pointer;
+  padding: ${props => props.theme.spacing.sm};
+  border-radius: ${props => props.theme.borderRadius.sm};
 
   &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: ${props => props.theme.colors.primary};
-    transition: width 0.3s ease;
-  }
-
-  &:hover::after {
-    width: 100%;
+    color: ${props => props.theme.colors.textEmphasis};
+    background: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
   }
 `;
 
 const MobileMenuButton = styled.button`
   display: none;
   background: none;
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.textEmphasis};
   font-size: ${props => props.theme.fontSizes.xl};
-  padding: ${props => props.theme.spacing.xs};
+  padding: ${props => props.theme.spacing.sm};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     display: block;
   }
 `;
+
+const GitHubLogo = () => (
+  <svg height="32" width="32" viewBox="0 0 16 16" fill="currentColor">
+    <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+  </svg>
+);
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -141,11 +151,12 @@ const Header: React.FC = () => {
       isScrolled={isScrolled}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
       <Nav>
         <Logo onClick={() => scrollToSection('hero')}>
-          Port<span>folio</span>
+          <GitHubLogo />
+          Portfolio
         </Logo>
         
         <NavList $isOpen={isMobileMenuOpen}>

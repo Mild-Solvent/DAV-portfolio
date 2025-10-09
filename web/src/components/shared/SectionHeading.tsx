@@ -26,131 +26,45 @@ const MainTitle = styled(motion.h2)<{
   showUnderline: boolean; 
 }>`
   font-family: ${props => props.theme.fonts.display};
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: ${props => props.showUnderline ? props.theme.spacing.lg : props.theme.spacing.md};
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: ${props => props.showUnderline ? props.theme.spacing.md : props.theme.spacing.sm};
   position: relative;
+  color: ${props => props.theme.colors.textEmphasis};
   
   /* Size variants */
   font-size: ${props => {
     switch (props.size) {
       case 'small': return 'clamp(1.5rem, 3vw, 2rem)';
-      case 'large': return 'clamp(3rem, 6vw, 4.5rem)';
-      default: return 'clamp(2rem, 4.5vw, 3.5rem)';
+      case 'large': return 'clamp(2.5rem, 5vw, 3.5rem)';
+      default: return 'clamp(2rem, 4vw, 3rem)';
     }
   }};
-  
-  /* Style variants */
-  ${props => {
-    switch (props.variant) {
-      case 'gradient':
-        return `
-          background: linear-gradient(
-            135deg, 
-            #ffffff 0%, 
-            #60a5fa 20%, 
-            #a855f7 40%, 
-            #ec4899 60%, 
-            #f59e0b 80%, 
-            #10b981 100%
-          );
-          background-size: 300% 300%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-shadow: none;
-          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-        `;
-      case 'outlined':
-        return `
-          color: transparent;
-          -webkit-text-stroke: 2px ${props.theme.colors.text};
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          transition: all 0.3s ease;
-          
-          &:hover {
-            -webkit-text-stroke: 2px #60a5fa;
-            filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.5));
-          }
-        `;
-      default:
-        return `
-          color: ${props.theme.colors.text};
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        `;
-    }
-  }}
 `;
 
 const Subtitle = styled(motion.p)<{ $align: string }>`
-  font-size: clamp(1rem, 2.2vw, 1.4rem);
-  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: ${props => props.theme.colors.textSecondary};
   line-height: 1.6;
   margin: 0;
-  max-width: ${props => props.$align === 'center' ? '600px' : '100%'};
+  max-width: ${props => props.$align === 'center' ? '700px' : '100%'};
   ${props => props.$align === 'center' && 'margin-left: auto; margin-right: auto;'}
   font-weight: 400;
-  letter-spacing: 0.01em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 `;
 
 const Underline = styled(motion.div)<{ $align: string }>`
-  height: 4px;
-  width: 80px;
-  background: linear-gradient(
-    90deg,
-    #60a5fa 0%,
-    #a855f7 50%,
-    #ec4899 100%
-  );
+  height: 2px;
+  width: 60px;
+  background: ${props => props.theme.colors.accent};
   border-radius: 2px;
-  margin: ${props => props.theme.spacing.lg} ${props => {
+  margin: ${props => props.theme.spacing.md} ${props => {
     switch (props.$align) {
       case 'left': return '0 auto 0 0';
       case 'right': return '0 0 auto auto';
       default: return '0 auto';
     }
   }};
-  box-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
-`;
-
-const DecorativeElements = styled.div<{ $align: string }>`
-  position: absolute;
-  ${props => {
-    switch (props.$align) {
-      case 'left': return 'left: -60px; top: 50%;';
-      case 'right': return 'right: -60px; top: 50%;';
-      default: return 'left: 50%; top: -40px;';
-    }
-  }}
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(45deg, #60a5fa, #a855f7);
-    border-radius: 50%;
-  }
-  
-  &::before {
-    top: 0;
-    left: 0;
-  }
-  
-  &::after {
-    bottom: 0;
-    right: 0;
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    display: none;
-  }
 `;
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({
@@ -224,8 +138,6 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
     >
-      <DecorativeElements $align={align} />
-      
       <MainTitle
         size={size}
         variant={variant}

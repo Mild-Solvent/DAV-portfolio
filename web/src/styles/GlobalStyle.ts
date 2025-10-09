@@ -9,25 +9,30 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
   }
 
   body {
     font-family: ${props => props.theme.fonts.primary};
     background-color: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    line-height: 1.2;
+    line-height: 1.25;
     font-weight: 600;
     margin-bottom: ${props => props.theme.spacing.md};
+    color: ${props => props.theme.colors.textEmphasis};
   }
 
   h1 {
     font-size: ${props => props.theme.fontSizes['5xl']};
     font-weight: 700;
+    letter-spacing: -0.03em;
     
     @media (max-width: ${props => props.theme.breakpoints.md}) {
       font-size: ${props => props.theme.fontSizes['4xl']};
@@ -36,6 +41,8 @@ export const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: ${props => props.theme.fontSizes['4xl']};
+    font-weight: 600;
+    letter-spacing: -0.02em;
     
     @media (max-width: ${props => props.theme.breakpoints.md}) {
       font-size: ${props => props.theme.fontSizes['3xl']};
@@ -44,6 +51,7 @@ export const GlobalStyle = createGlobalStyle`
 
   h3 {
     font-size: ${props => props.theme.fontSizes['2xl']};
+    font-weight: 600;
     
     @media (max-width: ${props => props.theme.breakpoints.md}) {
       font-size: ${props => props.theme.fontSizes.xl};
@@ -53,15 +61,17 @@ export const GlobalStyle = createGlobalStyle`
   p {
     margin-bottom: ${props => props.theme.spacing.md};
     color: ${props => props.theme.colors.textSecondary};
+    line-height: 1.6;
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.accent};
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 
     &:hover {
-      color: ${props => props.theme.colors.primaryDark};
+      color: ${props => props.theme.colors.accentDark};
+      text-decoration: underline;
     }
   }
 
@@ -70,7 +80,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     font-family: inherit;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   img {
@@ -78,33 +88,45 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
-  /* Custom scrollbar */
+  /* GitHub-style scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
+    height: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.backgroundLight};
+    background: ${props => props.theme.colors.primary};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.primary};
-    border-radius: ${props => props.theme.borderRadius.full};
+    background: ${props => props.theme.colors.surface};
+    border-radius: ${props => props.theme.borderRadius.sm};
+    border: 2px solid ${props => props.theme.colors.primary};
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.colors.primaryDark};
+    background: ${props => props.theme.colors.surfaceLight};
   }
 
-  /* Selection */
+  /* GitHub-style selection */
   ::selection {
-    background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.white};
+    background: rgba(88, 166, 255, 0.3);
+    color: ${props => props.theme.colors.textEmphasis};
   }
 
-  /* Focus outline */
+  /* GitHub-style focus outline */
   :focus-visible {
-    outline: 2px solid ${props => props.theme.colors.primary};
+    outline: 2px solid ${props => props.theme.colors.accent};
     outline-offset: 2px;
+    border-radius: ${props => props.theme.borderRadius.sm};
+  }
+  
+  /* GitHub-style code blocks */
+  code {
+    font-family: ${props => props.theme.fonts.mono};
+    background: ${props => props.theme.colors.backgroundLight};
+    padding: 0.2em 0.4em;
+    border-radius: ${props => props.theme.borderRadius.sm};
+    font-size: 85%;
   }
 `;
