@@ -330,22 +330,26 @@ const Hero: React.FC = () => {
 
     const handleMouseEnter = () => {
       setIsCursorVisible(true);
+      // Add mousemove listener only when over hero
+      document.addEventListener('mousemove', handleMouseMove);
     };
 
     const handleMouseLeave = () => {
       setIsCursorVisible(false);
+      // Remove mousemove listener when leaving hero
+      document.removeEventListener('mousemove', handleMouseMove);
     };
 
     const heroElement = heroRef.current;
     if (heroElement) {
-      document.addEventListener('mousemove', handleMouseMove);
       heroElement.addEventListener('mouseenter', handleMouseEnter);
       heroElement.addEventListener('mouseleave', handleMouseLeave);
 
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
         heroElement.removeEventListener('mouseenter', handleMouseEnter);
         heroElement.removeEventListener('mouseleave', handleMouseLeave);
+        // Ensure cleanup if component unmounts
+        document.removeEventListener('mousemove', handleMouseMove);
       };
     }
   }, []);
