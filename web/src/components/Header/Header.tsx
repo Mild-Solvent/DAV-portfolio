@@ -27,13 +27,16 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: ${props => props.theme.spacing['2xl']};
   
   @media (max-width: ${props => props.theme.breakpoints.lg}) {
     padding: 0 ${props => props.theme.spacing.xl};
+    gap: ${props => props.theme.spacing.xl};
   }
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     padding: 0 ${props => props.theme.spacing.lg};
+    gap: ${props => props.theme.spacing.lg};
   }
 `;
 
@@ -246,7 +249,7 @@ const Header: React.FC = () => {
               height={40}
               priority
             />
-            <LogoText>Portfolio</LogoText>
+            <LogoText>DAV Development</LogoText>
           </Logo>
         </LeftSection>
         
