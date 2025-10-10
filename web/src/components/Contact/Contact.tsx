@@ -257,64 +257,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-const SocialLinks = styled.div`
-  display: flex;
-  gap: ${props => props.theme.spacing.lg};
-  margin-top: ${props => props.theme.spacing.xl};
-  justify-content: center;
-
-  @media (max-width: ${props => props.theme.breakpoints.lg}) {
-    justify-content: flex-start;
-  }
-`;
-
-const SocialLink = styled.a`
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 2px solid transparent;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-    border-radius: 14px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    background: rgba(59, 130, 246, 0.1);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-`;
 
 const StatusMessage = styled.div<{ status: 'success' | 'error' }>`
   padding: ${props => props.theme.spacing.md};
@@ -424,7 +366,7 @@ const Contact: React.FC = () => {
                 <ContactIcon>📧</ContactIcon>
                 <ContactText>
                   <h4>Email</h4>
-                  <p>hello@portfolio.sk</p>
+                  <p>matejcik.denis@gmail.com</p>
                 </ContactText>
               </ContactItem>
 
@@ -444,32 +386,6 @@ const Contact: React.FC = () => {
                 </ContactText>
               </ContactItem>
             </ContactDetails>
-
-            <SocialLinks>
-              <SocialLink
-                href="https://linkedin.com/in/yourprofile"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                💼
-              </SocialLink>
-              
-              <SocialLink
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🐙
-              </SocialLink>
-              
-              <SocialLink
-                href="https://twitter.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🐦
-              </SocialLink>
-            </SocialLinks>
           </ContactInfo>
 
           <ContactForm
