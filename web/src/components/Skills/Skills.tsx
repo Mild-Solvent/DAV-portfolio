@@ -203,7 +203,7 @@ const Skills: React.FC = () => {
       <Container>
         <SectionHeading
           title="Technical Skills"
-          subtitle="Technologies and tools I work with to build modern, scalable applications"
+          subtitle="Technologies and tools we work with to build modern, scalable applications"
           size="medium"
           align="center"
           animationDelay={0.1}

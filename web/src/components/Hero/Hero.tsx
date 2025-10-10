@@ -401,7 +401,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          I specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.
+          We specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.
         </HeroSubtitle>
         
         <HeroButtons

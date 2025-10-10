@@ -244,8 +244,8 @@ const About: React.FC = () => {
       <Container>
         <GlowStrip />
         <SectionHeading
-          title="About Me"
-          subtitle="Web Developer with passion for modern technologies"
+          title="About Us"
+          subtitle="Web Development Team with passion for modern technologies"
         />
         <Content
           initial={{ opacity: 0, y: 50 }}
@@ -253,7 +253,7 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p>I create modern and responsive websites with focus on user experience and performance. I specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. I constantly educate myself and follow the latest trends in web development to offer the best solutions for my clients.</p>
+          <p>We create modern and responsive websites with focus on user experience and performance. We specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. We constantly educate ourselves and follow the latest trends in web development to offer the best solutions for our clients.</p>
         </Content>
       </Container>
     </AboutSection>

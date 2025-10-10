@@ -37,16 +37,16 @@ export default function RootLayout({
         <title>DAV Development - Modern Web Development & Digital Solutions</title>
         
         {/* SEO Meta Tags */}
-        <meta name="description" content="DAV Development - Creating digital experiences of the future. Specializing in modern web applications, mobile apps, UI/UX design, and cloud solutions. Expert in React, TypeScript, Next.js, Node.js, and performance optimization." />
+        <meta name="description" content="DAV Development - Creating digital experiences of the future. Our team specializes in modern web applications, mobile apps, UI/UX design, and cloud solutions. Experts in React, TypeScript, Next.js, Node.js, and performance optimization." />
         <meta name="keywords" content="web development, mobile applications, UI/UX design, React, TypeScript, Next.js, Node.js, performance optimization, cloud DevOps, AI integration, responsive design, modern web applications, David developer" />
-        <meta name="author" content="David - DAV Development" />
+        <meta name="author" content="DAV Development Team" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href="https://dav-development.com" />
         
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="DAV Development - Modern Web Development & Digital Solutions" />
-        <meta property="og:description" content="Creating digital experiences of the future. Specializing in web development, mobile applications, UI/UX design, performance optimization, cloud solutions, and AI integration. Expert developer with focus on modern technologies." />
+        <meta property="og:description" content="Creating digital experiences of the future. Our team specializes in web development, mobile applications, UI/UX design, performance optimization, cloud solutions, and AI integration. Expert developers with focus on modern technologies." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://dav-development.com" />
         <meta property="og:site_name" content="DAV Development" />
@@ -59,7 +59,7 @@ export default function RootLayout({
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="DAV Development - Modern Web Development & Digital Solutions" />
-        <meta name="twitter:description" content="Creating digital experiences of the future. Web development, mobile apps, UI/UX design, performance optimization. Expert in React, TypeScript, Next.js, Node.js, cloud solutions & AI integration." />
+        <meta name="twitter:description" content="Creating digital experiences of the future. Web development, mobile apps, UI/UX design, performance optimization. Team of experts in React, TypeScript, Next.js, Node.js, cloud solutions & AI integration." />
         <meta name="twitter:creator" content="@dav_development" />
         <meta name="twitter:site" content="@dav_development" />
         {/* <meta name="twitter:image" content="https://dav-development.com/twitter-image.jpg" /> */}
@@ -77,11 +77,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "David",
-              "alternateName": "DAV Development",
-              "description": "Professional web developer specializing in modern web applications, mobile development, and digital solutions",
-              "jobTitle": "Web Developer",
+              "@type": "Organization",
+              "name": "DAV Development",
+              "description": "Professional web development team specializing in modern web applications, mobile development, and digital solutions",
               "url": "https://dav-development.com",
               "knowsAbout": [
                 "Web Development",
@@ -98,6 +96,10 @@ export default function RootLayout({
               "offers": {
                 "@type": "Offer",
                 "description": "Professional web development services including modern web applications, mobile apps, UI/UX design, performance audits, cloud solutions, and AI integration"
+              },
+              "founder": {
+                "@type": "Person",
+                "name": "David"
               }
             })
           }}
