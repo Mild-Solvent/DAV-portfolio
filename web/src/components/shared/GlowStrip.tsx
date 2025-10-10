@@ -56,27 +56,6 @@ const GlowStripWrapper = styled(motion.div)`
   }
 `;
 
-/* Extended glow container for additional lamp effect */
-const ExtendedGlow = styled(motion.div)`
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 400px;
-  height: 150px;
-  background: radial-gradient(ellipse 200px 75px at center top,
-    rgba(210, 168, 255, 0.12) 0%,
-    rgba(163, 113, 247, 0.1) 20%,
-    rgba(25, 108, 46, 0.08) 40%,
-    rgba(46, 160, 67, 0.06) 60%,
-    rgba(86, 211, 100, 0.04) 80%,
-    transparent 100%
-  );
-  filter: blur(12px);
-  pointer-events: none;
-  z-index: -3;
-`;
-
 interface GlowStripProps {
   className?: string;
 }
@@ -101,37 +80,27 @@ const GlowStrip: React.FC<GlowStripProps> = ({ className }) => {
   }, [scrollY, hasAnimated]);
   
   return (
-    <div style={{ position: 'relative' }}>
-      {/* Extended glow appears first with fade and scale */}
-      <ExtendedGlow
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={hasAnimated ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-      />
-      
-      {/* Main glow strip appears with width animation and glow effect */}
-      <GlowStripWrapper
-        className={className}
-        initial={{ 
-          opacity: 0, 
-          scaleX: 0
-        }}
-        animate={hasAnimated ? {
-          opacity: 1, 
-          scaleX: 1
-        } : {
-          opacity: 0, 
-          scaleX: 0
-        }}
-        transition={{ 
-          duration: 1.2, 
-          delay: 0.5,
-          ease: [0.25, 0.1, 0.25, 1],
-          opacity: { duration: 0.6 },
-          scaleX: { duration: 1.2 }
-        }}
-      />
-    </div>
+    <GlowStripWrapper
+      className={className}
+      initial={{ 
+        opacity: 0, 
+        scaleX: 0
+      }}
+      animate={hasAnimated ? {
+        opacity: 1, 
+        scaleX: 1
+      } : {
+        opacity: 0, 
+        scaleX: 0
+      }}
+      transition={{ 
+        duration: 1.2, 
+        delay: 0.5,
+        ease: [0.25, 0.1, 0.25, 1],
+        opacity: { duration: 0.6 },
+        scaleX: { duration: 1.2 }
+      }}
+    />
   );
 };
 
