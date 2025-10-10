@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SectionHeading, GlowStrip } from '../shared';
 
 const AboutSection = styled(motion.section)<{ $borderOpacity: number }>`
