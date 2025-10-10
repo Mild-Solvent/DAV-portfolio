@@ -164,19 +164,18 @@ const CookieBanner: React.FC = () => {
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
-
   const handleDecline = () => {
     setIsVisible(false);
-    // Optionally set a "declined" flag in localStorage
     localStorage.setItem('cookieDeclined', 'true');
   };
+
+  if (!isVisible) return null;
 
   return (
     <ModalContainer isVisible={isVisible}>
       <ModalContent>
         <ModalHeader>
-          <ModalTitle>🍪 Cookie Notice</ModalTitle>
+          <ModalTitle>Cookie Notice</ModalTitle>
           <CloseButton onClick={handleDecline}>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -184,7 +183,11 @@ const CookieBanner: React.FC = () => {
           </CloseButton>
         </ModalHeader>
         <ModalText>
-          This site is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> and doesn't collect personal data or use tracking cookies. Essential functionality only.
+          This site is hosted on{' '}
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>{' '}
+          and does not collect personal data or use tracking cookies. Essential functionality only.
         </ModalText>
         <ButtonGroup>
           <AcceptButton onClick={handleAccept}>
