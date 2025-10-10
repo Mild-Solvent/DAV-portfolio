@@ -87,7 +87,7 @@ const ModalText = styled.p`
   line-height: 1.5;
   
   a {
-    color: ${props => props.theme.colors.primary || '#00d2ff'};
+    color: ${props => props.theme.colors.text || '#ffffff'};
     text-decoration: none;
     
     &:hover {
