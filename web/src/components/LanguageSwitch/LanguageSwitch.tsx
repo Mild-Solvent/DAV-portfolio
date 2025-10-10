@@ -178,7 +178,7 @@ const LanguageSwitch: React.FC = () => {
       y: -10,
       transition: {
         duration: 0.2,
-        ease: [0.4, 0, 0.2, 1]
+        ease: [0.4, 0, 0.2, 1] as const
       }
     },
     visible: {
@@ -187,7 +187,7 @@ const LanguageSwitch: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.3,
-        ease: [0.4, 0, 0.2, 1]
+        ease: [0.4, 0, 0.2, 1] as const
       }
     }
   };
@@ -200,7 +200,7 @@ const LanguageSwitch: React.FC = () => {
       transition: {
         delay: index * 0.05,
         duration: 0.2,
-        ease: [0.4, 0, 0.2, 1]
+        ease: [0.4, 0, 0.2, 1] as const
       }
     })
   };
@@ -223,7 +223,7 @@ const LanguageSwitch: React.FC = () => {
         <ChevronIcon
           variants={chevronVariants}
           animate={isOpen ? 'open' : 'closed'}
-          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] as const }}
         >
           ▼
         </ChevronIcon>
