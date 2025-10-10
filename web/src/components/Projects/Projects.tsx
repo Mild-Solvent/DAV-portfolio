@@ -209,7 +209,6 @@ const Projects: React.FC = () => {
     transition: {
       duration: 8,
       repeat: Infinity,
-      ease: "easeInOut",
     }
   };
 
@@ -222,7 +221,6 @@ const Projects: React.FC = () => {
     transition: {
       duration: 12,
       repeat: Infinity,
-      ease: "easeInOut",
     }
   };
 
@@ -262,7 +260,6 @@ const Projects: React.FC = () => {
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: "easeInOut",
         }}
       />
       
@@ -279,7 +276,6 @@ const Projects: React.FC = () => {
         transition={{
           duration: 14,
           repeat: Infinity,
-          ease: "easeInOut",
         }}
       />
       

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 
 const GlowStripWrapper = styled(motion.div)`
   width: 200px;
