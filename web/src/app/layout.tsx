@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
 import StyledComponentsRegistry from '../lib/styled-components-registry';
+import './globals.css';
 
 const inter = Inter({ 
   subsets: ['latin'],
