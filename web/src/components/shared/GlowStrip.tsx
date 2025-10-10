@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const GlowStripWrapper = styled.div`
   width: 200px;
   height: 4px;
-  margin: ${props => props.theme.spacing.xl} auto ${props => props.theme.spacing['2xl']} auto;
+  margin: ${props => props.theme.spacing.xl} auto ${props => props.theme.spacing['4xl']} auto;
   background: linear-gradient(90deg, 
     #d2a8ff 0%, 
     #a371f7 20%, 
