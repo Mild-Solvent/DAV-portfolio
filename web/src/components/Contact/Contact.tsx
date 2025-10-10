@@ -145,32 +145,81 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button`
   width: 100%;
-  background: ${props => props.theme.colors.success};
-  color: ${props => props.theme.colors.primary};
-  border: 1px solid ${props => props.theme.colors.border};
-  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
-  border-radius: ${props => props.theme.borderRadius.sm};
-  font-size: ${props => props.theme.fontSizes.base};
-  font-weight: 600;
-  box-shadow: ${props => props.theme.shadows.md};
-  transition: all 0.2s ease;
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 25%, #00b894 50%, #00cec9 75%, #0984e3 100%);
+  color: ${props => props.theme.colors.white};
+  border: none;
+  padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  font-size: ${props => props.theme.fontSizes.lg};
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.6s;
+  }
   
   &:hover:not(:disabled) {
-    background: #2ea043;
-    transform: translateY(-1px);
-    box-shadow: ${props => props.theme.shadows.lg};
+    background: linear-gradient(135deg, #00b8d4 0%, #2962ff 25%, #00a085 50%, #00acc1 75%, #1565c0 100%);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+      0 8px 25px rgba(0, 210, 255, 0.5),
+      0 0 20px rgba(0, 184, 148, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    &::before {
+      left: 100%;
+    }
   }
   
   &:active:not(:disabled) {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.6);
   }
 
   &:disabled {
-    opacity: 0.5;
+    background: linear-gradient(135deg, #a4a4a4 0%, #757575 100%);
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  /* Pulsing animation for emphasis */
+  &:not(:disabled) {
+    animation: pulse-glow 3s infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+    }
+    50% {
+      box-shadow: 
+        0 4px 15px rgba(0, 210, 255, 0.6),
+        0 0 20px rgba(0, 184, 148, 0.2);
+    }
   }
 `;
 
