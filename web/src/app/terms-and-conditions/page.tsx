@@ -249,7 +249,7 @@ const containerVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
       staggerChildren: 0.2
     }
   }
@@ -262,7 +262,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 };
@@ -274,7 +274,7 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 };
@@ -337,7 +337,7 @@ export default function TermsAndConditions() {
 
             <h2>Hosting and Availability</h2>
             <p>
-              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. We make no guarantees about the availability, reliability, or uptime of the website. GitHub's terms of service also apply to the hosting of this site.
+              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. We make no guarantees about the availability, reliability, or uptime of the website. GitHub&apos;s terms of service also apply to the hosting of this site.
             </p>
 
             <h2>No Data Collection</h2>
@@ -352,7 +352,7 @@ export default function TermsAndConditions() {
 
             <h2>Limitation of Liability</h2>
             <p>
-              This website is provided "as is" without any representations or warranties. We shall not be liable for any damages arising from the use of this website.
+              This website is provided &quot;as is&quot; without any representations or warranties. We shall not be liable for any damages arising from the use of this website.
             </p>
 
             <h2>Contact Information</h2>

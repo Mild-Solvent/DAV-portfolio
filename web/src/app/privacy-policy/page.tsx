@@ -227,7 +227,7 @@ const containerVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
       staggerChildren: 0.2
     }
   }
@@ -240,7 +240,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 };
@@ -252,7 +252,7 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 };
@@ -300,7 +300,7 @@ export default function PrivacyPolicy() {
 
             <h2>Hosting</h2>
             <p>
-              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> using GitHub Pages. GitHub may collect certain technical information as part of their hosting service. Please refer to <a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub's Privacy Policy</a> for information about their data practices.
+              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> using GitHub Pages. GitHub may collect certain technical information as part of their hosting service. Please refer to <a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub&apos;s Privacy Policy</a> for information about their data practices.
             </p>
 
             <h2>Cookies</h2>
@@ -320,7 +320,7 @@ export default function PrivacyPolicy() {
 
             <h2>Changes to This Policy</h2>
             <p>
-              We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated "last modified" date.
+              We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated &quot;last modified&quot; date.
             </p>
           </Content>
         </ContentCard>

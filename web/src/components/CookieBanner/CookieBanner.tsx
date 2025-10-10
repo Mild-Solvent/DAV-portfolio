@@ -74,7 +74,7 @@ const CloseButton = styled.button`
 
 const ModalTitle = styled.h3`
   color: ${props => props.theme.colors.text || '#ffffff'};
-  font-size: ${props => props.theme.fontSizes.md || '16px'};
+  font-size: ${props => props.theme.fontSizes.base || '16px'};
   font-weight: 600;
   margin: 0;
   flex: 1;
@@ -82,7 +82,7 @@ const ModalTitle = styled.h3`
 
 const ModalText = styled.p`
   color: ${props => props.theme.colors.textSecondary || 'rgba(255, 255, 255, 0.8)'};
-  font-size: ${props => props.theme.fontSizes.sm || '14px'};
+  font-size: ${props => props.theme.fontSizes.xs || '14px'};
   margin: 0;
   line-height: 1.5;
   
@@ -108,7 +108,7 @@ const AcceptButton = styled.button`
   border: none;
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   border-radius: ${props => props.theme.borderRadius.md || '6px'};
-  font-size: ${props => props.theme.fontSizes.sm || '14px'};
+  font-size: ${props => props.theme.fontSizes.xs || '14px'};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -131,7 +131,7 @@ const DeclineButton = styled.button`
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
   border-radius: ${props => props.theme.borderRadius.md || '6px'};
-  font-size: ${props => props.theme.fontSizes.sm || '14px'};
+  font-size: ${props => props.theme.fontSizes.xs || '14px'};
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
