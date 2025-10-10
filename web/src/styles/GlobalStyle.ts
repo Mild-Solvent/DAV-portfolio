@@ -10,6 +10,9 @@ export const GlobalStyle = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     font-size: 16px;
+    /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   body {
@@ -88,24 +91,23 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
-  /* GitHub-style scrollbar */
+  /* Hidden scrollbar - only dots navigation visible */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 0px;
+    height: 0px;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.primary};
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.surface};
-    border-radius: ${props => props.theme.borderRadius.sm};
-    border: 2px solid ${props => props.theme.colors.primary};
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.colors.surfaceLight};
+    background: transparent;
   }
 
   /* GitHub-style selection */
