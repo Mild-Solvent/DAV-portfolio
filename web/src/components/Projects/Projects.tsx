@@ -18,8 +18,8 @@ const LeftGlow = styled.div`
   width: 40%;
   height: 60%;
   background: radial-gradient(ellipse at center, 
-    ${props => props.theme.colors.accent}15 0%, 
-    ${props => props.theme.colors.secondary}10 30%, 
+    ${props => props.theme.colors.accent}10 0%, 
+    ${props => props.theme.colors.secondary}08 30%, 
     transparent 70%
   );
   border-radius: 50%;
@@ -29,13 +29,13 @@ const LeftGlow = styled.div`
 
 const RightGlow = styled.div`
   position: absolute;
-  top: 30%;
+  top: 20%;
   right: -20%;
   width: 40%;
-  height: 50%;
+  height: 60%;
   background: radial-gradient(ellipse at center, 
-    ${props => props.theme.colors.done}15 0%, 
-    ${props => props.theme.colors.sponsors}10 30%, 
+    ${props => props.theme.colors.accent}10 0%, 
+    ${props => props.theme.colors.secondary}08 30%, 
     transparent 70%
   );
   border-radius: 50%;
