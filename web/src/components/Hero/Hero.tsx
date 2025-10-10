@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -17,6 +17,7 @@ const HeroSection = styled.section`
   background: #0d1117;
   width: 100%;
   box-sizing: border-box;
+  cursor: none; /* Hide default cursor in hero section */
   
 `;
 
@@ -217,6 +218,31 @@ const ParticlesContainer = styled.div`
   z-index: 6;
 `;
 
+// Cursor glow effect
+const CursorGlow = styled.div<{ $x: number; $y: number; $isVisible: boolean }>`
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.2) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(${props => props.$x - 20}px, ${props => props.$y - 20}px);
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  transition: opacity 0.2s ease;
+  mix-blend-mode: screen;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.2),
+    0 0 60px rgba(255, 255, 255, 0.1);
+`;
+
 // Individual particle
 const Particle = styled(motion.div)<{ $delay: number; $duration: number; $x: number; $size: number }>`
   position: absolute;
@@ -293,6 +319,36 @@ const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
 
 
 const Hero: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isCursorVisible, setIsCursorVisible] = useState(false);
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = () => {
+      setIsCursorVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsCursorVisible(false);
+    };
+
+    const heroElement = heroRef.current;
+    if (heroElement) {
+      document.addEventListener('mousemove', handleMouseMove);
+      heroElement.addEventListener('mouseenter', handleMouseEnter);
+      heroElement.addEventListener('mouseleave', handleMouseLeave);
+
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        heroElement.removeEventListener('mouseenter', handleMouseEnter);
+        heroElement.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
+  }, []);
   
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -304,9 +360,17 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <HeroSection id="hero">
-      {/* Bottom glow effect */}
-      <BottomGlow />
+    <>
+      {/* Custom cursor glow - rendered outside hero to avoid z-index issues */}
+      <CursorGlow 
+        $x={cursorPosition.x} 
+        $y={cursorPosition.y} 
+        $isVisible={isCursorVisible}
+      />
+      
+      <HeroSection id="hero" ref={heroRef}>
+        {/* Bottom glow effect */}
+        <BottomGlow />
       
       {/* Floating particles */}
       <ParticlesContainer>
@@ -355,6 +419,7 @@ const Hero: React.FC = () => {
         </HeroButtons>
       </HeroContainer>
     </HeroSection>
+    </>
   );
 };
 
