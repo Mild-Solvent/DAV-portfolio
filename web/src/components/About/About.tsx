@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { SectionHeading, GlowStrip } from '../shared';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const AboutSection = styled(motion.section)<{ $borderOpacity: number }>`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -163,6 +164,7 @@ const AboutFloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
 };
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
   const aboutRef = useRef<HTMLElement>(null);
   const [borderOpacity, setBorderOpacity] = useState(1);
   
@@ -244,8 +246,8 @@ const About: React.FC = () => {
       <Container>
         <GlowStrip />
         <SectionHeading
-          title="About Us"
-          subtitle="Web Development Team with passion for modern technologies"
+          title={t('about.title')}
+          subtitle={t('about.subtitle')}
         />
         <Content
           initial={{ opacity: 0, y: 50 }}
@@ -253,7 +255,7 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p>We create modern and responsive websites with focus on user experience and performance. We specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. We constantly educate ourselves and follow the latest trends in web development to offer the best solutions for our clients.</p>
+          <p>{t('about.description')}</p>
         </Content>
       </Container>
     </AboutSection>

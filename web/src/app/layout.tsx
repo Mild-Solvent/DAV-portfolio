@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { theme } from '../styles/theme';
 import StyledComponentsRegistry from '../lib/styled-components-registry';
+import { TranslationProvider } from '../contexts/TranslationContext';
 import './globals.css';
 
 const inter = Inter({ 
@@ -107,12 +108,14 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <AppContainer>
-              {children}
-            </AppContainer>
-          </ThemeProvider>
+          <TranslationProvider>
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <AppContainer>
+                {children}
+              </AppContainer>
+            </ThemeProvider>
+          </TranslationProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

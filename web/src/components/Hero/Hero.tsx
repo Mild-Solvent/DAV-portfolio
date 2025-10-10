@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -319,6 +320,7 @@ const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
 
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isCursorVisible, setIsCursorVisible] = useState(false);
@@ -393,7 +395,7 @@ const Hero: React.FC = () => {
         ease: [0.25, 0.1, 0.25, 1] as const
           }}
         >
-          Creating <span>digital experiences</span> of the future
+          {t('hero.title.before')}<span>{t('hero.title.highlight')}</span>{t('hero.title.after')}
         </HeroTitle>
         
         <HeroSubtitle
@@ -401,7 +403,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          We specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.
+          {t('hero.subtitle')}
         </HeroSubtitle>
         
         <HeroButtons
@@ -412,13 +414,13 @@ const Hero: React.FC = () => {
           <PrimaryButton
             onClick={() => scrollToSection('projects')}
           >
-            View Projects
+            {t('hero.cta.projects')}
           </PrimaryButton>
           
           <SecondaryButton
             onClick={() => scrollToSection('contact')}
           >
-            Contact
+            {t('hero.cta.contact')}
           </SecondaryButton>
         </HeroButtons>
       </HeroContainer>

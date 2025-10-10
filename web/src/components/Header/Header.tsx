@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTranslation } from '../../contexts/TranslationContext';
+import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
 
 interface HeaderContainerProps {
   isScrolled: boolean;
@@ -205,6 +207,7 @@ const MobileMenuButton = styled.button`
 
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -249,31 +252,33 @@ const Header: React.FC = () => {
               height={40}
               priority
             />
-            <LogoText>DAV Development</LogoText>
+            <LogoText>{t('header.logo')}</LogoText>
           </Logo>
         </LeftSection>
         
         <RightSection>
           <NavList $isOpen={isMobileMenuOpen}>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('hero')}>Home</NavLink>
+              <NavLink onClick={() => scrollToSection('hero')}>{t('header.home')}</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('about')}>About</NavLink>
+              <NavLink onClick={() => scrollToSection('about')}>{t('header.about')}</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('projects')}>Projects</NavLink>
+              <NavLink onClick={() => scrollToSection('projects')}>{t('header.projects')}</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('services')}>Services</NavLink>
+              <NavLink onClick={() => scrollToSection('services')}>{t('header.services')}</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('skills')}>Skills</NavLink>
+              <NavLink onClick={() => scrollToSection('skills')}>{t('header.skills')}</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink onClick={() => scrollToSection('contact')}>Contact</NavLink>
+              <NavLink onClick={() => scrollToSection('contact')}>{t('header.contact')}</NavLink>
             </NavItem>
           </NavList>
+          
+          <LanguageSwitch />
 
           <MobileMenuButton
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

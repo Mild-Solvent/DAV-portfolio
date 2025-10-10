@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import SectionHeading from '../shared/SectionHeading';
+import { SectionHeading } from '../shared';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const ContactSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -290,6 +291,7 @@ const StatusMessage = styled.div<{ status: 'success' | 'error' }>`
 `;
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -323,14 +325,14 @@ const Contact: React.FC = () => {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setSubmitMessage('Thank you! Your message has been sent successfully.');
+        setSubmitMessage(t('contact.form.success'));
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         throw new Error('Failed to send message');
       }
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
+      setSubmitMessage(t('contact.form.error'));
       console.error('Form submission error:', error);
     } finally {
       setIsSubmitting(false);
@@ -346,7 +348,7 @@ const Contact: React.FC = () => {
     <ContactSection id="contact">
       <Container>
         <SectionHeading
-          title="Contact Me"
+          title={t('contact.title')}
         />
 
         <ContactContent>
@@ -356,16 +358,16 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3>Let&apos;s work together</h3>
+            <h3>{t('contact.subtitle')}</h3>
             <p>
-              Do you have an interesting project or need help with web development? Don&apos;t hesitate to contact me. I&apos;d be happy to discuss your ideas and create something amazing together.
+              {t('contact.description')}
             </p>
 
             <ContactDetails>
               <ContactItem>
                 <ContactIcon>📧</ContactIcon>
                 <ContactText>
-                  <h4>Email</h4>
+                  <h4>{t('contact.email')}</h4>
                   <p>matejcik.denis@gmail.com</p>
                 </ContactText>
               </ContactItem>
@@ -373,7 +375,7 @@ const Contact: React.FC = () => {
               <ContactItem>
                 <ContactIcon>📱</ContactIcon>
                 <ContactText>
-                  <h4>Phone</h4>
+                  <h4>{t('contact.phone')}</h4>
                   <p>+421 914 229 122</p>
                 </ContactText>
               </ContactItem>
@@ -381,8 +383,8 @@ const Contact: React.FC = () => {
               <ContactItem>
                 <ContactIcon>📍</ContactIcon>
                 <ContactText>
-                  <h4>Location</h4>
-                  <p>Bratislava, Slovakia</p>
+                  <h4>{t('contact.location')}</h4>
+                  <p>{t('contact.locationValue')}</p>
                 </ContactText>
               </ContactItem>
             </ContactDetails>
@@ -401,7 +403,7 @@ const Contact: React.FC = () => {
               </StatusMessage>
             )}
             <FormGroup>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t('contact.form.name')}</Label>
               <Input
                 type="text"
                 id="name"
@@ -409,12 +411,12 @@ const Contact: React.FC = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Name"
+                placeholder={t('contact.form.namePlaceholder')}
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('contact.form.email')}</Label>
               <Input
                 type="email"
                 id="email"
@@ -422,12 +424,12 @@ const Contact: React.FC = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="your@email.com"
+                placeholder={t('contact.form.emailPlaceholder')}
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="subject">Subject</Label>
+              <Label htmlFor="subject">{t('contact.form.subject')}</Label>
               <Input
                 type="text"
                 id="subject"
@@ -435,19 +437,19 @@ const Contact: React.FC = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                placeholder="Subject"
+                placeholder={t('contact.form.subjectPlaceholder')}
               />
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t('contact.form.message')}</Label>
               <TextArea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
-                placeholder="Message"
+                placeholder={t('contact.form.messagePlaceholder')}
               />
             </FormGroup>
 
@@ -455,7 +457,7 @@ const Contact: React.FC = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
             </SubmitButton>
           </ContactForm>
         </ContactContent>

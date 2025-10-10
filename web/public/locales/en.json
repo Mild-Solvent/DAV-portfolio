@@ -1,0 +1,43 @@
+{
+  "header.home": "Home",
+  "header.about": "About",
+  "header.projects": "Projects", 
+  "header.services": "Services",
+  "header.skills": "Skills",
+  "header.contact": "Contact",
+  "header.logo": "DAV Development",
+  
+  "hero.title.before": "Creating ",
+  "hero.title.highlight": "digital experiences",
+  "hero.title.after": " of the future",
+  "hero.subtitle": "We specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.",
+  "hero.cta.projects": "View Projects",
+  "hero.cta.contact": "Contact",
+  
+  "about.title": "About Us",
+  "about.subtitle": "Web Development Team with passion for modern technologies",
+  "about.description": "We create modern and responsive websites with focus on user experience and performance. We specialize in frontend development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. We constantly educate ourselves and follow the latest trends in web development to offer the best solutions for our clients.",
+  
+  "contact.title": "Contact Me",
+  "contact.subtitle": "Let's work together",
+  "contact.description": "Do you have an interesting project or need help with web development? Don't hesitate to contact me. I'd be happy to discuss your ideas and create something amazing together.",
+  "contact.email": "Email",
+  "contact.phone": "Phone", 
+  "contact.location": "Location",
+  "contact.locationValue": "Bratislava, Slovakia",
+  "contact.form.name": "Name",
+  "contact.form.email": "Email",
+  "contact.form.subject": "Subject",
+  "contact.form.message": "Message",
+  "contact.form.namePlaceholder": "Name",
+  "contact.form.emailPlaceholder": "your@email.com",
+  "contact.form.subjectPlaceholder": "Subject",
+  "contact.form.messagePlaceholder": "Message",
+  "contact.form.send": "Send Message",
+  "contact.form.sending": "Sending...",
+  "contact.form.success": "Thank you! Your message has been sent successfully.",
+  "contact.form.error": "Sorry, there was an error sending your message. Please try again.",
+  
+  "language.current": "English",
+  "language.select": "Select Language"
+}

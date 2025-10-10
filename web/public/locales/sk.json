@@ -1,0 +1,43 @@
+{
+  "header.home": "Domov",
+  "header.about": "O nás",
+  "header.projects": "Projekty", 
+  "header.services": "Služby",
+  "header.skills": "Zručnosti",
+  "header.contact": "Kontakt",
+  "header.logo": "DAV Development",
+  
+  "hero.title.before": "Vytvárame ",
+  "hero.title.highlight": "digitálne zážitky",
+  "hero.title.after": " budúcnosti",
+  "hero.subtitle": "Špecializujeme sa na vývoj moderných webových aplikácií a používateľských rozhraní so zameraním na výkon, dostupnosť a skvelý dizajn.",
+  "hero.cta.projects": "Zobraziť projekty",
+  "hero.cta.contact": "Kontakt",
+  
+  "about.title": "O nás",
+  "about.subtitle": "Tím webových vývojárov s vášňou pre moderné technológie",
+  "about.description": "Vytvárame moderné a responzívne webové stránky so zameraním na používateľskú skúsenosť a výkon. Špecializujeme sa na frontend vývoj pomocou najnovších technológií a máme rozsiahle skúsenosti s navrhovaním a implementáciou komplexných webových aplikácií - od jednoduchých landing pages až po zložité podnikové systémy. Neustále sa vzdelávame a sledujeme najnovšie trendy vo webovom vývoji, aby sme mohli ponúknuť najlepšie riešenia pre našich klientov.",
+  
+  "contact.title": "Kontakt",
+  "contact.subtitle": "Poďme spolupracovať",
+  "contact.description": "Máte zaujímavý projekt alebo potrebujete pomoc s webovým vývojom? Neváhajte ma kontaktovať. Rád prediskutujem vaše nápady a spoločne vytvoríme niečo úžasné.",
+  "contact.email": "Email",
+  "contact.phone": "Telefón", 
+  "contact.location": "Poloha",
+  "contact.locationValue": "Bratislava, Slovensko",
+  "contact.form.name": "Meno",
+  "contact.form.email": "Email",
+  "contact.form.subject": "Predmet",
+  "contact.form.message": "Správa",
+  "contact.form.namePlaceholder": "Vaše meno",
+  "contact.form.emailPlaceholder": "vas@email.com",
+  "contact.form.subjectPlaceholder": "Predmet správy",
+  "contact.form.messagePlaceholder": "Vaša správa",
+  "contact.form.send": "Odoslať správu",
+  "contact.form.sending": "Odosielam...",
+  "contact.form.success": "Ďakujem! Vaša správa bola úspešne odoslaná.",
+  "contact.form.error": "Ospravedlňujem sa, pri odosielaní správy sa vyskytla chyba. Skúste to prosím znovu.",
+  
+  "language.current": "Slovenčina",
+  "language.select": "Vybrať jazyk"
+}
