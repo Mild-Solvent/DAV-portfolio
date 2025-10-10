@@ -6,11 +6,8 @@ const FooterContainer = styled.footer`
   background: #000000;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: ${props => props.theme.spacing.xl} 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  margin-top: auto;
+  width: 100%;
 `;
 
 const Container = styled.div`

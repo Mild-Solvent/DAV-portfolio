@@ -23,12 +23,16 @@ export default function Home() {
         zIndex: 10, 
         marginTop: '100vh',
         background: 'transparent',
-        paddingBottom: '120px'
+        flex: '1',
+        display: 'flex',
+        flexDirection: 'column'
       }}>
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
+        <div style={{ flex: '1' }}>
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </div>
         <Footer />
       </main>
       <CookieBanner />

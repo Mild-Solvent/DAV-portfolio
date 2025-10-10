@@ -17,6 +17,8 @@ const AppContainer = styled.div`
   min-height: 100vh;
   background: ${props => props.theme.colors.backgroundSolid};
   color: ${props => props.theme.colors.text};
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow-x: hidden;
   width: 100%;
