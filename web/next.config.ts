@@ -6,10 +6,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // GitHub Pages uses a subdirectory for project pages
-  // Update this if your repo name is different
-  basePath: process.env.NODE_ENV === 'production' ? '/DAV-portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/DAV-portfolio/' : '',
+  // Custom domain configuration for davdev.eu
+  // No basePath or assetPrefix needed for custom domains
 };
 
 export default nextConfig;
