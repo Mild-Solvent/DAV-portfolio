@@ -39,5 +39,12 @@
   "contact.form.error": "Sorry, there was an error sending your message. Please try again.",
   
   "language.current": "English",
-  "language.select": "Select Language"
+  "language.select": "Select Language",
+  
+  "skills.title": "Technical Skills",
+  "skills.subtitle": "Technologies and tools we work with to build modern, scalable applications",
+  "skills.frontend.title": "Frontend Development",
+  "skills.backend.title": "Backend Development",
+  "skills.cloud.title": "Cloud & DevOps",
+  "skills.design.title": "Design & UX"
 }

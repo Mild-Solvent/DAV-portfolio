@@ -39,5 +39,12 @@
   "contact.form.error": "Ospravedlňujem sa, pri odosielaní správy sa vyskytla chyba. Skúste to prosím znovu.",
   
   "language.current": "Slovenčina",
-  "language.select": "Vybrať jazyk"
+  "language.select": "Vybrať jazyk",
+  
+  "skills.title": "Technické zručnosti",
+  "skills.subtitle": "Technológie a nástroje, s ktorými pracújem pri vytváraní moderných, škálovateľných aplikácií",
+  "skills.frontend.title": "Frontend vývoj",
+  "skills.backend.title": "Backend vývoj",
+  "skills.cloud.title": "Cloud & DevOps",
+  "skills.design.title": "Dizajn & UX"
 }

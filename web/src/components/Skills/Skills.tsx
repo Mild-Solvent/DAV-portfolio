@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { portfolioContent } from '../../data/portfolio-content';
 import SectionHeading from '../shared/SectionHeading';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const SkillsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -164,7 +165,15 @@ const TechnologyTag = styled(motion.span)`
 
 
 const Skills: React.FC = () => {
-  const skillsArray = Object.values(portfolioContent.skills);
+  const { t } = useTranslation();
+  
+  // Function to get translated skill category titles
+  const getSkillTitle = (skillKey: string, fallbackTitle: string) => {
+    const translationKey = `skills.${skillKey}.title`;
+    const translatedTitle = t(translationKey);
+    // If translation is the same as key (not found), return fallback
+    return translatedTitle === translationKey ? fallbackTitle : translatedTitle;
+  };
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -202,8 +211,8 @@ const Skills: React.FC = () => {
     <SkillsSection id="skills">
       <Container>
         <SectionHeading
-          title="Technical Skills"
-          subtitle="Technologies and tools we work with to build modern, scalable applications"
+          title={t('skills.title')}
+          subtitle={t('skills.subtitle')}
           size="medium"
           align="center"
           animationDelay={0.1}
@@ -217,11 +226,11 @@ const Skills: React.FC = () => {
         >
           <SkillsWrapper>
             <SkillsGrid>
-              {skillsArray.map((skillCategory, index) => (
+              {Object.entries(portfolioContent.skills).map(([skillKey, skillCategory], index) => (
                 <SkillCard key={index} variants={cardVariants}>
                   <SkillHeader>
                     <SkillIcon>{skillCategory.icon}</SkillIcon>
-                    <SkillTitle>{skillCategory.title}</SkillTitle>
+                    <SkillTitle>{getSkillTitle(skillKey, skillCategory.title)}</SkillTitle>
                   </SkillHeader>
                   
                   <SkillTechnologies>
