@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-const GlowStripWrapper = styled.div`
+const GlowStripWrapper = styled(motion.div)`
   width: 200px;
   height: 4px;
   margin: ${props => props.theme.spacing.xl} auto ${props => props.theme.spacing['4xl']} auto;
@@ -56,7 +57,7 @@ const GlowStripWrapper = styled.div`
 `;
 
 /* Extended glow container for additional lamp effect */
-const ExtendedGlow = styled.div`
+const ExtendedGlow = styled(motion.div)`
   position: absolute;
   top: 4px;
   left: 50%;
@@ -81,10 +82,55 @@ interface GlowStripProps {
 }
 
 const GlowStrip: React.FC<GlowStripProps> = ({ className }) => {
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const { scrollY } = useScroll();
+  
+  useEffect(() => {
+    const unsubscribe = scrollY.on('change', (latest) => {
+      // Trigger animation when scrolling past hero section (assuming hero is 100vh)
+      // About section typically starts around 100vh, so trigger when scrollY > 50vh
+      const heroHeight = window.innerHeight;
+      const triggerPoint = heroHeight * 0.5; // Trigger at 50% of hero height
+      
+      if (latest > triggerPoint && !hasAnimated) {
+        setHasAnimated(true);
+      }
+    });
+    
+    return () => unsubscribe();
+  }, [scrollY, hasAnimated]);
+  
   return (
     <div style={{ position: 'relative' }}>
-      <ExtendedGlow />
-      <GlowStripWrapper className={className} />
+      {/* Extended glow appears first with fade and scale */}
+      <ExtendedGlow
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={hasAnimated ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+      />
+      
+      {/* Main glow strip appears with width animation and glow effect */}
+      <GlowStripWrapper
+        className={className}
+        initial={{ 
+          opacity: 0, 
+          scaleX: 0
+        }}
+        animate={hasAnimated ? {
+          opacity: 1, 
+          scaleX: 1
+        } : {
+          opacity: 0, 
+          scaleX: 0
+        }}
+        transition={{ 
+          duration: 1.2, 
+          delay: 0.5,
+          ease: [0.25, 0.1, 0.25, 1],
+          opacity: { duration: 0.6 },
+          scaleX: { duration: 1.2 }
+        }}
+      />
     </div>
   );
 };
