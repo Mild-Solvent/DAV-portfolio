@@ -7,6 +7,67 @@ const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
   background: ${props => props.theme.colors.primary};
   position: relative;
+  overflow: hidden;
+`;
+
+// Side glows
+const LeftGlow = styled.div`
+  position: absolute;
+  top: 20%;
+  left: -20%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, 
+    ${props => props.theme.colors.accent}15 0%, 
+    ${props => props.theme.colors.secondary}10 30%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 0;
+`;
+
+const RightGlow = styled.div`
+  position: absolute;
+  top: 30%;
+  right: -20%;
+  width: 40%;
+  height: 50%;
+  background: radial-gradient(ellipse at center, 
+    ${props => props.theme.colors.done}15 0%, 
+    ${props => props.theme.colors.sponsors}10 30%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 0;
+`;
+
+// Furball gradients with animations
+const FurballGradient = styled(motion.div)<{ $size: number; $top: string; $left: string; $delay: number }>`
+  position: absolute;
+  width: ${props => props.$size}px;
+  height: ${props => props.$size}px;
+  top: ${props => props.$top};
+  left: ${props => props.$left};
+  background: radial-gradient(circle at 30% 30%, 
+    ${props => props.theme.colors.accent}20 0%,
+    ${props => props.theme.colors.success}15 25%,
+    ${props => props.theme.colors.done}10 50%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  filter: blur(15px);
+  z-index: 0;
+`;
+
+const SmallFurball = styled(FurballGradient)`
+  background: radial-gradient(circle at 40% 20%, 
+    ${props => props.theme.colors.sponsors}25 0%,
+    ${props => props.theme.colors.attention}15 35%,
+    transparent 70%
+  );
+  filter: blur(10px);
 `;
 
 const Container = styled.div`
@@ -139,8 +200,89 @@ const Projects: React.FC = () => {
     }
   ];
 
+  const floatingAnimation = {
+    animate: {
+      y: [0, -20, 0],
+      x: [0, 10, -5, 0],
+      rotate: [0, 5, -3, 0],
+    },
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }
+  };
+
+  const slowFloatingAnimation = {
+    animate: {
+      y: [0, -15, 0],
+      x: [0, -8, 12, 0],
+      rotate: [0, -3, 2, 0],
+    },
+    transition: {
+      duration: 12,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }
+  };
+
   return (
     <ProjectsSection id="projects">
+      {/* Side glows */}
+      <LeftGlow />
+      <RightGlow />
+      
+      {/* Floating furball gradients */}
+      <FurballGradient 
+        $size={120} 
+        $top="15%" 
+        $left="10%" 
+        $delay={0}
+        {...floatingAnimation}
+      />
+      
+      <SmallFurball 
+        $size={80} 
+        $top="70%" 
+        $left="85%" 
+        $delay={2}
+        {...slowFloatingAnimation}
+      />
+      
+      <FurballGradient 
+        $size={100} 
+        $top="45%" 
+        $left="5%" 
+        $delay={4}
+        animate={{
+          y: [0, 25, -10, 0],
+          x: [0, -5, 8, 0],
+          scale: [1, 1.1, 0.9, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <SmallFurball 
+        $size={60} 
+        $top="25%" 
+        $left="90%" 
+        $delay={6}
+        animate={{
+          y: [0, -18, 12, 0],
+          x: [0, 6, -10, 0],
+          rotate: [0, 8, -5, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
       <Container>
         <SectionHeading
           title="My Projects"
