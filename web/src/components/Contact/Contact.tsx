@@ -316,6 +316,37 @@ const SocialLink = styled.a`
   }
 `;
 
+const StatusMessage = styled.div<{ status: 'success' | 'error' }>`
+  padding: ${props => props.theme.spacing.md};
+  border-radius: ${props => props.theme.borderRadius.md};
+  margin-bottom: ${props => props.theme.spacing.lg};
+  font-size: ${props => props.theme.fontSizes.sm};
+  font-weight: 500;
+  text-align: center;
+  animation: slideIn 0.3s ease-out;
+  
+  background: ${props => props.status === 'success' 
+    ? 'rgba(34, 197, 94, 0.1)' 
+    : 'rgba(239, 68, 68, 0.1)'};
+  color: ${props => props.status === 'success' 
+    ? '#22c55e' 
+    : '#ef4444'};
+  border: 1px solid ${props => props.status === 'success' 
+    ? 'rgba(34, 197, 94, 0.2)' 
+    : 'rgba(239, 68, 68, 0.2)'};
+    
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -324,6 +355,8 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -335,13 +368,36 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
     
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Message sent! Thank you for your interest.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      const response = await fetch('https://formspree.io/f/mjkaagzd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSubmitMessage('Thank you! Your message has been sent successfully.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
+      console.error('Form submission error:', error);
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+      // Clear status message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+      }, 5000);
+    }
   };
 
   return (
@@ -423,6 +479,11 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             onSubmit={handleSubmit}
           >
+            {submitStatus !== 'idle' && submitMessage && (
+              <StatusMessage status={submitStatus as 'success' | 'error'}>
+                {submitMessage}
+              </StatusMessage>
+            )}
             <FormGroup>
               <Label htmlFor="name">Name</Label>
               <Input
@@ -478,7 +539,7 @@ const Contact: React.FC = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? '...' : 'Send Message'}
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </SubmitButton>
           </ContactForm>
         </ContactContent>
