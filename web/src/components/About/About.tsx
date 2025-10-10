@@ -35,7 +35,7 @@ const AboutSection = styled(motion.section)<{ $borderOpacity: number }>`
     opacity: ${props => props.$borderOpacity};
     transform: scaleX(1);
     transform-origin: center;
-    transition: opacity 0.1s ease-out;
+    transition: opacity 0.05s ease-out;
   }
   
   &::after {
@@ -56,7 +56,7 @@ const AboutSection = styled(motion.section)<{ $borderOpacity: number }>`
     pointer-events: none;
     z-index: 1;
     opacity: ${props => props.$borderOpacity * 0.7};
-    transition: opacity 0.1s ease-out;
+    transition: opacity 0.05s ease-out;
   }
 `;
 
@@ -190,16 +190,30 @@ const About: React.FC = () => {
         const sectionCenter = sectionTop + (sectionHeight / 2);
         const screenCenter = windowHeight / 2;
         
-        // Distance from section center to screen center
-        const distanceFromCenter = Math.abs(sectionCenter - screenCenter);
+        // Calculate how far the section has moved from bottom toward center
+        // When sectionCenter > screenCenter, section is below center (approaching from bottom)
+        // When sectionCenter < screenCenter, section is above center (moving past center)
         
-        // Maximum distance (when section just enters or exits)
-        const maxDistance = windowHeight / 2 + sectionHeight / 2;
-        
-        // Calculate opacity (1 when far, 0 when centered)
-        const opacity = Math.min(1, distanceFromCenter / (maxDistance * 0.8));
-        
-        setBorderOpacity(opacity);
+        if (sectionCenter > screenCenter) {
+          // Section is approaching from bottom
+          const totalJourney = windowHeight / 2 + sectionHeight / 2; // Distance from bottom edge to center
+          const currentDistance = sectionCenter - screenCenter; // How far below center
+          const progressFromBottom = 1 - (currentDistance / totalJourney); // 0 at bottom, 1 at center
+          
+          // Start fading at 60% of journey, invisible at 90%
+          if (progressFromBottom < 0.6) {
+            setBorderOpacity(1); // Full brightness until 60% of journey
+          } else if (progressFromBottom > 0.9) {
+            setBorderOpacity(0); // Invisible at 90% of journey
+          } else {
+            // Gradual fade between 60% and 90%
+            const fadeProgress = (progressFromBottom - 0.6) / (0.9 - 0.6);
+            setBorderOpacity(1 - fadeProgress);
+          }
+        } else {
+          // Section has passed center, keep invisible
+          setBorderOpacity(0);
+        }
       }
     };
     
