@@ -8,6 +8,40 @@ const ContactSection = styled.section`
   background: ${props => props.theme.colors.primary};
   min-height: 100vh;
   position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(180deg, 
+      rgba(0, 210, 255, 0.3) 0%, 
+      rgba(58, 123, 213, 0.25) 20%, 
+      rgba(0, 184, 148, 0.2) 40%, 
+      rgba(0, 206, 201, 0.15) 60%, 
+      rgba(9, 132, 227, 0.1) 80%, 
+      transparent 100%
+    );
+    filter: blur(8px);
+    opacity: 0.7;
+    animation: pulse-glow-gradient 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes pulse-glow-gradient {
+    0%, 100% {
+      opacity: 0.7;
+      filter: blur(8px);
+      transform: scaleY(1);
+    }
+    50% {
+      opacity: 1;
+      filter: blur(12px);
+      transform: scaleY(1.2);
+    }
+  }
 `;
 
 const Container = styled.div`
