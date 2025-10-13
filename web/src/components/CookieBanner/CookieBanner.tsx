@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const ModalContainer = styled.div<{ isVisible: boolean }>`
+const ModalContainer = styled.div`
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -12,10 +12,10 @@ const ModalContainer = styled.div<{ isVisible: boolean }>`
   border-radius: ${props => props.theme.borderRadius.lg || '12px'};
   padding: ${props => props.theme.spacing.lg};
   z-index: 1001;
-  opacity: ${props => props.isVisible ? '1' : '0'};
-  transform: translateY(${props => props.isVisible ? '0' : '20px'}) scale(${props => props.isVisible ? '1' : '0.95'});
+  opacity: 1;
+  transform: translateY(0) scale(1);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: ${props => props.isVisible ? 'auto' : 'none'};
+  pointer-events: auto;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 210, 255, 0.1);
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
@@ -172,7 +172,7 @@ const CookieBanner: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <ModalContainer isVisible={isVisible}>
+    <ModalContainer>
       <ModalContent>
         <ModalHeader>
           <ModalTitle>Cookie Notice</ModalTitle>
