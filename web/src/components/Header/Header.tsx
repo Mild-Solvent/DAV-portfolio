@@ -54,8 +54,13 @@ const RightSection = styled.div`
   gap: ${props => props.theme.spacing.lg};
   flex-shrink: 0;
   
+  @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    gap: ${props => props.theme.spacing.md};
+  }
+  
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     position: relative;
+    gap: ${props => props.theme.spacing.sm};
   }
 `;
 
@@ -105,14 +110,15 @@ interface NavListProps {
 }
 
 const NavList = styled.ul<NavListProps>`
-  display: flex;
   list-style: none;
   gap: ${props => props.theme.spacing.xl};
   align-items: center;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap;
 
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
+  /* When mobile menu should be shown, hide the regular nav and show dropdown when open */
+  @media (max-width: 1400px) {
     display: ${props => props.$isOpen ? 'flex' : 'none'};
     position: absolute;
     top: calc(100% + ${props => props.theme.spacing.md});
@@ -127,6 +133,21 @@ const NavList = styled.ul<NavListProps>`
     border: 1px solid rgba(48, 54, 61, 0.5);
     min-width: 200px;
     z-index: 1000;
+  }
+
+  /* Desktop: show normal horizontal navigation */
+  @media (min-width: 1401px) {
+    display: flex;
+    position: static;
+    background: none;
+    backdrop-filter: none;
+    flex-direction: row;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    min-width: auto;
+    z-index: auto;
   }
 `;
 
@@ -143,6 +164,7 @@ const NavLink = styled.a`
   border-radius: ${props => props.theme.borderRadius.lg};
   text-decoration: none;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 
   &:hover {
     color: ${props => props.theme.colors.textEmphasis};
@@ -168,10 +190,16 @@ const NavLink = styled.a`
     width: 80%;
   }
   
+  @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
+    font-size: ${props => props.theme.fontSizes.sm};
+  }
+  
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     padding: ${props => props.theme.spacing.lg};
     width: 100%;
     text-align: center;
+    font-size: ${props => props.theme.fontSizes.base};
     
     &::after {
       display: none;
@@ -198,7 +226,8 @@ const MobileMenuButton = styled.button`
     transform: scale(1.05);
   }
 
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
+  /* Show burger menu when navigation needs to collapse */
+  @media (max-width: 1400px) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -216,8 +245,24 @@ const Header: React.FC = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
+    const handleResize = () => {
+      const width = window.innerWidth;
+      
+      // Close mobile menu if screen becomes desktop size
+      if (width > 1400) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    // Initial check
+    handleResize();
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -277,8 +322,6 @@ const Header: React.FC = () => {
               <NavLink onClick={() => scrollToSection('contact')}>{t('header.contact')}</NavLink>
             </NavItem>
           </NavList>
-          
-          <LanguageSwitch />
 
           <MobileMenuButton
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -292,4 +335,33 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+// Floating Language Switch positioned outside header
+const FloatingLanguageSwitch = styled.div`
+  position: fixed;
+  top: calc(${props => props.theme.spacing.lg} * 2 + 60px); /* Adjust based on header height */
+  right: ${props => props.theme.spacing['2xl']};
+  z-index: ${props => props.theme.zIndex.dropdown - 1};
+  
+  @media (max-width: ${props => props.theme.breakpoints.lg}) {
+    right: ${props => props.theme.spacing.xl};
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    right: ${props => props.theme.spacing.lg};
+    top: calc(${props => props.theme.spacing.lg} * 2 + 50px);
+  }
+`;
+
+const HeaderWithLanguageSwitch: React.FC = () => {
+  return (
+    <>
+      <Header />
+      <FloatingLanguageSwitch>
+        <LanguageSwitch />
+      </FloatingLanguageSwitch>
+    </>
+  );
+};
+
+export { Header };
+export default HeaderWithLanguageSwitch;
