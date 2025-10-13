@@ -235,10 +235,17 @@ const MobileMenuButton = styled.button`
 `;
 
 
-const Header: React.FC = () => {
+interface HeaderWithMobileStateProps {
+  isMobileMenuOpen: boolean;
+  setIsMobileMenuOpen: (isOpen: boolean) => void;
+}
+
+const HeaderWithMobileState: React.FC<HeaderWithMobileStateProps> = ({ 
+  isMobileMenuOpen, 
+  setIsMobileMenuOpen 
+}) => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -263,7 +270,7 @@ const Header: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [setIsMobileMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     if (sectionId === 'hero') {
@@ -335,12 +342,18 @@ const Header: React.FC = () => {
   );
 };
 
+
 // Floating Language Switch positioned outside header
-const FloatingLanguageSwitch = styled.div`
+interface FloatingLanguageSwitchProps {
+  $isMobileMenuOpen: boolean;
+}
+
+const FloatingLanguageSwitch = styled(motion.div)<FloatingLanguageSwitchProps>`
   position: fixed;
-  top: calc(${props => props.theme.spacing.lg} * 2 + 60px); /* Adjust based on header height */
+  top: calc(${props => props.theme.spacing.lg} * 2 + 80px); /* Extra space to avoid header animation */
   right: ${props => props.theme.spacing['2xl']};
-  z-index: ${props => props.theme.zIndex.dropdown - 1};
+  z-index: ${props => props.theme.zIndex.dropdown + 10}; /* Above all dropdowns */
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   @media (max-width: ${props => props.theme.breakpoints.lg}) {
     right: ${props => props.theme.spacing.xl};
@@ -348,20 +361,43 @@ const FloatingLanguageSwitch = styled.div`
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     right: ${props => props.theme.spacing.lg};
-    top: calc(${props => props.theme.spacing.lg} * 2 + 50px);
+    top: calc(${props => props.theme.spacing.lg} * 2 + 70px); /* Extra space on mobile */
+  }
+  
+  /* When mobile menu is open on smaller screens, move below the dropdown */
+  @media (max-width: 1400px) {
+    top: ${props => props.$isMobileMenuOpen 
+      ? `calc(${props.theme.spacing.lg} * 2 + 80px + 300px)` /* Below mobile menu */
+      : `calc(${props.theme.spacing.lg} * 2 + 80px)`}; /* Normal position */
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    top: ${props => props.$isMobileMenuOpen 
+      ? `calc(${props.theme.spacing.lg} * 2 + 70px + 280px)` /* Below mobile menu on mobile */
+      : `calc(${props.theme.spacing.lg} * 2 + 70px)`}; /* Normal position on mobile */
   }
 `;
 
 const HeaderWithLanguageSwitch: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <>
-      <Header />
-      <FloatingLanguageSwitch>
+      <HeaderWithMobileState 
+        isMobileMenuOpen={isMobileMenuOpen} 
+        setIsMobileMenuOpen={setIsMobileMenuOpen} 
+      />
+      <FloatingLanguageSwitch 
+        $isMobileMenuOpen={isMobileMenuOpen}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.3 }} // Delay to appear after header animation
+      >
         <LanguageSwitch />
       </FloatingLanguageSwitch>
     </>
   );
 };
 
-export { Header };
+export { HeaderWithMobileState as Header };
 export default HeaderWithLanguageSwitch;
