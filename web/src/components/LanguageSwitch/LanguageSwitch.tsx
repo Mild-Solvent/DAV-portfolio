@@ -91,11 +91,6 @@ const DropdownMenu = styled(motion.div)`
     0 20px 60px rgba(0, 0, 0, 0.3),
     0 8px 32px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    left: 0;
-    right: auto;
-  }
 `;
 
 const DropdownItem = styled(motion.button)<{ $isActive: boolean }>`
