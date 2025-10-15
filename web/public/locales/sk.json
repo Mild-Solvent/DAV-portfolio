@@ -46,5 +46,8 @@
   "skills.frontend.title": "Frontend vývoj",
   "skills.backend.title": "Backend vývoj",
   "skills.cloud.title": "Cloud & DevOps",
-  "skills.design.title": "Dizajn & UX"
+  "skills.design.title": "Dizajn & UX",
+  
+  "projects.title": "Moje projekty",
+  "projects.visitWebsite": "Navštíviť stránku"
 }

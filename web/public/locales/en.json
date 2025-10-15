@@ -46,5 +46,8 @@
   "skills.frontend.title": "Frontend Development",
   "skills.backend.title": "Backend Development",
   "skills.cloud.title": "Cloud & DevOps",
-  "skills.design.title": "Design & UX"
+  "skills.design.title": "Design & UX",
+  
+  "projects.title": "My Projects",
+  "projects.visitWebsite": "Visit website"
 }

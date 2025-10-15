@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -159,6 +160,7 @@ const ProjectLink = styled.a`
 
 
 const Projects: React.FC = () => {
+  const { t } = useTranslation();
   
   // Real projects data
   const projects = [
@@ -281,7 +283,7 @@ const Projects: React.FC = () => {
       
       <Container>
         <SectionHeading
-          title="My Projects"
+          title={t('projects.title')}
         />
 
         <ProjectsGrid>
@@ -301,7 +303,7 @@ const Projects: React.FC = () => {
                 
                 <ProjectLinks>
                   <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    Visit website
+                    {t('projects.visitWebsite')}
                   </ProjectLink>
                 </ProjectLinks>
               </ProjectContent>
