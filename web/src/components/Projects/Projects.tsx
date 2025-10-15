@@ -205,6 +205,12 @@ const Projects: React.FC = () => {
       description: "Profesionálne 3D tlačiarenské služby a riešenia",
       liveUrl: "https://www.3dtlaciaren.sk/",
       image: "/projects/3dtlaciaren.png"
+    },
+    {
+      title: "Morpheus",
+      description: "Pokročilá webová aplikácia s moderným dizajnom a funkcionalitou",
+      liveUrl: "https://mild-solvent.github.io/Morpheus/",
+      image: "/projects/morpherus.png"
     }
   ];
 
