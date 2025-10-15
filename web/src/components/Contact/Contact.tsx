@@ -365,7 +365,6 @@ const Contact: React.FC = () => {
 
             <ContactDetails>
               <ContactItem>
-                <ContactIcon>📧</ContactIcon>
                 <ContactText>
                   <h4>{t('contact.email')}</h4>
                   <p>matejcik.denis@gmail.com</p>
@@ -373,7 +372,6 @@ const Contact: React.FC = () => {
               </ContactItem>
 
               <ContactItem>
-                <ContactIcon>📱</ContactIcon>
                 <ContactText>
                   <h4>{t('contact.phone')}</h4>
                   <p>+421 914 229 122</p>
@@ -381,7 +379,6 @@ const Contact: React.FC = () => {
               </ContactItem>
 
               <ContactItem>
-                <ContactIcon>📍</ContactIcon>
                 <ContactText>
                   <h4>{t('contact.location')}</h4>
                   <p>{t('contact.locationValue')}</p>
