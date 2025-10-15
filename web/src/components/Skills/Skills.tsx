@@ -116,17 +116,6 @@ const SkillHeader = styled.div`
   margin-bottom: ${props => props.theme.spacing.lg};
 `;
 
-const SkillIcon = styled.div`
-  font-size: ${props => props.theme.fontSizes['2xl']};
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${props => props.theme.colors.surface};
-  border-radius: ${props => props.theme.borderRadius.md};
-  border: 1px solid ${props => props.theme.colors.border};
-`;
 
 const SkillTitle = styled.h3`
   font-size: ${props => props.theme.fontSizes.xl};

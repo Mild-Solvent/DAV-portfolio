@@ -91,17 +91,6 @@ const ContactItem = styled.div`
   gap: ${props => props.theme.spacing.md};
 `;
 
-const ContactIcon = styled.div`
-  width: 48px;
-  height: 48px;
-  background: ${props => props.theme.colors.primary};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${props => props.theme.fontSizes.xl};
-  color: ${props => props.theme.colors.white};
-`;
 
 const ContactText = styled.div`
   h4 {
