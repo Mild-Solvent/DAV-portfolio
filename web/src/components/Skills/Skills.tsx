@@ -229,7 +229,6 @@ const Skills: React.FC = () => {
               {Object.entries(portfolioContent.skills).map(([skillKey, skillCategory], index) => (
                 <SkillCard key={index} variants={cardVariants}>
                   <SkillHeader>
-                    <SkillIcon>{skillCategory.icon}</SkillIcon>
                     <SkillTitle>{getSkillTitle(skillKey, skillCategory.title)}</SkillTitle>
                   </SkillHeader>
                   

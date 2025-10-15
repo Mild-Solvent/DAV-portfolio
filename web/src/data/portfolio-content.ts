@@ -6,7 +6,6 @@ export const portfolioContent = {
       title: 'Web Development',
       description: 'Modern, responsive web applications with latest technologies',
       price: 'From $500',
-      icon: '🌐',
       category: 'development'
     },
     {
@@ -14,7 +13,6 @@ export const portfolioContent = {
       title: 'Mobile Applications', 
       description: 'Cross-platform mobile applications for iOS and Android',
       price: 'From $875',
-      icon: '📱',
       category: 'development'
     },
     {
@@ -22,7 +20,6 @@ export const portfolioContent = {
       title: 'UI/UX Design',
       description: 'User-friendly design with focus on experience',
       price: 'From $375',
-      icon: '🎨',
       category: 'design'
     },
     {
@@ -30,7 +27,6 @@ export const portfolioContent = {
       title: 'Performance Audit',
       description: 'Performance and SEO optimization for existing applications',
       price: 'From $200',
-      icon: '⚡',
       category: 'optimization'
     },
     {
@@ -38,7 +34,6 @@ export const portfolioContent = {
       title: 'Cloud & DevOps',
       description: 'Deployment and management of applications in cloud environment',
       price: 'From $300',
-      icon: '☁️',
       category: 'infrastructure'
     },
     {
@@ -46,7 +41,6 @@ export const portfolioContent = {
       title: 'AI Integration',
       description: 'Artificial intelligence integration into web applications',
       price: 'Contact for pricing',
-      icon: '🤖',
       category: 'ai'
     }
   ],
@@ -55,7 +49,6 @@ export const portfolioContent = {
   skills: {
     frontend: {
       title: 'Frontend Development',
-      icon: '🚀',
       technologies: [
         'React',
         'TypeScript', 
@@ -68,7 +61,6 @@ export const portfolioContent = {
     },
     backend: {
       title: 'Backend Development',
-      icon: '⚙️',
       technologies: [
         'Node.js',
         'Express',
@@ -81,7 +73,6 @@ export const portfolioContent = {
     },
     cloud: {
       title: 'Cloud & DevOps',
-      icon: '☁️',
       technologies: [
         'AWS',
         'Docker',
@@ -94,7 +85,6 @@ export const portfolioContent = {
     },
     design: {
       title: 'Design & UX',
-      icon: '🎨',
       technologies: [
         'Figma',
         'Adobe XD',
