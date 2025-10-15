@@ -199,6 +199,12 @@ const Projects: React.FC = () => {
       description: "Profesionální software a kurzy 3D modelování",
       liveUrl: "https://www.softwarepoint.cz/",
       image: "/projects/softwarepoint.png"
+    },
+    {
+      title: "3D Tlaciaren",
+      description: "Profesionálne 3D tlačiarenské služby a riešenia",
+      liveUrl: "https://www.3dtlaciaren.sk/",
+      image: "/projects/3dtlaciaren.png"
     }
   ];
 
