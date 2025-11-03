@@ -255,7 +255,7 @@ const Note = styled.p`
 type ProjectType = 'wordpress' | 'nextjs' | 'react' | 'vue' | 'saas' | 'mobile' | 'custom' | null;
 
 const Calculator: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, isLoading } = useTranslation();
   const [projectType, setProjectType] = useState<ProjectType>(null);
   const [features, setFeatures] = useState<string[]>([]);
   const [pages, setPages] = useState('1-5');
@@ -337,6 +337,19 @@ const Calculator: React.FC = () => {
     const currentLang = window.location.pathname.split('/')[1] || 'en';
     window.location.href = `/${currentLang}#contact`;
   };
+
+  if (isLoading) {
+    return (
+      <CalculatorSection>
+        <BackgroundGlow />
+        <Container>
+          <Header>
+            <Title>Loading...</Title>
+          </Header>
+        </Container>
+      </CalculatorSection>
+    );
+  }
 
   return (
     <CalculatorSection>
