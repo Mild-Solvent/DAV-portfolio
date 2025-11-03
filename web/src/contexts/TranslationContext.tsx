@@ -1,8 +1,10 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
+import type { Locale } from '../lib/i18n';
+
 // Supported languages
-export type Language = 'en' | 'sk';
+export type Language = Locale;
 
 export interface LanguageOption {
   code: Language;
@@ -26,10 +28,11 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 
 interface TranslationProviderProps {
   children: ReactNode;
+  initialLang?: Language;
 }
 
-export const TranslationProvider: React.FC<TranslationProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+export const TranslationProvider: React.FC<TranslationProviderProps> = ({ children, initialLang = 'en' }) => {
+  const [language, setLanguage] = useState<Language>(initialLang);
   const [translations, setTranslations] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(true);
 

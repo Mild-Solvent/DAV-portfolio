@@ -49,5 +49,13 @@
   "skills.design.title": "Design & UX",
   
   "projects.title": "My Projects",
-  "projects.visitWebsite": "Visit website"
+  "projects.visitWebsite": "Visit website",
+  
+  "seo.title": "DAV Development - Modern Web Development & Digital Solutions",
+  "seo.description": "DAV Development - Creating digital experiences of the future. Our team specializes in modern web applications, mobile apps, UI/UX design, and cloud solutions. Experts in React, TypeScript, Next.js, Node.js, and performance optimization.",
+  "seo.keywords": "web development, mobile applications, UI/UX design, React, TypeScript, Next.js, Node.js, performance optimization, cloud DevOps, AI integration, responsive design, modern web applications, David developer",
+  "seo.ogTitle": "DAV Development - Modern Web Development & Digital Solutions",
+  "seo.ogDescription": "Creating digital experiences of the future. Our team specializes in web development, mobile applications, UI/UX design, performance optimization, cloud solutions, and AI integration. Expert developers with focus on modern technologies.",
+  "seo.twitterTitle": "DAV Development - Modern Web Development & Digital Solutions",
+  "seo.twitterDescription": "Creating digital experiences of the future. Web development, mobile apps, UI/UX design, performance optimization. Team of experts in React, TypeScript, Next.js, Node.js, cloud solutions & AI integration."
 }

@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // Skip middleware in build since it's incompatible with static export
+  skipMiddlewareUrlNormalize: true,
+  
   // Custom domain configuration for davdev.eu
   // No basePath or assetPrefix needed for custom domains
   

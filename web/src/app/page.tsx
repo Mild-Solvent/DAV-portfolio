@@ -1,41 +1,21 @@
-"use client";
-import React from 'react';
-import Header from '../components/Header/Header';
-import Hero from '../components/Hero/Hero';
-import About from '../components/About/About';
-import Skills from '../components/Skills/Skills';
-import Projects from '../components/Projects/Projects';
-import Contact from '../components/Contact/Contact';
-import Footer from '../components/Footer/Footer';
-import CookieBanner from '../components/CookieBanner/CookieBanner';
-import SectionDots from '../components/SectionDots/SectionDots';
-import ScrollToTop from '../components/ScrollButton/ScrollButton';
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { i18n } from '../lib/i18n';
 
-export default function Home() {
-  return (
-    <>
-      <SectionDots />
-      <ScrollToTop />
-      <Header />
-      <Hero />
-      <main style={{ 
-        position: 'relative', 
-        zIndex: 10, 
-        marginTop: '100vh',
-        background: 'transparent',
-        flex: '1',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        <div style={{ flex: '1' }}>
-          <About />
-          <Projects />
-          <Skills />
-          <Contact />
-        </div>
-        <Footer />
-      </main>
-      <CookieBanner />
-    </>
-  );
+export default function RootPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    // Detect user's preferred language from browser
+    const browserLang = navigator.language.split('-')[0];
+    const targetLang = i18n.locales.includes(browserLang as 'en' | 'sk') 
+      ? browserLang 
+      : i18n.defaultLocale;
+    
+    // Redirect to detected or default language
+    router.replace(`/${targetLang}`);
+  }, [router]);
+  
+  return null;
 }

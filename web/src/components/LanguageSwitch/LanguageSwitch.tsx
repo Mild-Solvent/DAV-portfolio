@@ -2,7 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation, SUPPORTED_LANGUAGES, Language } from '../../contexts/TranslationContext';
+import { i18n } from '../../lib/i18n';
 
 interface LanguageSwitchContainerProps {
   $isOpen: boolean;
@@ -142,9 +144,11 @@ const getCountryFlag = (countryCode: string): string => {
 };
 
 const LanguageSwitch: React.FC = () => {
-  const { language, setLanguage, t } = useTranslation();
+  const { language, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const currentLanguage = SUPPORTED_LANGUAGES.find(lang => lang.code === language);
 
@@ -162,8 +166,19 @@ const LanguageSwitch: React.FC = () => {
   }, [isOpen]);
 
   const handleLanguageChange = (newLanguage: Language) => {
-    setLanguage(newLanguage);
     setIsOpen(false);
+    
+    // Get the current path without the language prefix
+    const segments = pathname.split('/');
+    const currentLang = segments[1];
+    
+    // Remove the current language from the path if it exists
+    const pathWithoutLang = i18n.locales.includes(currentLang as Language)
+      ? '/' + segments.slice(2).join('/')
+      : pathname;
+    
+    // Navigate to the new language path
+    router.push(`/${newLanguage}${pathWithoutLang}`);
   };
 
   const dropdownVariants = {

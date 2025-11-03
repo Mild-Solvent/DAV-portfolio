@@ -49,5 +49,13 @@
   "skills.design.title": "Dizajn & UX",
   
   "projects.title": "Moje projekty",
-  "projects.visitWebsite": "Navštíviť stránku"
+  "projects.visitWebsite": "Navštíviť stránku",
+  
+  "seo.title": "DAV Development - Moderný Vývoj Webov a Digitálne Riešenia",
+  "seo.description": "DAV Development - Vytvárame digitálne zážitky budúcnosti. Náš tím sa špecializuje na moderné webové aplikácie, mobilné aplikácie, UI/UX dizajn a cloudové riešenia. Experti na React, TypeScript, Next.js, Node.js a optimalizáciu výkonu.",
+  "seo.keywords": "vývoj webov, mobilné aplikácie, UI/UX dizajn, React, TypeScript, Next.js, Node.js, optimalizácia výkonu, cloud DevOps, AI integrácia, responzívny dizajn, moderné webové aplikácie, webový vývojár",
+  "seo.ogTitle": "DAV Development - Moderný Vývoj Webov a Digitálne Riešenia",
+  "seo.ogDescription": "Vytvárame digitálne zážitky budúcnosti. Náš tím sa špecializuje na vývoj webov, mobilné aplikácie, UI/UX dizajn, optimalizáciu výkonu, cloudové riešenia a AI integráciu. Odborní vývojári so zameraním na moderné technológie.",
+  "seo.twitterTitle": "DAV Development - Moderný Vývoj Webov a Digitálne Riešenia",
+  "seo.twitterDescription": "Vytvárame digitálne zážitky budúcnosti. Vývoj webov, mobilné aplikácie, UI/UX dizajn, optimalizácia výkonu. Tím expertov na React, TypeScript, Next.js, Node.js, cloudové riešenia a AI integráciu."
 }
