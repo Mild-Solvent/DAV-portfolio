@@ -247,8 +247,9 @@ const Projects: React.FC = () => {
   }, []);
   
   const handleCalculatorClick = () => {
-    // Navigate to calculator - adjust this URL as needed
-    window.location.href = '/calculator';
+    // Navigate to calculator page
+    const currentLang = window.location.pathname.split('/')[1] || 'en';
+    window.location.href = `/${currentLang}/calculator`;
   };
   
   // Real projects data

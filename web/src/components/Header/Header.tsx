@@ -273,6 +273,20 @@ const HeaderWithMobileState: React.FC<HeaderWithMobileStateProps> = ({
   }, [setIsMobileMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
+    // Check if we're on a different page (like calculator)
+    const currentPath = window.location.pathname;
+    const currentLang = currentPath.split('/')[1] || 'en';
+    const isOnHomePage = currentPath === `/${currentLang}` || currentPath === `/${currentLang}/`;
+    
+    if (!isOnHomePage) {
+      // If not on home page, navigate to home with hash
+      window.location.href = sectionId === 'hero' 
+        ? `/${currentLang}` 
+        : `/${currentLang}#${sectionId}`;
+      return;
+    }
+    
+    // On home page, scroll to section
     if (sectionId === 'hero') {
       // Scroll to top for hero section
       window.scrollTo({ top: 0, behavior: 'smooth' });
