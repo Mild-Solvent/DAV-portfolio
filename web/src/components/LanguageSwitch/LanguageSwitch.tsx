@@ -168,6 +168,11 @@ const LanguageSwitch: React.FC = () => {
   const handleLanguageChange = (newLanguage: Language) => {
     setIsOpen(false);
     
+    // Save language preference
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferred-language', newLanguage);
+    }
+    
     // Get the current path without the language prefix
     const segments = pathname.split('/');
     const currentLang = segments[1];

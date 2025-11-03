@@ -65,19 +65,8 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({ childr
     loadTranslations();
   }, [language]);
 
-  // Load saved language preference on mount
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('preferred-language') as Language;
-    if (savedLanguage && SUPPORTED_LANGUAGES.some(lang => lang.code === savedLanguage)) {
-      setLanguage(savedLanguage);
-    } else {
-      // Detect browser language
-      const browserLang = navigator.language.substring(0, 2) as Language;
-      if (SUPPORTED_LANGUAGES.some(lang => lang.code === browserLang)) {
-        setLanguage(browserLang);
-      }
-    }
-  }, []);
+  // Don't auto-detect language on mount - use initialLang from URL instead
+  // This ensures static builds with URL-based routing work correctly
 
   // Save language preference
   const handleSetLanguage = (lang: Language) => {
