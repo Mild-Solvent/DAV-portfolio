@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
@@ -9,6 +9,30 @@ const ProjectsSection = styled.section`
   background: ${props => props.theme.colors.primary};
   position: relative;
   overflow: hidden;
+`;
+
+const ScrollIndicator = styled(motion.div)<{ $progress: number }>`
+  position: fixed;
+  right: 2rem;
+  top: ${props => `calc(50% + ${props.$progress}px - 30px)`};
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+  background: ${props => props.theme.colors.primary};
+  border: 2px solid ${props => props.theme.colors.accent};
+  border-radius: 50%;
+  box-shadow: 0 0 20px ${props => props.theme.colors.accent}40;
+  
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke: ${props => props.theme.colors.accent};
+    stroke-width: 2.5;
+  }
 `;
 
 // Side glows
@@ -161,6 +185,34 @@ const ProjectLink = styled.a`
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      
+      const section = sectionRef.current;
+      const rect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate scroll progress within the section (moves down in pixels)
+      // The arrow can move down as the user scrolls through the section
+      const scrollableHeight = sectionHeight - viewportHeight;
+      const scrolled = -rect.top;
+      const maxMovement = 200; // Maximum pixels the arrow can move down
+      const progress = Math.max(0, Math.min(maxMovement, (scrolled / scrollableHeight) * maxMovement));
+      
+      setScrollProgress(progress);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Real projects data
   const projects = [
@@ -239,7 +291,27 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <ProjectsSection id="projects">
+    <ProjectsSection 
+      id="projects" 
+      ref={sectionRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Scroll indicator arrow */}
+      <ScrollIndicator
+        $progress={scrollProgress}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ 
+          opacity: isHovered ? 1 : 0,
+          x: isHovered ? 0 : 20
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </ScrollIndicator>
+      
       {/* Side glows */}
       <LeftGlow />
       <RightGlow />
