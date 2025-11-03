@@ -11,28 +11,55 @@ const ProjectsSection = styled.section`
   overflow: hidden;
 `;
 
-const ScrollIndicator = styled(motion.div)<{ $progress: number }>`
+const CalculatorButton = styled(motion.div)<{ $progress: number; $visible: boolean }>`
   position: fixed;
-  right: 2rem;
-  top: ${props => `calc(50% + ${props.$progress}px - 30px)`};
+  right: 4rem;
+  top: ${props => `calc(50% + ${props.$progress}px - 40px)`};
+  display: ${props => props.$visible ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 100;
+  cursor: pointer;
+  pointer-events: auto;
+`;
+
+const CircleButton = styled.div`
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
-  pointer-events: none;
   background: ${props => props.theme.colors.primary};
   border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 50%;
   box-shadow: 0 0 20px ${props => props.theme.colors.accent}40;
+  transition: all 0.3s ease;
   
   svg {
     width: 24px;
     height: 24px;
     stroke: ${props => props.theme.colors.accent};
     stroke-width: 2.5;
+    transition: transform 0.3s ease;
   }
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px ${props => props.theme.colors.accent}60;
+    
+    svg {
+      transform: translateX(3px);
+    }
+  }
+`;
+
+const ButtonText = styled.span`
+  color: ${props => props.theme.colors.accent};
+  font-size: ${props => props.theme.fontSizes.sm};
+  font-weight: 600;
+  white-space: nowrap;
+  text-shadow: 0 0 10px ${props => props.theme.colors.accent}40;
 `;
 
 // Side glows
@@ -188,6 +215,7 @@ const Projects: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isInSection, setIsInSection] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -198,11 +226,15 @@ const Projects: React.FC = () => {
       const sectionHeight = section.offsetHeight;
       const viewportHeight = window.innerHeight;
       
+      // Check if section is visible in viewport
+      const sectionVisible = rect.top < viewportHeight && rect.bottom > 0;
+      setIsInSection(sectionVisible);
+      
       // Calculate scroll progress within the section (moves down in pixels)
-      // The arrow can move down as the user scrolls through the section
+      // The button can move down as the user scrolls through the section
       const scrollableHeight = sectionHeight - viewportHeight;
       const scrolled = -rect.top;
-      const maxMovement = 200; // Maximum pixels the arrow can move down
+      const maxMovement = 200; // Maximum pixels the button can move down
       const progress = Math.max(0, Math.min(maxMovement, (scrolled / scrollableHeight) * maxMovement));
       
       setScrollProgress(progress);
@@ -213,6 +245,11 @@ const Projects: React.FC = () => {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  const handleCalculatorClick = () => {
+    // Navigate to calculator - adjust this URL as needed
+    window.location.href = '/calculator';
+  };
   
   // Real projects data
   const projects = [
@@ -297,20 +334,25 @@ const Projects: React.FC = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Scroll indicator arrow */}
-      <ScrollIndicator
+      {/* Calculator button */}
+      <CalculatorButton
         $progress={scrollProgress}
+        $visible={isInSection && isHovered}
         initial={{ opacity: 0, x: 20 }}
         animate={{ 
-          opacity: isHovered ? 1 : 0,
-          x: isHovered ? 0 : 20
+          opacity: (isInSection && isHovered) ? 1 : 0,
+          x: (isInSection && isHovered) ? 0 : 20
         }}
         transition={{ duration: 0.3 }}
+        onClick={handleCalculatorClick}
       >
-        <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </ScrollIndicator>
+        <CircleButton>
+          <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </CircleButton>
+        <ButtonText>Calculate price</ButtonText>
+      </CalculatorButton>
       
       {/* Side glows */}
       <LeftGlow />
