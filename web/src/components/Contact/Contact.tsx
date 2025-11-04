@@ -304,7 +304,7 @@ const Contact: React.FC = () => {
     setSubmitStatus('idle');
     
     try {
-      const response = await fetch('https://formspree.io/f/mjkaagzd', {
+      const response = await fetch('https://formspree.io/f/mrbowvke', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -356,7 +356,7 @@ const Contact: React.FC = () => {
               <ContactItem>
                 <ContactText>
                   <h4>{t('contact.email')}</h4>
-                  <p>matejcik.denis@gmail.com</p>
+                  <p>dav.development.official@gmail.com</p>
                 </ContactText>
               </ContactItem>
 
