@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage - English -->
+  <url>
+    <loc>https://davdev.eu/en/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/" />
+  </url>
+  
+  <!-- Homepage - Slovak -->
+  <url>
+    <loc>https://davdev.eu/sk/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/" />
+  </url>
+  
+  <!-- Calculator Page - English -->
+  <url>
+    <loc>https://davdev.eu/en/calculator/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/calculator/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/calculator/" />
+  </url>
+  
+  <!-- Calculator Page - Slovak -->
+  <url>
+    <loc>https://davdev.eu/sk/calculator/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/calculator/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/calculator/" />
+  </url>
+  
+  <!-- Privacy Policy - English -->
+  <url>
+    <loc>https://davdev.eu/en/privacy-policy/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/privacy-policy/" />
+  </url>
+  
+  <!-- Privacy Policy - Slovak -->
+  <url>
+    <loc>https://davdev.eu/sk/privacy-policy/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/privacy-policy/" />
+  </url>
+  
+  <!-- Terms and Conditions - English -->
+  <url>
+    <loc>https://davdev.eu/en/terms-and-conditions/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/terms-and-conditions/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/terms-and-conditions/" />
+  </url>
+  
+  <!-- Terms and Conditions - Slovak -->
+  <url>
+    <loc>https://davdev.eu/sk/terms-and-conditions/</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davdev.eu/en/terms-and-conditions/" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://davdev.eu/sk/terms-and-conditions/" />
+  </url>
+  
+</urlset>

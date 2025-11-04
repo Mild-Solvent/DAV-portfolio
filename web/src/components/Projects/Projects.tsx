@@ -252,55 +252,71 @@ const Projects: React.FC = () => {
     window.location.href = `/${currentLang}/calculator`;
   };
   
-  // Real projects data
+  // Real projects data with SEO-optimized categories
   const projects = [
     {
       title: "Softwareshop",
-      description: "Profesionálny softvér a kurzy pre dizajnérov a architektov",
+      description: "E-commerce store - Professional software and courses for designers and architects",
       liveUrl: "https://www.softwareshop.sk/",
-      image: "/projects/softwareshop.png"
+      image: "/projects/softwareshop.png",
+      category: "E-commerce",
+      tags: ["online store", "e-shop", "WordPress", "digital products"]
     },
     {
       title: "CEA Europe.sk",
-      description: "Reklamná a eventová agentúra - kompletná realizácia služieb a produktov vo všetkých oblastiach reklamy",
+      description: "Corporate website - Advertising and event agency, complete services and products in all areas of advertising",
       liveUrl: "https://www.ceaeurope.sk/",
-      image: "/projects/ceaeurope.png"
+      image: "/projects/ceaeurope.png",
+      category: "Corporate Website",
+      tags: ["business site", "portfolio", "services platform"]
     },
     {
       title: "3D Software",
-      description: "Profesionálne 3D softvérové riešenia a služby",
+      description: "E-commerce platform - Professional 3D software solutions and services",
       liveUrl: "https://www.3dsoftware.sk/",
-      image: "/projects/3dsoftware.png"
+      image: "/projects/3dsoftware.png",
+      category: "E-commerce",
+      tags: ["online shop", "software store", "e-commerce"]
     },
     {
       title: "ALLA.SK",
-      description: "Navrhneme a zrealizujeme váš vysnívaný projekt",
+      description: "Portfolio website - Design and realization of dream projects",
       liveUrl: "https://www.alla.sk/",
-      image: "/projects/alla-sk.png"
+      image: "/projects/alla-sk.png",
+      category: "Portfolio",
+      tags: ["portfolio", "showcase", "design services"]
     },
     {
       title: "ACTIVITY DW Club",
-      description: "Objavte úžasné trasy - aktivity a výlety pre všetkých",
+      description: "Web platform - Discover amazing routes, activities and trips for everyone",
       liveUrl: "https://aktivity.ceaeurope.sk/",
-      image: "/projects/aktivity-ceaeurope.png"
+      image: "/projects/aktivity-ceaeurope.png",
+      category: "Web Platform",
+      tags: ["web app", "community platform", "activities"]
     },
     {
       title: "Software Point CZ",
-      description: "Profesionální software a kurzy 3D modelování",
+      description: "E-shop - Professional software and 3D modeling courses",
       liveUrl: "https://www.softwarepoint.cz/",
-      image: "/projects/softwarepoint.png"
+      image: "/projects/softwarepoint.png",
+      category: "E-commerce",
+      tags: ["e-commerce", "online store", "digital products"]
     },
     {
       title: "3D Tlaciaren",
-      description: "Profesionálne 3D tlačiarenské služby a riešenia",
+      description: "E-commerce store - Professional 3D printing services and solutions",
       liveUrl: "https://www.3dtlaciaren.sk/",
-      image: "/projects/3dtlaciaren.png"
+      image: "/projects/3dtlaciaren.png",
+      category: "E-commerce",
+      tags: ["online shop", "e-shop", "3D printing"]
     },
     {
       title: "Morpheus",
-      description: "Pokročilá webová aplikácia s moderným dizajnom a funkcionalitou",
+      description: "SaaS application - Advanced web application with modern design and functionality",
       liveUrl: "https://mild-solvent.github.io/Morpheus/",
-      image: "/projects/morpherus.png"
+      image: "/projects/morpherus.png",
+      category: "SaaS",
+      tags: ["web app", "SaaS platform", "React application"]
     }
   ];
 

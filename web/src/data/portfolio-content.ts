@@ -3,43 +3,43 @@ export const portfolioContent = {
   services: [
     {
       id: 'web-development',
-      title: 'Web Development',
-      description: 'Modern, responsive web applications with latest technologies',
+      title: 'Web Development & E-commerce',
+      description: 'Modern, responsive web applications, e-commerce stores, online shops, SaaS platforms, and custom web solutions with latest technologies (React, Vue.js, Next.js, TypeScript)',
       price: 'From $500',
       category: 'development'
     },
     {
       id: 'mobile-applications',
-      title: 'Mobile Applications', 
-      description: 'Cross-platform mobile applications for iOS and Android',
+      title: 'Mobile App Development', 
+      description: 'Cross-platform mobile applications for iOS and Android, React Native apps, native mobile development for smartphones and tablets',
       price: 'From $875',
       category: 'development'
     },
     {
       id: 'ui-ux-design',
-      title: 'UI/UX Design',
-      description: 'User-friendly design with focus on experience',
+      title: 'UI/UX Design & Responsive Design',
+      description: 'User-friendly design with focus on user experience, responsive layouts, Figma prototypes, Adobe XD mockups, and modern interface design',
       price: 'From $375',
       category: 'design'
     },
     {
       id: 'performance-audit',
-      title: 'Performance Audit',
-      description: 'Performance and SEO optimization for existing applications',
+      title: 'Performance & SEO Optimization',
+      description: 'Website performance audits, SEO optimization, speed improvements, search engine visibility, and technical optimization for web applications',
       price: 'From $200',
       category: 'optimization'
     },
     {
       id: 'cloud-devops',
-      title: 'Cloud & DevOps',
-      description: 'Deployment and management of applications in cloud environment',
+      title: 'Cloud & DevOps Solutions',
+      description: 'Cloud deployment and management (AWS, Docker, Kubernetes), CI/CD pipelines, DevOps automation, scalable infrastructure for web and mobile applications',
       price: 'From $300',
       category: 'infrastructure'
     },
     {
       id: 'ai-integration',
-      title: 'AI Integration',
-      description: 'Artificial intelligence integration into web applications',
+      title: 'AI Integration & Machine Learning',
+      description: 'Artificial intelligence integration, machine learning features, AI-powered chatbots, intelligent automation, and smart web application features',
       price: 'Contact for pricing',
       category: 'ai'
     }
