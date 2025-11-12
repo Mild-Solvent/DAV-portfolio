@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import styled from 'styled-components';
 import { theme } from '@/styles/theme';
-import Header from '@/components/Header/Header';
+import SiteHeader from '@/components/Header/Header';
 import { motion } from 'framer-motion';
 
 const PageWrapper = styled.div`
@@ -60,7 +60,7 @@ const FormCard = styled(motion.div)`
   }
 `;
 
-const Header = styled.div`
+const FormHeader = styled.div`
   text-align: center;
   margin-bottom: ${theme.spacing.xl};
 `;
@@ -345,7 +345,7 @@ export default function ContactFormPage() {
 
   return (
     <>
-      <Header />
+      <SiteHeader />
       <PageWrapper>
         <Container>
           <FormCard
@@ -353,10 +353,10 @@ export default function ContactFormPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-          <Header>
+          <FormHeader>
             <Title>Contact Form</Title>
             {selectedDate && <SelectedDate>{selectedDate}</SelectedDate>}
-          </Header>
+          </FormHeader>
 
           <Form onSubmit={handleSubmit}>
             <FormGroup>
