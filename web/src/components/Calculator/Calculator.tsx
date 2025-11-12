@@ -295,12 +295,6 @@ const ContactButton = styled.button`
   }
 `;
 
-const Note = styled.p`
-  font-size: ${props => props.theme.fontSizes.xs};
-  color: ${props => props.theme.colors.textSecondary};
-  margin-top: ${props => props.theme.spacing.md};
-  font-style: italic;
-`;
 
 type ProjectType = 'wordpress' | 'nextjs' | 'vue' | 'saas' | 'mobile' | 'custom' | null;
 
@@ -365,10 +359,14 @@ const Calculator: React.FC = () => {
   if (isLoading) {
     return (
       <CalculatorSection>
-        <BackgroundGlow />
+        <LeftGlow />
+        <RightGlow />
         <Container>
           <Header>
-            <Title>Loading...</Title>
+            <SectionHeading
+              title="Loading..."
+              subtitle=""
+            />
           </Header>
         </Container>
       </CalculatorSection>
