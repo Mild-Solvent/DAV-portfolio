@@ -166,38 +166,39 @@ const FeatureCheckbox = styled.label`
   }
 `;
 
-const SelectGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${props => props.theme.spacing.lg};
+const CustomFeaturesWrapper = styled.div`
+  margin-top: ${props => props.theme.spacing.lg};
 `;
 
-const SelectWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${props => props.theme.spacing.sm};
-`;
-
-const Label = styled.label`
-  font-size: ${props => props.theme.fontSizes.sm};
-  font-weight: 600;
-  color: ${props => props.theme.colors.text};
-`;
-
-const Select = styled.select`
+const TextArea = styled.textarea`
+  width: 100%;
+  min-height: 100px;
   padding: ${props => props.theme.spacing.lg};
   background: ${props => props.theme.colors.primary};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.md};
   color: ${props => props.theme.colors.text};
   font-size: ${props => props.theme.fontSizes.base};
-  cursor: pointer;
+  font-family: inherit;
+  resize: vertical;
   transition: all 0.3s ease;
   
   &:hover, &:focus {
     border-color: ${props => props.theme.colors.accent};
     outline: none;
   }
+  
+  &::placeholder {
+    color: ${props => props.theme.colors.textSecondary};
+  }
+`;
+
+const Label = styled.label`
+  display: block;
+  font-size: ${props => props.theme.fontSizes.sm};
+  font-weight: 600;
+  color: ${props => props.theme.colors.text};
+  margin-bottom: ${props => props.theme.spacing.sm};
 `;
 
 const PriceSection = styled.div`
@@ -252,39 +253,35 @@ const Note = styled.p`
   font-style: italic;
 `;
 
-type ProjectType = 'wordpress' | 'nextjs' | 'react' | 'vue' | 'saas' | 'mobile' | 'custom' | null;
+type ProjectType = 'wordpress' | 'nextjs' | 'vue' | 'saas' | 'mobile' | 'custom' | null;
+
+interface ProjectFeatures {
+  [key: string]: string[];
+}
 
 const Calculator: React.FC = () => {
   const { t, isLoading } = useTranslation();
   const [projectType, setProjectType] = useState<ProjectType>(null);
   const [features, setFeatures] = useState<string[]>([]);
-  const [pages, setPages] = useState('1-5');
-  const [timeline, setTimeline] = useState('1month');
+  const [customFeatures, setCustomFeatures] = useState('');
 
   const projectTypes = [
     { id: 'wordpress', icon: '📝', name: t('calculator.wordpress') },
     { id: 'nextjs', icon: '⚡', name: t('calculator.nextjs') },
-    { id: 'react', icon: '⚛️', name: t('calculator.react') },
     { id: 'vue', icon: '💚', name: t('calculator.vue') },
     { id: 'saas', icon: '☁️', name: t('calculator.saas') },
     { id: 'mobile', icon: '📱', name: t('calculator.mobile') },
     { id: 'custom', icon: '🛠️', name: t('calculator.custom') },
   ];
 
-  const availableFeatures = [
-    'responsive',
-    'cms',
-    'ecommerce',
-    'payment',
-    'auth',
-    'api',
-    'database',
-    'seo',
-    'analytics',
-    'multilingual',
-    'admin',
-    'hosting',
-  ];
+  const projectFeatures: ProjectFeatures = {
+    wordpress: ['cms', 'responsive', 'seo', 'ecommerce'],
+    nextjs: ['api', 'database', 'auth', 'seo'],
+    vue: ['api', 'database', 'auth', 'responsive'],
+    saas: ['auth', 'payment', 'api', 'database'],
+    mobile: ['auth', 'api', 'analytics', 'payment'],
+    custom: ['api', 'database', 'auth', 'hosting'],
+  };
 
   const toggleFeature = (feature: string) => {
     setFeatures(prev => 
@@ -294,43 +291,9 @@ const Calculator: React.FC = () => {
     );
   };
 
-  const calculatePrice = () => {
-    let basePrice = 0;
-    
-    // Base price by project type
-    switch (projectType) {
-      case 'wordpress': basePrice = 800; break;
-      case 'nextjs': basePrice = 2000; break;
-      case 'react': basePrice = 1800; break;
-      case 'vue': basePrice = 1700; break;
-      case 'saas': basePrice = 5000; break;
-      case 'mobile': basePrice = 4000; break;
-      case 'custom': basePrice = 3000; break;
-      default: basePrice = 0;
-    }
-    
-    // Add feature costs
-    const featureCost = features.length * 200;
-    
-    // Multiply by pages
-    let pageMultiplier = 1;
-    switch (pages) {
-      case '6-10': pageMultiplier = 1.5; break;
-      case '11-20': pageMultiplier = 2; break;
-      case '20+': pageMultiplier = 3; break;
-    }
-    
-    // Timeline factor
-    let timelineFactor = 1;
-    switch (timeline) {
-      case '2weeks': timelineFactor = 1.3; break;
-      case '1month': timelineFactor = 1; break;
-      case '2months': timelineFactor = 0.9; break;
-      case '3months+': timelineFactor = 0.8; break;
-    }
-    
-    const total = (basePrice + featureCost) * pageMultiplier * timelineFactor;
-    return Math.round(total);
+  const getAvailableFeatures = () => {
+    if (!projectType) return [];
+    return projectFeatures[projectType] || [];
   };
 
   const handleContactClick = () => {
@@ -387,7 +350,7 @@ const Calculator: React.FC = () => {
               <Section>
                 <SectionTitle>{t('calculator.features')}</SectionTitle>
                 <FeaturesGrid>
-                  {availableFeatures.map(feature => (
+                  {getAvailableFeatures().map(feature => (
                     <FeatureCheckbox key={feature}>
                       <input
                         type="checkbox"
@@ -398,41 +361,22 @@ const Calculator: React.FC = () => {
                     </FeatureCheckbox>
                   ))}
                 </FeaturesGrid>
-              </Section>
-
-              <Section>
-                <SelectGroup>
-                  <SelectWrapper>
-                    <Label>{t('calculator.pages')}</Label>
-                    <Select value={pages} onChange={(e) => setPages(e.target.value)}>
-                      <option value="1-5">{t('calculator.pages1-5')}</option>
-                      <option value="6-10">{t('calculator.pages6-10')}</option>
-                      <option value="11-20">{t('calculator.pages11-20')}</option>
-                      <option value="20+">{t('calculator.pages20+')}</option>
-                    </Select>
-                  </SelectWrapper>
-
-                  <SelectWrapper>
-                    <Label>{t('calculator.timeline')}</Label>
-                    <Select value={timeline} onChange={(e) => setTimeline(e.target.value)}>
-                      <option value="2weeks">{t('calculator.timeline2weeks')}</option>
-                      <option value="1month">{t('calculator.timeline1month')}</option>
-                      <option value="2months">{t('calculator.timeline2months')}</option>
-                      <option value="3months+">{t('calculator.timeline3months+')}</option>
-                    </Select>
-                  </SelectWrapper>
-                </SelectGroup>
+                <CustomFeaturesWrapper>
+                  <Label>{t('calculator.additionalFeatures')}</Label>
+                  <TextArea
+                    value={customFeatures}
+                    onChange={(e) => setCustomFeatures(e.target.value)}
+                    placeholder={t('calculator.additionalFeaturesPlaceholder')}
+                  />
+                </CustomFeaturesWrapper>
               </Section>
 
               <PriceSection>
-                <PriceLabel>{t('calculator.estimatedPrice')}</PriceLabel>
-                <Price>
-                  {t('calculator.from')} €{calculatePrice().toLocaleString()}
-                </Price>
+                <PriceLabel>{t('calculator.priceRange')}</PriceLabel>
+                <Price>€25,000 - €50,000</Price>
                 <ContactButton onClick={handleContactClick}>
                   {t('calculator.contactUs')}
                 </ContactButton>
-                <Note>{t('calculator.note')}</Note>
               </PriceSection>
             </>
           )}
