@@ -296,6 +296,18 @@ const Calculator: React.FC = () => {
     return projectFeatures[projectType] || [];
   };
 
+  const getPriceRange = () => {
+    switch (projectType) {
+      case 'wordpress': return '€500 - €1,500';
+      case 'nextjs': return '€1,500 - €3,000';
+      case 'vue': return '€1,500 - €3,000';
+      case 'saas': return '€25,000 - €50,000';
+      case 'mobile': return '€25,000 - €50,000';
+      case 'custom': return null;
+      default: return null;
+    }
+  };
+
   const handleContactClick = () => {
     const currentLang = window.location.pathname.split('/')[1] || 'en';
     window.location.href = `/${currentLang}#contact`;
@@ -372,8 +384,14 @@ const Calculator: React.FC = () => {
               </Section>
 
               <PriceSection>
-                <PriceLabel>{t('calculator.priceRange')}</PriceLabel>
-                <Price>€25,000 - €50,000</Price>
+                {getPriceRange() ? (
+                  <>
+                    <PriceLabel>{t('calculator.priceRange')}</PriceLabel>
+                    <Price>{getPriceRange()}</Price>
+                  </>
+                ) : (
+                  <PriceLabel>{t('calculator.customPricing')}</PriceLabel>
+                )}
                 <ContactButton onClick={handleContactClick}>
                   {t('calculator.contactUs')}
                 </ContactButton>
