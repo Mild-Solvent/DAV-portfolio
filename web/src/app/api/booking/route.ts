@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -157,15 +158,46 @@ Nová rezervácia stretnutia:
       `
     };
 
-    // TODO: Implement actual email sending
-    // For now, log the email data
-    console.log('📧 Booking Email Data:', emailData);
-
-    return NextResponse.json({
-      success: true,
-      message: 'Booking submitted successfully',
-      data: { date: formattedDate, time }
+    // Create nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '465'),
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     });
+
+    // Send email
+    try {
+      await transporter.sendMail({
+        from: process.env.SMTP_FROM,
+        to: emailData.to,
+        subject: emailData.subject,
+        text: emailData.text,
+        html: emailData.html,
+      });
+
+      console.log('✅ Email sent successfully to:', emailData.to);
+
+      return NextResponse.json({
+        success: true,
+        message: 'Booking submitted and email sent successfully',
+        data: { date: formattedDate, time }
+      });
+    } catch (emailError) {
+      console.error('❌ Error sending email:', emailError);
+      // Log the error but still return success (booking was recorded)
+      console.log('📧 Booking Data (email failed):', emailData);
+      
+      return NextResponse.json({
+        success: true,
+        message: 'Booking submitted but email failed',
+        data: { date: formattedDate, time },
+        warning: 'Email notification failed'
+      });
+    }
 
   } catch (error) {
     console.error('Error processing booking:', error);
