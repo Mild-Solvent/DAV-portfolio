@@ -246,12 +246,6 @@ const ContactButton = styled.button`
   }
 `;
 
-const Note = styled.p`
-  font-size: ${props => props.theme.fontSizes.sm};
-  color: ${props => props.theme.colors.textSecondary};
-  margin-top: ${props => props.theme.spacing.lg};
-  font-style: italic;
-`;
 
 type ProjectType = 'wordpress' | 'nextjs' | 'vue' | 'saas' | 'mobile' | 'custom' | null;
 

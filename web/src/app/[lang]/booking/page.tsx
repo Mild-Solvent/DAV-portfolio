@@ -1,7 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import BookingCalendar from '@/components/BookingCalendar/BookingCalendar';
 
 export default function BookingPage() {

@@ -298,10 +298,11 @@ export default function ContactCalendar() {
       const date = new Date(year, month, day);
       const isPast = date < today;
       const isToday = date.getTime() === today.getTime();
-      const isSelected = selectedDate &&
-        selectedDate.getDate() === day &&
-        selectedDate.getMonth() === month &&
-        selectedDate.getFullYear() === year;
+      const isSelected = selectedDate
+        ? selectedDate.getDate() === day &&
+          selectedDate.getMonth() === month &&
+          selectedDate.getFullYear() === year
+        : undefined;
       
       days.push(
         <DayCell
