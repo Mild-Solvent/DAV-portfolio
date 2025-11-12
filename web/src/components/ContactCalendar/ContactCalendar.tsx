@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
 import styled from 'styled-components';
 import { theme } from '@/styles/theme';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CalendarWrapper = styled.div`
   max-width: 900px;
@@ -234,13 +234,153 @@ const LegendColor = styled.div<{ $color: string }>`
   border: 1px solid ${theme.colors.border};
 `;
 
-export default function ContactCalendar() {
-  const router = useRouter();
-  const params = useParams();
-  const lang = params?.lang || 'sk';
+const Overlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: ${theme.zIndex.modal};
+  padding: ${theme.spacing.xl};
+`;
+
+const Popup = styled(motion.div)`
+  background: linear-gradient(145deg, rgba(22, 27, 34, 0.98) 0%, rgba(13, 17, 23, 1) 100%);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: ${theme.borderRadius.xl};
+  padding: ${theme.spacing['3xl']};
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6),
+              0 0 60px rgba(88, 166, 255, 0.2);
+  position: relative;
   
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: ${theme.gradients.blue};
+  }
+`;
+
+const PopupTitle = styled.h3`
+  font-size: ${theme.fontSizes['2xl']};
+  font-weight: 700;
+  background: ${theme.gradients.purple};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: ${theme.spacing.xl};
+  text-align: center;
+`;
+
+const TimeGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${theme.spacing.md};
+  margin-bottom: ${theme.spacing.xl};
+`;
+
+const TimeButton = styled.button<{ $selected?: boolean }>`
+  padding: ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${props => props.$selected ? theme.colors.accent : 'rgba(48, 54, 61, 0.8)'};
+  background: ${props => props.$selected 
+    ? `linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%)`
+    : 'linear-gradient(135deg, rgba(48, 54, 61, 0.4) 0%, rgba(33, 38, 45, 0.5) 100%)'
+  };
+  color: ${theme.colors.text};
+  font-size: ${theme.fontSizes.base};
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+    background: linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%);
+    border-color: ${theme.colors.accent};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+  }
+  
+  ${props => props.$selected && `
+    box-shadow: 0 4px 20px rgba(88, 166, 255, 0.4);
+  `}
+`;
+
+const PopupButtons = styled.div`
+  display: flex;
+  gap: ${theme.spacing.md};
+  margin-top: ${theme.spacing.xl};
+`;
+
+const PopupButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
+  flex: 1;
+  padding: ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.md};
+  font-weight: 700;
+  font-size: ${theme.fontSizes.base};
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  ${props => props.$variant === 'primary' ? `
+    background: linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%);
+    border: 1px solid ${theme.colors.accent};
+    color: ${theme.colors.white};
+    box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+    
+    &:hover {
+      box-shadow: 0 6px 25px rgba(88, 166, 255, 0.4);
+      transform: translateY(-2px);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  ` : `
+    background: rgba(48, 54, 61, 0.6);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    color: ${theme.colors.text};
+    
+    &:hover {
+      background: rgba(48, 54, 61, 0.8);
+      border-color: ${theme.colors.accent};
+    }
+  `}
+`;
+
+const ConfirmationText = styled.p`
+  font-size: ${theme.fontSizes.lg};
+  color: ${theme.colors.text};
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: ${theme.spacing.lg};
+`;
+
+const ConfirmationAddress = styled.div`
+  background: linear-gradient(135deg, rgba(31, 111, 235, 0.1) 0%, rgba(88, 166, 255, 0.05) 100%);
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: ${theme.borderRadius.lg};
+  padding: ${theme.spacing.lg};
+  text-align: center;
+  font-size: ${theme.fontSizes.xl};
+  font-weight: 700;
+  color: ${theme.colors.accent};
+  box-shadow: 0 4px 15px rgba(88, 166, 255, 0.2);
+`;
+
+export default function ContactCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -264,11 +404,40 @@ export default function ContactCalendar() {
     if (selected < today) return;
     
     setSelectedDate(selected);
+    setShowTimePicker(true);
+  };
+
+  const handleTimeSubmit = async () => {
+    if (!selectedTime || !selectedDate) return;
     
-    // Store in session and redirect to contact form
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('selectedDate', selected.toISOString());
-      router.push(`/${lang}/calendar/contact`);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          date: selectedDate.toISOString(),
+          time: selectedTime,
+        }),
+      });
+
+      if (response.ok) {
+        setShowTimePicker(false);
+        setShowConfirmation(true);
+        
+        setTimeout(() => {
+          setShowConfirmation(false);
+          setSelectedDate(null);
+          setSelectedTime('');
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -386,6 +555,86 @@ export default function ContactCalendar() {
           </LegendItem>
         </Legend>
       </CalendarCard>
+
+      {/* Time Picker Popup */}
+      <AnimatePresence>
+        {showTimePicker && selectedDate && (
+          <Overlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowTimePicker(false)}
+          >
+            <Popup
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <PopupTitle>
+                Vyberte čas pre {selectedDate.toLocaleDateString('sk-SK', { day: 'numeric', month: 'long' })}
+              </PopupTitle>
+              
+              <TimeGrid>
+                {['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'].map((time) => (
+                  <TimeButton
+                    key={time}
+                    $selected={selectedTime === time}
+                    onClick={() => setSelectedTime(time)}
+                  >
+                    {time}
+                  </TimeButton>
+                ))}
+              </TimeGrid>
+              
+              <PopupButtons>
+                <PopupButton
+                  $variant="secondary"
+                  onClick={() => {
+                    setShowTimePicker(false);
+                    setSelectedTime('');
+                  }}
+                >
+                  Zrušiť
+                </PopupButton>
+                <PopupButton
+                  $variant="primary"
+                  onClick={handleTimeSubmit}
+                  disabled={!selectedTime || isSubmitting}
+                >
+                  {isSubmitting ? 'Odosielam...' : 'Potvrdiť'}
+                </PopupButton>
+              </PopupButtons>
+            </Popup>
+          </Overlay>
+        )}
+      </AnimatePresence>
+
+      {/* Confirmation Popup */}
+      <AnimatePresence>
+        {showConfirmation && (
+          <Overlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Popup
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <PopupTitle>✨ Rezervácia potvrdená!</PopupTitle>
+              <ConfirmationText>
+                Tešíme sa na vás na adrese:
+              </ConfirmationText>
+              <ConfirmationAddress>
+                📍 Mliekárenská 1<br />
+                (zvonček Kováč)
+              </ConfirmationAddress>
+            </Popup>
+          </Overlay>
+        )}
+      </AnimatePresence>
     </CalendarWrapper>
   );
 }

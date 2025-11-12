@@ -274,10 +274,11 @@ export default function ContactFormPage() {
           day: 'numeric'
         }));
       } else {
-        router.push(`/${lang}/calendar`);
+        // No date selected, redirect to calendar
+        window.location.href = `/${lang}/calendar`;
       }
     }
-  }, [router, lang]);
+  }, [lang]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
