@@ -3,33 +3,51 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../contexts/TranslationContext';
+import { SectionHeading } from '../shared';
 
 const CalculatorSection = styled.section`
-  min-height: 100vh;
   padding: ${props => props.theme.spacing['4xl']} 0;
   background: ${props => props.theme.colors.primary};
   position: relative;
   overflow: hidden;
+  min-height: auto;
 `;
 
-const BackgroundGlow = styled.div`
+// Side glows similar to Projects section
+const LeftGlow = styled.div`
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
+  top: 20%;
+  left: -15%;
+  width: 35%;
   height: 60%;
   background: radial-gradient(ellipse at center, 
-    ${props => props.theme.colors.accent}08 0%, 
+    ${props => props.theme.colors.accent}10 0%, 
+    rgba(0, 255, 136, 0.05) 30%, 
     transparent 70%
   );
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(40px);
+  z-index: 0;
+`;
+
+const RightGlow = styled.div`
+  position: absolute;
+  bottom: 10%;
+  right: -15%;
+  width: 35%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, 
+    rgba(64, 224, 255, 0.08) 0%, 
+    ${props => props.theme.colors.accent}05 30%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
   z-index: 0;
 `;
 
 const Container = styled.div`
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
   position: relative;
@@ -37,50 +55,23 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  text-align: center;
-  margin-bottom: ${props => props.theme.spacing['4xl']};
-`;
-
-const Title = styled.h1`
-  font-size: ${props => props.theme.fontSizes['4xl']};
-  font-family: ${props => props.theme.fonts.display};
-  font-weight: 700;
-  color: ${props => props.theme.colors.textEmphasis};
-  margin-bottom: ${props => props.theme.spacing.md};
-  
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    font-size: ${props => props.theme.fontSizes['3xl']};
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: ${props => props.theme.fontSizes.lg};
-  color: ${props => props.theme.colors.textSecondary};
-  margin-bottom: ${props => props.theme.spacing.xl};
-`;
-
-const Description = styled.p`
-  font-size: ${props => props.theme.fontSizes.base};
-  color: ${props => props.theme.colors.textSecondary};
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
+  margin-bottom: ${props => props.theme.spacing['3xl']};
 `;
 
 const CalculatorCard = styled(motion.div)`
-  background: ${props => props.theme.colors.surface};
+  background: ${props => props.theme.colors.primary};
   border: 1px solid ${props => props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.xl};
-  padding: ${props => props.theme.spacing['3xl']};
-  box-shadow: ${props => props.theme.shadows.xl};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  padding: ${props => props.theme.spacing['2xl']};
+  position: relative;
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
-    padding: ${props => props.theme.spacing['2xl']};
+    padding: ${props => props.theme.spacing.xl};
   }
 `;
 
 const Section = styled.div`
-  margin-bottom: ${props => props.theme.spacing['3xl']};
+  margin-bottom: ${props => props.theme.spacing['2xl']};
   
   &:last-child {
     margin-bottom: 0;
@@ -92,49 +83,77 @@ const SectionTitle = styled.h3`
   font-weight: 600;
   color: ${props => props.theme.colors.textEmphasis};
   margin-bottom: ${props => props.theme.spacing.lg};
+  font-family: ${props => props.theme.fonts.display};
 `;
 
 const ProjectTypeGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: ${props => props.theme.spacing.md};
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: ${props => props.theme.spacing.lg};
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const ProjectTypeCard = styled.button<{ $selected: boolean }>`
   background: ${props => props.$selected 
-    ? `${props.theme.colors.accent}20` 
-    : props.theme.colors.primary};
-  border: 2px solid ${props => props.$selected 
+    ? `${props.theme.colors.accent}15` 
+    : 'transparent'};
+  border: 1px solid ${props => props.$selected 
     ? props.theme.colors.accent 
     : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.lg};
-  padding: ${props => props.theme.spacing.xl};
+  padding: ${props => props.theme.spacing.lg};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, ${props => props.theme.colors.accent}15, transparent 70%);
+    opacity: ${props => props.$selected ? 1 : 0};
+    transition: opacity 0.3s ease;
+  }
   
   &:hover {
     transform: translateY(-2px);
     border-color: ${props => props.theme.colors.accent};
-    box-shadow: 0 4px 12px ${props => props.theme.colors.accent}30;
+    box-shadow: 0 4px 12px ${props => props.theme.colors.accent}20;
+    
+    &::before {
+      opacity: 0.5;
+    }
   }
 `;
 
 const ProjectTypeIcon = styled.div`
-  font-size: ${props => props.theme.fontSizes['3xl']};
+  font-size: ${props => props.theme.fontSizes['2xl']};
   margin-bottom: ${props => props.theme.spacing.sm};
+  position: relative;
+  z-index: 1;
 `;
 
 const ProjectTypeName = styled.div`
-  font-size: ${props => props.theme.fontSizes.base};
+  font-size: ${props => props.theme.fontSizes.sm};
   font-weight: 600;
   color: ${props => props.theme.colors.text};
+  position: relative;
+  z-index: 1;
 `;
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: ${props => props.theme.spacing.md};
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FeatureCheckbox = styled.label`
@@ -142,20 +161,21 @@ const FeatureCheckbox = styled.label`
   align-items: center;
   gap: ${props => props.theme.spacing.md};
   padding: ${props => props.theme.spacing.lg};
-  background: ${props => props.theme.colors.primary};
+  background: transparent;
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.md};
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   
   &:hover {
     border-color: ${props => props.theme.colors.accent};
-    background: ${props => props.theme.colors.accent}10;
+    background: ${props => props.theme.colors.accent}08;
+    transform: translateY(-1px);
   }
   
   input {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     cursor: pointer;
     accent-color: ${props => props.theme.colors.accent};
   }
@@ -172,20 +192,25 @@ const CustomFeaturesWrapper = styled.div`
 
 const TextArea = styled.textarea`
   width: 100%;
-  min-height: 100px;
+  min-height: 80px;
   padding: ${props => props.theme.spacing.lg};
-  background: ${props => props.theme.colors.primary};
+  background: transparent;
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.md};
   color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSizes.base};
+  font-size: ${props => props.theme.fontSizes.sm};
   font-family: inherit;
   resize: vertical;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   
-  &:hover, &:focus {
+  &:hover {
+    border-color: ${props => props.theme.colors.accent};
+  }
+  
+  &:focus {
     border-color: ${props => props.theme.colors.accent};
     outline: none;
+    box-shadow: 0 0 0 1px ${props => props.theme.colors.accent}30;
   }
   
   &::placeholder {
@@ -195,61 +220,83 @@ const TextArea = styled.textarea`
 
 const Label = styled.label`
   display: block;
-  font-size: ${props => props.theme.fontSizes.sm};
+  font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
   color: ${props => props.theme.colors.text};
-  margin-bottom: ${props => props.theme.spacing.sm};
+  margin-bottom: ${props => props.theme.spacing.md};
 `;
 
-const PriceSection = styled.div`
+const PriceSection = styled(motion.div)`
   text-align: center;
   padding: ${props => props.theme.spacing['2xl']};
-  background: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.accent};
+  background: transparent;
+  border: 1px solid ${props => props.theme.colors.accent};
   border-radius: ${props => props.theme.borderRadius.lg};
   margin-top: ${props => props.theme.spacing['2xl']};
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, ${props => props.theme.colors.accent}10, transparent 70%);
+    opacity: 0.5;
+  }
 `;
 
 const PriceLabel = styled.div`
   font-size: ${props => props.theme.fontSizes.lg};
   color: ${props => props.theme.colors.textSecondary};
-  margin-bottom: ${props => props.theme.spacing.sm};
+  margin-bottom: ${props => props.theme.spacing.md};
+  position: relative;
+  z-index: 1;
 `;
 
 const Price = styled.div`
-  font-size: ${props => props.theme.fontSizes['4xl']};
+  font-size: ${props => props.theme.fontSizes['3xl']};
   font-weight: 700;
   color: ${props => props.theme.colors.accent};
   font-family: ${props => props.theme.fonts.display};
-  margin-bottom: ${props => props.theme.spacing.md};
+  margin-bottom: ${props => props.theme.spacing.lg};
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px ${props => props.theme.colors.accent}30;
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
-    font-size: ${props => props.theme.fontSizes['3xl']};
+    font-size: ${props => props.theme.fontSizes['2xl']};
   }
 `;
 
 const ContactButton = styled.button`
-  background: ${props => props.theme.colors.accent};
-  color: #000;
-  padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing['2xl']};
-  border: none;
-  border-radius: ${props => props.theme.borderRadius.md};
+  background: ${props => props.theme.colors.textEmphasis};
+  color: ${props => props.theme.colors.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing['2xl']};
+  border-radius: ${props => props.theme.borderRadius.sm};
   font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: ${props => props.theme.spacing.lg};
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: ${props => props.theme.shadows.md};
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px ${props => props.theme.colors.accent}40;
+    background: ${props => props.theme.colors.text};
+    transform: translateY(-1px);
+    box-shadow: ${props => props.theme.shadows.lg};
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 `;
 
 const Note = styled.p`
-  font-size: ${props => props.theme.fontSizes.sm};
+  font-size: ${props => props.theme.fontSizes.xs};
   color: ${props => props.theme.colors.textSecondary};
-  margin-top: ${props => props.theme.spacing.lg};
+  margin-top: ${props => props.theme.spacing.md};
   font-style: italic;
 `;
 
@@ -328,12 +375,14 @@ const Calculator: React.FC = () => {
 
   return (
     <CalculatorSection>
-      <BackgroundGlow />
+      <LeftGlow />
+      <RightGlow />
       <Container>
         <Header>
-          <Title>{t('calculator.title')}</Title>
-          <Subtitle>{t('calculator.subtitle')}</Subtitle>
-          <Description>{t('calculator.description')}</Description>
+          <SectionHeading
+            title={t('calculator.title')}
+            subtitle={t('calculator.subtitle')}
+          />
         </Header>
 
         <CalculatorCard
@@ -383,7 +432,11 @@ const Calculator: React.FC = () => {
                 </CustomFeaturesWrapper>
               </Section>
 
-              <PriceSection>
+              <PriceSection
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 {getPriceRange() ? (
                   <>
                     <PriceLabel>{t('calculator.priceRange')}</PriceLabel>
