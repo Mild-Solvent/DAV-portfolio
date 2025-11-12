@@ -88,11 +88,15 @@ const SectionTitle = styled.h3`
 
 const ProjectTypeGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: ${props => props.theme.spacing.lg};
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -104,12 +108,16 @@ const ProjectTypeCard = styled.button<{ $selected: boolean }>`
     ? props.theme.colors.accent 
     : props.theme.colors.border};
   border-radius: ${props => props.theme.borderRadius.lg};
-  padding: ${props => props.theme.spacing.lg};
+  padding: ${props => props.theme.spacing.xl};
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   &::before {
     content: '';
@@ -131,15 +139,9 @@ const ProjectTypeCard = styled.button<{ $selected: boolean }>`
   }
 `;
 
-const ProjectTypeIcon = styled.div`
-  font-size: ${props => props.theme.fontSizes['2xl']};
-  margin-bottom: ${props => props.theme.spacing.sm};
-  position: relative;
-  z-index: 1;
-`;
 
 const ProjectTypeName = styled.div`
-  font-size: ${props => props.theme.fontSizes.sm};
+  font-size: ${props => props.theme.fontSizes.base};
   font-weight: 600;
   color: ${props => props.theme.colors.text};
   position: relative;
@@ -148,7 +150,7 @@ const ProjectTypeName = styled.div`
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: ${props => props.theme.spacing.md};
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
@@ -313,12 +315,12 @@ const Calculator: React.FC = () => {
   const [customFeatures, setCustomFeatures] = useState('');
 
   const projectTypes = [
-    { id: 'wordpress', icon: '📝', name: t('calculator.wordpress') },
-    { id: 'nextjs', icon: '⚡', name: t('calculator.nextjs') },
-    { id: 'vue', icon: '💚', name: t('calculator.vue') },
-    { id: 'saas', icon: '☁️', name: t('calculator.saas') },
-    { id: 'mobile', icon: '📱', name: t('calculator.mobile') },
-    { id: 'custom', icon: '🛠️', name: t('calculator.custom') },
+    { id: 'wordpress', name: t('calculator.wordpress') },
+    { id: 'nextjs', name: t('calculator.nextjs') },
+    { id: 'vue', name: t('calculator.vue') },
+    { id: 'saas', name: t('calculator.saas') },
+    { id: 'mobile', name: t('calculator.mobile') },
+    { id: 'custom', name: t('calculator.custom') },
   ];
 
   const projectFeatures: ProjectFeatures = {
@@ -399,7 +401,6 @@ const Calculator: React.FC = () => {
                   $selected={projectType === type.id}
                   onClick={() => setProjectType(type.id as ProjectType)}
                 >
-                  <ProjectTypeIcon>{type.icon}</ProjectTypeIcon>
                   <ProjectTypeName>{type.name}</ProjectTypeName>
                 </ProjectTypeCard>
               ))}
