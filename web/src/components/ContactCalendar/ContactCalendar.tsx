@@ -413,14 +413,24 @@ export default function ContactCalendar() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/booking', {
+      const formattedDate = selectedDate.toLocaleDateString('sk-SK', { 
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric' 
+      });
+      
+      const response = await fetch('https://formspree.io/f/mrbowvke', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          date: selectedDate.toISOString(),
+          subject: '🗓️ Nová rezervácia stretnutia',
+          message: `Nová rezervácia stretnutia:\n\n📅 Dátum: ${formattedDate}\n🕐 Čas: ${selectedTime}\n\n📍 Miesto: Mliekárenská 1 (zvonček Kováč)`,
+          date: formattedDate,
           time: selectedTime,
+          _subject: '🗓️ Nová rezervácia stretnutia - Kalendár',
         }),
       });
 
