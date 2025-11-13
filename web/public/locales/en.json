@@ -93,6 +93,10 @@
   "calculator.additionalFeatures": "Additional Features or Requirements",
   "calculator.additionalFeaturesPlaceholder": "Describe any additional features, integrations, or specific requirements for your project...",
   
+  "calendar.title.before": "Schedule a ",
+  "calendar.title.highlight": "Meeting",
+  "calendar.subtitle": "Select a date to contact us and schedule your appointment",
+  
   "seo.title": "DAV Development - E-commerce, SaaS, Mobile Apps & Web Development Solutions",
   "seo.description": "Professional web development team specializing in e-commerce stores, SaaS platforms, mobile apps, online shops, and modern web applications. Expert developers for React, Vue.js, Next.js ecommerce, WordPress shops, custom shopping carts, enterprise SaaS, iOS/Android apps, UI/UX design, performance optimization, cloud deployment, and AI integration. Full-stack development from landing pages to complex enterprise systems.",
   "seo.keywords": "web development, e-commerce development, ecommerce website, SaaS development, SaaS platform, online store, web shop, eshop development, e-shop, shopping cart, WordPress ecommerce, React ecommerce, Vue.js development, Next.js development, online shopping platform, digital store, web store development, mobile app development, iOS app, Android app, cross-platform mobile, React Native, UI/UX design, Figma design, Adobe XD, responsive design, frontend development, backend development, full-stack developer, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL, REST API, TypeScript, JavaScript, Tailwind CSS, styled components, performance optimization, SEO optimization, cloud deployment, AWS, Docker, Kubernetes, DevOps, CI/CD, GitHub Actions, Vercel, Heroku, AI integration, machine learning, landing page, portfolio website, enterprise application, web application, custom software, digital solutions, software development, website builder, CMS development, database design, API development, microservices, scalable applications, modern web technologies",

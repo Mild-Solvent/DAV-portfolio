@@ -5,6 +5,7 @@ import ContactCalendar from '@/components/ContactCalendar/ContactCalendar';
 import styled from 'styled-components';
 import { theme } from '@/styles/theme';
 import { motion } from 'framer-motion';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
@@ -105,6 +106,8 @@ const DecorLine = styled.div`
 `;
 
 export default function CalendarPage() {
+  const { t } = useTranslation();
+  
   return (
     <>
       <Header />
@@ -116,11 +119,11 @@ export default function CalendarPage() {
             transition={{ duration: 0.6 }}
           >
             <Title>
-              Schedule a <Gradient>Meeting</Gradient>
+              {t('calendar.title.before')}<Gradient>{t('calendar.title.highlight')}</Gradient>
             </Title>
             <DecorLine />
             <Subtitle>
-              Select a date to contact us and schedule your appointment
+              {t('calendar.subtitle')}
             </Subtitle>
           </HeaderSection>
           

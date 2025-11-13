@@ -93,6 +93,10 @@
   "calculator.additionalFeatures": "Dodatočné funkcie alebo požiadavky",
   "calculator.additionalFeaturesPlaceholder": "Popíšte akékoľvek dodatočné funkcie, integrácie alebo špecifické požiadavky pre váš projekt...",
   
+  "calendar.title.before": "Naplánujte si ",
+  "calendar.title.highlight": "stretnutie",
+  "calendar.subtitle": "Vyberte dátum pre naplánovanie stretnutia",
+  
   "seo.title": "DAV Development - E-shop, SaaS, Mobilné Aplikácie & Vývoj Webov",
   "seo.description": "Profesionálny tím pre vývoj e-shopov, SaaS platforiem, mobilných aplikácií a webových stránok. Experti na React, Vue.js, Next.js e-commerce, WordPress obchody, vlastné nákupné košíky, enterprise SaaS, iOS/Android aplikácie, UI/UX dizajn, optimalizáciu výkonu, cloudové nasadenie a AI integráciu. Full-stack vývoj od landing pages po komplexné podnikové systémy.",
   "seo.keywords": "vývoj webov, vývoj e-shopu, e-commerce, eshop, SaaS vývoj, SaaS platforma, online obchod, webový obchod, internetový obchod, nákupný košík, WordPress eshop, React eshop, Vue.js vývoj, Next.js vývoj, online predaj, digitálny obchod, vývoj mobilných aplikácií, iOS aplikácia, Android aplikácia, cross-platform mobil, React Native, UI/UX dizajn, Figma dizajn, Adobe XD, responzívny dizajn, frontend vývoj, backend vývoj, full-stack vývojár, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL, REST API, TypeScript, JavaScript, Tailwind CSS, styled components, optimalizácia výkonu, SEO optimalizácia, cloudové nasadenie, AWS, Docker, Kubernetes, DevOps, CI/CD, GitHub Actions, Vercel, Heroku, AI integrácia, umelá inteligencia, landing page, portfólio web, podniková aplikácia, webová aplikácia, vlastný softvér, digitálne riešenia, vývoj softvéru, tvorba webov, CMS vývoj, návrh databázy, API vývoj, mikroslužby, škálovateľné aplikácie, moderné webové technológie",
