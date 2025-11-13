@@ -28,16 +28,16 @@ const PageWrapper = styled.div`
 const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  padding: 140px ${theme.spacing.xl} 80px;
+  padding: 160px ${theme.spacing.xl} 80px;
   position: relative;
   z-index: 1;
   
   @media (max-width: 768px) {
-    padding: 100px ${theme.spacing.md} 60px;
+    padding: 140px ${theme.spacing.md} 60px;
   }
   
   @media (max-width: 480px) {
-    padding: 80px ${theme.spacing.sm} 40px;
+    padding: 120px ${theme.spacing.sm} 40px;
   }
 `;
 
