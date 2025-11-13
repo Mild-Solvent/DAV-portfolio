@@ -50,6 +50,15 @@
   
   "projects.title": "My Projects",
   "projects.visitWebsite": "Visit website",
+  "projects.tabs.web": "Web Development",
+  "projects.tabs.mobile": "Mobile Development",
+  "projects.tabs.games": "Game Development",
+  "projects.games.experimentEcho.title": "Unreal Engine 5: Experiment Echo",
+  "projects.games.experimentEcho.description": "An immersive adventure built with Unreal Engine 5, currently in blockout stage with working mechanics and advanced AI. Developed with students of VŠMU.",
+  "projects.games.experimentEcho.download": "Download Game",
+  "projects.games.loadingScreen.title": "Godot: You are the loading screen",
+  "projects.games.loadingScreen.description": "Point and click adventure game set in alternative universe where you wake up inside a room with a computer that is running a citizen of the surrounding city.",
+  "projects.games.loadingScreen.comingSoon": "Alpha coming soon...",
   
   "calculator.title": "Service Price Calculator",
   "calculator.subtitle": "Get an estimate for your project",

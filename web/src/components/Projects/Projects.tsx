@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
 import { useTranslation } from '../../contexts/TranslationContext';
+import ProjectTabs from './ProjectTabs';
 
 const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -209,6 +210,67 @@ const ProjectLink = styled.a`
   }
 `;
 
+const GameCard = styled(motion.div)`
+  background: ${props => props.theme.colors.primary};
+  border: 1px solid ${props => props.theme.colors.border};
+  border-radius: ${props => props.theme.borderRadius.lg};
+  overflow: hidden;
+  transition: all 0.2s ease;
+  position: relative;
+  margin-bottom: ${props => props.theme.spacing['2xl']};
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${props => props.theme.shadows.lg};
+    border-color: ${props => props.theme.colors.surfaceLight};
+  }
+`;
+
+const GameImage = styled.div<{ $backgroundImage?: string }>`
+  height: 400px;
+  background: ${props => props.$backgroundImage 
+    ? `url(${props.$backgroundImage}) center/cover no-repeat`
+    : `linear-gradient(135deg, ${props.theme.colors.primary}40, ${props.theme.colors.accent}40)`
+  };
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    height: 250px;
+  }
+`;
+
+const GameContent = styled.div`
+  padding: ${props => props.theme.spacing['2xl']};
+  text-align: center;
+`;
+
+const GameTitle = styled.h3`
+  color: ${props => props.theme.colors.textEmphasis};
+  margin-bottom: ${props => props.theme.spacing.md};
+  font-size: ${props => props.theme.fontSizes['2xl']};
+  font-family: ${props => props.theme.fonts.display};
+  font-weight: 600;
+`;
+
+const GameDescription = styled.p`
+  color: ${props => props.theme.colors.textSecondary};
+  margin-bottom: ${props => props.theme.spacing.lg};
+  line-height: 1.6;
+  font-size: ${props => props.theme.fontSizes.base};
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const GameLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: ${props => props.theme.spacing.md};
+`;
+
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
@@ -252,8 +314,8 @@ const Projects: React.FC = () => {
     window.location.href = `/${currentLang}/calculator`;
   };
   
-  // Real projects data with SEO-optimized categories
-  const projects = [
+  // Web development projects data
+  const webProjects = [
     {
       title: "Softwareshop",
       description: "E-commerce store - Professional software and courses for designers and architects",
@@ -317,6 +379,46 @@ const Projects: React.FC = () => {
       image: "/projects/morpherus.png",
       category: "SaaS",
       tags: ["web app", "SaaS platform", "React application"]
+    }
+  ];
+  
+  // Mobile development projects data
+  const mobileProjects = [
+    {
+      title: "M&K Cleaning",
+      description: "Cleaning company website with complete booking system and stripe payments",
+      liveUrl: "https://mkbratislava.sk",
+      image: "/projects/mk-cleaning.png",
+      category: "Mobile & Web Platform",
+      tags: ["booking system", "payments", "mobile-friendly"]
+    },
+    {
+      title: "TEDxRoatán",
+      description: "Independent TEDx Event organized on Island Roatán",
+      liveUrl: "https://tedxroatan.com",
+      image: "/projects/tedx.png",
+      category: "Event Platform",
+      tags: ["event management", "responsive design"]
+    }
+  ];
+  
+  // Game development projects data
+  const gameProjects = [
+    {
+      title: t('projects.games.experimentEcho.title'),
+      description: t('projects.games.experimentEcho.description'),
+      downloadUrl: "https://github.com/Ezra525/Bakalarka_Denny_Ezri_Sofi/releases/tag/v0.0.4-alpha",
+      image: "/projects/game-experiment-echo.png",
+      category: "Game Development",
+      tags: ["Unreal Engine 5", "Adventure", "AI"]
+    },
+    {
+      title: t('projects.games.loadingScreen.title'),
+      description: t('projects.games.loadingScreen.description'),
+      downloadUrl: null,
+      image: "/projects/game-loading-screen.png",
+      category: "Game Development",
+      tags: ["Godot", "Point & Click", "Adventure"]
     }
   ];
 
@@ -429,30 +531,107 @@ const Projects: React.FC = () => {
           title={t('projects.title')}
         />
 
-        <ProjectsGrid>
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <ProjectImage $backgroundImage={project.image} />
-              
-              <ProjectContent>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
-                
-                <ProjectLinks>
-                  <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    {t('projects.visitWebsite')}
-                  </ProjectLink>
-                </ProjectLinks>
-              </ProjectContent>
-            </ProjectCard>
-          ))}
-        </ProjectsGrid>
+        <ProjectTabs
+          tabs={[
+            {
+              id: 'web',
+              label: t('projects.tabs.web'),
+              content: (
+                <ProjectsGrid>
+                  {webProjects.map((project, index) => (
+                    <ProjectCard
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                    >
+                      <ProjectImage $backgroundImage={project.image} />
+                      
+                      <ProjectContent>
+                        <ProjectTitle>{project.title}</ProjectTitle>
+                        <ProjectDescription>{project.description}</ProjectDescription>
+                        
+                        <ProjectLinks>
+                          <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            {t('projects.visitWebsite')}
+                          </ProjectLink>
+                        </ProjectLinks>
+                      </ProjectContent>
+                    </ProjectCard>
+                  ))}
+                </ProjectsGrid>
+              )
+            },
+            {
+              id: 'mobile',
+              label: t('projects.tabs.mobile'),
+              content: (
+                <ProjectsGrid>
+                  {mobileProjects.map((project, index) => (
+                    <ProjectCard
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                    >
+                      <ProjectImage $backgroundImage={project.image} />
+                      
+                      <ProjectContent>
+                        <ProjectTitle>{project.title}</ProjectTitle>
+                        <ProjectDescription>{project.description}</ProjectDescription>
+                        
+                        <ProjectLinks>
+                          <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            {t('projects.visitWebsite')}
+                          </ProjectLink>
+                        </ProjectLinks>
+                      </ProjectContent>
+                    </ProjectCard>
+                  ))}
+                </ProjectsGrid>
+              )
+            },
+            {
+              id: 'games',
+              label: t('projects.tabs.games'),
+              content: (
+                <div>
+                  {gameProjects.map((game, index) => (
+                    <GameCard
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                    >
+                      <GameImage $backgroundImage={game.image} />
+                      
+                      <GameContent>
+                        <GameTitle>{game.title}</GameTitle>
+                        <GameDescription>{game.description}</GameDescription>
+                        
+                        <GameLinks>
+                          {game.downloadUrl ? (
+                            <ProjectLink href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
+                              {t('projects.games.experimentEcho.download')}
+                            </ProjectLink>
+                          ) : (
+                            <ProjectLink as="span" style={{ opacity: 0.6, cursor: 'not-allowed' }}>
+                              {t('projects.games.loadingScreen.comingSoon')}
+                            </ProjectLink>
+                          )}
+                        </GameLinks>
+                      </GameContent>
+                    </GameCard>
+                  ))}
+                </div>
+              )
+            }
+          ]}
+          defaultTab="web"
+        />
       </Container>
     </ProjectsSection>
   );

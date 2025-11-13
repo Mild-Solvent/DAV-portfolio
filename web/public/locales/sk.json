@@ -50,6 +50,15 @@
   
   "projects.title": "Moje projekty",
   "projects.visitWebsite": "Navštíviť stránku",
+  "projects.tabs.web": "Webový vývoj",
+  "projects.tabs.mobile": "Mobilný vývoj",
+  "projects.tabs.games": "Vývoj hier",
+  "projects.games.experimentEcho.title": "Unreal Engine 5: Experiment Echo",
+  "projects.games.experimentEcho.description": "Immerzívne dobrodružstvo vytvorené v Unreal Engine 5, momentálne vo fáze blockoutu s funkčnými mechanikami a pokročilou AI. Vyvinuté so študentmi VŠMU.",
+  "projects.games.experimentEcho.download": "Stiahnuť hru",
+  "projects.games.loadingScreen.title": "Godot: You are the loading screen",
+  "projects.games.loadingScreen.description": "Point and click adventúra odohravajúca sa v alternatívnom vesmíre, kde sa zobudíte v miestnosti s počítačom, ktorý riadi občana okolitého mesta.",
+  "projects.games.loadingScreen.comingSoon": "Alpha už čoskoro...",
   
   "calculator.title": "Kalkulačka ceny služieb",
   "calculator.subtitle": "Získajte odhad pre váš projekt",
