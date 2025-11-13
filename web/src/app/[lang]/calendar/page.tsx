@@ -10,15 +10,14 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   background: ${theme.colors.primary};
   position: relative;
-  overflow: hidden;
   
   &::before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60vh;
+    bottom: 0;
     background: radial-gradient(ellipse at top, rgba(163, 113, 247, 0.15) 0%, transparent 70%),
                 radial-gradient(ellipse at bottom right, rgba(31, 111, 235, 0.1) 0%, transparent 60%);
     pointer-events: none;
