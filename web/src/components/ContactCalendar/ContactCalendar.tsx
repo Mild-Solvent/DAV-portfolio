@@ -9,6 +9,14 @@ const CalendarWrapper = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding: ${theme.spacing.xl};
+  
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+  }
+  
+  @media (max-width: 480px) {
+    padding: ${theme.spacing.sm};
+  }
 `;
 
 const CalendarCard = styled.div`
@@ -21,6 +29,15 @@ const CalendarCard = styled.div`
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.xl};
+    border-radius: ${theme.borderRadius.lg};
+  }
+  
+  @media (max-width: 480px) {
+    padding: ${theme.spacing.lg};
+  }
   
   &::before {
     content: '';
@@ -50,6 +67,10 @@ const CalendarHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${theme.spacing.xl};
+  
+  @media (max-width: 480px) {
+    margin-bottom: ${theme.spacing.lg};
+  }
 `;
 
 const MonthTitle = styled.h2`
@@ -61,6 +82,14 @@ const MonthTitle = styled.h2`
   background-clip: text;
   margin: 0;
   letter-spacing: -0.01em;
+  
+  @media (max-width: 768px) {
+    font-size: ${theme.fontSizes['2xl']};
+  }
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.xl};
+  }
 `;
 
 const NavButton = styled.button`
@@ -78,6 +107,12 @@ const NavButton = styled.button`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    font-size: ${theme.fontSizes.lg};
+  }
 
   &::before {
     content: '';
@@ -115,6 +150,10 @@ const DaysHeader = styled.div`
   grid-template-columns: repeat(7, 1fr);
   gap: ${theme.spacing.sm};
   margin-bottom: ${theme.spacing.md};
+  
+  @media (max-width: 480px) {
+    gap: ${theme.spacing.xs};
+  }
 `;
 
 const DayLabel = styled.div`
@@ -123,12 +162,21 @@ const DayLabel = styled.div`
   font-weight: 600;
   color: ${theme.colors.textSecondary};
   padding: ${theme.spacing.sm};
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.xs};
+    padding: ${theme.spacing.xs};
+  }
 `;
 
 const DaysGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: ${theme.spacing.sm};
+  
+  @media (max-width: 480px) {
+    gap: ${theme.spacing.xs};
+  }
 `;
 
 const DayCell = styled.button<{ $isOtherMonth?: boolean; $isPast?: boolean; $isToday?: boolean; $isSelected?: boolean }>`
@@ -160,6 +208,10 @@ const DayCell = styled.button<{ $isOtherMonth?: boolean; $isPast?: boolean; $isT
   justify-content: center;
   position: relative;
   overflow: hidden;
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.sm};
+  }
 
   &::before {
     content: '';
@@ -216,6 +268,13 @@ const Legend = styled.div`
   margin-top: ${theme.spacing.xl};
   padding-top: ${theme.spacing.xl};
   border-top: 1px solid ${theme.colors.border};
+  flex-wrap: wrap;
+  
+  @media (max-width: 480px) {
+    gap: ${theme.spacing.md};
+    margin-top: ${theme.spacing.lg};
+    padding-top: ${theme.spacing.lg};
+  }
 `;
 
 const LegendItem = styled.div`
@@ -224,6 +283,10 @@ const LegendItem = styled.div`
   gap: ${theme.spacing.sm};
   font-size: ${theme.fontSizes.sm};
   color: ${theme.colors.textSecondary};
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.xs};
+  }
 `;
 
 const LegendColor = styled.div<{ $color: string }>`
@@ -257,6 +320,17 @@ const Popup = styled(motion.div)`
               0 0 60px rgba(88, 166, 255, 0.2);
   position: relative;
   
+  @media (max-width: 768px) {
+    max-width: 90%;
+    padding: ${theme.spacing['2xl']};
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 95%;
+    padding: ${theme.spacing.xl};
+    border-radius: ${theme.borderRadius.lg};
+  }
+  
   &::before {
     content: '';
     position: absolute;
@@ -277,6 +351,11 @@ const PopupTitle = styled.h3`
   background-clip: text;
   margin-bottom: ${theme.spacing.xl};
   text-align: center;
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.xl};
+    margin-bottom: ${theme.spacing.lg};
+  }
 `;
 
 const TimeGrid = styled.div`
@@ -284,6 +363,11 @@ const TimeGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: ${theme.spacing.md};
   margin-bottom: ${theme.spacing.xl};
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${theme.spacing.sm};
+  }
 `;
 
 const TimeButton = styled.button<{ $selected?: boolean }>`
@@ -299,6 +383,11 @@ const TimeButton = styled.button<{ $selected?: boolean }>`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
+  
+  @media (max-width: 480px) {
+    padding: ${theme.spacing.md};
+    font-size: ${theme.fontSizes.sm};
+  }
   
   &:hover {
     background: linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%);
@@ -316,6 +405,11 @@ const PopupButtons = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
   margin-top: ${theme.spacing.xl};
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: ${theme.spacing.sm};
+  }
 `;
 
 const PopupButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
@@ -360,6 +454,10 @@ const ConfirmationText = styled.p`
   text-align: center;
   line-height: 1.6;
   margin-bottom: ${theme.spacing.lg};
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.base};
+  }
 `;
 
 const ConfirmationAddress = styled.div`
@@ -372,6 +470,11 @@ const ConfirmationAddress = styled.div`
   font-weight: 700;
   color: ${theme.colors.accent};
   box-shadow: 0 4px 15px rgba(88, 166, 255, 0.2);
+  
+  @media (max-width: 480px) {
+    font-size: ${theme.fontSizes.lg};
+    padding: ${theme.spacing.md};
+  }
 `;
 
 export default function ContactCalendar() {
