@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useState, ChangeEvent } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -279,37 +279,123 @@ const PopupTitle = styled.h3`
   text-align: center;
 `;
 
-const TimeGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: ${theme.spacing.md};
+const TimePickerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
 `;
 
-const TimeButton = styled.button<{ $selected?: boolean }>`
-  padding: ${theme.spacing.lg};
-  border-radius: ${theme.borderRadius.md};
-  border: 1px solid ${props => props.$selected ? theme.colors.accent : 'rgba(48, 54, 61, 0.8)'};
-  background: ${props => props.$selected 
-    ? `linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%)`
-    : 'linear-gradient(135deg, rgba(48, 54, 61, 0.4) 0%, rgba(33, 38, 45, 0.5) 100%)'
-  };
-  color: ${theme.colors.text};
-  font-size: ${theme.fontSizes.base};
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  
-  &:hover {
-    background: linear-gradient(135deg, ${theme.colors.secondary} 0%, ${theme.colors.secondaryDark} 100%);
-    border-color: ${theme.colors.accent};
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+const TimeDisplay = styled.div`
+  font-size: ${theme.fontSizes['3xl']};
+  font-weight: 700;
+  text-align: center;
+  color: ${theme.colors.accent};
+`;
+
+const TimeSliderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.md};
+`;
+
+const TimeSliderLabel = styled.span`
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.textSecondary};
+`;
+
+const TimeSlider = styled.input.attrs({ type: 'range', min: 0, max: 47, step: 1 })`
+  flex: 1;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0f172a 0%, #1d4ed8 50%, #0f172a 100%);
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: ${theme.gradients.purple};
+    border: 2px solid ${theme.colors.white};
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.8);
+    cursor: pointer;
   }
-  
-  ${props => props.$selected && `
-    box-shadow: 0 4px 20px rgba(88, 166, 255, 0.4);
-  `}
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: ${theme.gradients.purple};
+    border: 2px solid ${theme.colors.white};
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.8);
+    cursor: pointer;
+  }
+`;
+
+const SunMoonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${theme.spacing.sm};
+`;
+
+const SunPath = styled.div`
+  position: relative;
+  width: 240px;
+  height: 120px;
+  border-bottom-left-radius: 240px;
+  border-bottom-right-radius: 240px;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-top: none;
+  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.2), transparent 60%);
+  overflow: visible;
+`;
+
+const floatCloud = keyframes`
+  0% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+`;
+
+const SunMoonIcon = styled.div<{ $isDay: boolean; $x: number; $y: number }>`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  left: ${props => `${props.$x}%`};
+  bottom: ${props => `${props.$y}%`};
+  transform: translate(-50%, 50%);
+  background: ${props => props.$isDay
+    ? 'radial-gradient(circle at 30% 30%, #facc15, #f97316)'
+    : 'radial-gradient(circle at 30% 30%, #e5e7eb, #1f2937)'};
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
+  transition: left 0.4s ease-out, bottom 0.4s ease-out, box-shadow 0.4s ease-out;
+`;
+
+const Cloud = styled.div<{ $position: 'left' | 'right' }>`
+  position: absolute;
+  bottom: 8%;
+  left: ${props => (props.$position === 'left' ? '10%' : '70%')};
+  width: 70px;
+  height: 26px;
+  background: rgba(148, 163, 184, 0.92);
+  border-radius: 999px;
+  box-shadow:
+    -18px 4px 0 0 rgba(148, 163, 184, 0.9),
+    -4px -2px 0 0 rgba(209, 213, 219, 0.95),
+    18px 2px 0 0 rgba(148, 163, 184, 0.9);
+  opacity: 0.9;
+  filter: blur(0.2px);
+  animation: ${floatCloud} 8s ease-in-out infinite alternate;
+  z-index: 2;
+`;
+
+const SunMoonLabel = styled.span`
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.textSecondary};
 `;
 
 const PopupButtons = styled.div`
@@ -374,11 +460,28 @@ const ConfirmationAddress = styled.div`
   box-shadow: 0 4px 15px rgba(88, 166, 255, 0.2);
 `;
 
+const formatTimeFromIndex = (index: number): string => {
+  const hours = Math.floor(index / 2);
+  const minutes = index % 2 === 0 ? '00' : '30';
+  const hoursString = hours.toString().padStart(2, '0');
+  return `${hoursString}:${minutes}`;
+};
+
+const getInitialTimeIndex = () => {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const index = hours * 2 + (minutes >= 30 ? 1 : 0);
+  // Clamp to slider range 0–47
+  return Math.min(Math.max(index, 0), 47);
+};
+
 export default function ContactCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [timeIndex, setTimeIndex] = useState(() => getInitialTimeIndex());
+  const [selectedTime, setSelectedTime] = useState(() => formatTimeFromIndex(getInitialTimeIndex()));
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -443,6 +546,12 @@ export default function ContactCalendar() {
 
   const changeMonth = (offset: number) => {
     setCurrentDate(new Date(year, month + offset, 1));
+  };
+
+  const handleSliderChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const index = Number(event.target.value);
+    setTimeIndex(index);
+    setSelectedTime(formatTimeFromIndex(index));
   };
 
   const renderDays = () => {
@@ -574,18 +683,42 @@ export default function ContactCalendar() {
               <PopupTitle>
                 Vyberte čas pre {selectedDate.toLocaleDateString('sk-SK', { day: 'numeric', month: 'long' })}
               </PopupTitle>
-              
-              <TimeGrid>
-                {['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'].map((time) => (
-                  <TimeButton
-                    key={time}
-                    $selected={selectedTime === time}
-                    onClick={() => setSelectedTime(time)}
-                  >
-                    {time}
-                  </TimeButton>
-                ))}
-              </TimeGrid>
+
+              <TimePickerWrapper>
+                <TimeDisplay>{selectedTime}</TimeDisplay>
+                <TimeSliderRow>
+                  <TimeSliderLabel>00:00</TimeSliderLabel>
+                  <TimeSlider
+                    value={timeIndex}
+                    onChange={handleSliderChange}
+                  />
+                  <TimeSliderLabel>23:30</TimeSliderLabel>
+                </TimeSliderRow>
+                {(() => {
+                  const currentHour = Math.floor(timeIndex / 2);
+                  const isDay = currentHour >= 6 && currentHour < 18;
+                  const isCloudy = currentHour < 8 || currentHour >= 19;
+
+                  // Normalized position (0 at 00:00, 1 at 23:30)
+                  const t = timeIndex / 47;
+                  const x = 10 + t * 80; // 10% → 90%
+                  const y = 8 + Math.sin(Math.PI * t) * 70; // arc height
+
+                  return (
+                    <SunMoonWrapper>
+                      <SunPath>
+                        <SunMoonIcon $isDay={isDay} $x={x} $y={y} />
+                        {isCloudy && (
+                          <>
+                            <Cloud $position="left" />
+                            <Cloud $position="right" />
+                          </>
+                        )}
+                      </SunPath>
+                    </SunMoonWrapper>
+                  );
+                })()}
+              </TimePickerWrapper>
               
               <PopupButtons>
                 <PopupButton
