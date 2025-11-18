@@ -4,10 +4,10 @@ import nodemailer from 'nodemailer';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { date, time } = body;
+    const { date, time, name, email, phone } = body;
 
     // Validate required fields
-    if (!date || !time) {
+    if (!date || !time || !name || !email || !phone) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -32,6 +32,10 @@ Nová rezervácia stretnutia:
 
 📅 Dátum: ${formattedDate}
 🕐 Čas: ${time}
+
+👤 Meno: ${name}
+📧 E-mail: ${email}
+📱 Telefón: ${phone}
 
 📍 Miesto: Mliekárenská 1 (zvonček Kováč)
       `,
@@ -142,6 +146,30 @@ Nová rezervácia stretnutia:
           <span class="value">${time}</span>
         </div>
       </div>
+
+      <div class="info-row">
+        <span class="icon">👤</span>
+        <div>
+          <span class="label">Meno:</span>
+          <span class="value">${name}</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="icon">📧</span>
+        <div>
+          <span class="label">E-mail:</span>
+          <span class="value">${email}</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="icon">📱</span>
+        <div>
+          <span class="label">Telefón:</span>
+          <span class="value">${phone}</span>
+        </div>
+      </div>
     </div>
     
     <div class="address">
@@ -184,7 +212,7 @@ Nová rezervácia stretnutia:
       return NextResponse.json({
         success: true,
         message: 'Booking submitted and email sent successfully',
-        data: { date: formattedDate, time }
+        data: { date: formattedDate, time, name, email, phone }
       });
     } catch (emailError) {
       console.error('❌ Error sending email:', emailError);
@@ -194,7 +222,7 @@ Nová rezervácia stretnutia:
       return NextResponse.json({
         success: true,
         message: 'Booking submitted but email failed',
-        data: { date: formattedDate, time },
+        data: { date: formattedDate, time, name, email, phone },
         warning: 'Email notification failed'
       });
     }

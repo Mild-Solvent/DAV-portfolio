@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ChangeEvent } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { theme } from '@/styles/theme';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,6 +9,10 @@ const CalendarWrapper = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding: ${theme.spacing.xl};
+
+  @media (max-width: 640px) {
+    padding: ${theme.spacing.lg} ${theme.spacing.md};
+  }
 `;
 
 const CalendarCard = styled.div`
@@ -16,6 +20,10 @@ const CalendarCard = styled.div`
   border: 1px solid rgba(88, 166, 255, 0.2);
   border-radius: ${theme.borderRadius.xl};
   padding: ${theme.spacing['2xl']};
+
+  @media (max-width: 640px) {
+    padding: ${theme.spacing.lg};
+  }
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
               0 0 40px rgba(88, 166, 255, 0.1),
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -242,20 +250,34 @@ const Overlay = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: ${theme.zIndex.modal};
+  /* above navbar so popup header text is not hidden */
+  z-index: ${theme.zIndex.navbar + 10};
   padding: ${theme.spacing.xl};
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    /* push popup significantly lower on small screens */
+    padding: ${theme.spacing['4xl']} ${theme.spacing.md} ${theme.spacing.sm};
+  }
 `;
 
 const Popup = styled(motion.div)`
   background: linear-gradient(145deg, rgba(22, 27, 34, 0.98) 0%, rgba(13, 17, 23, 1) 100%);
   border: 1px solid rgba(88, 166, 255, 0.3);
-  border-radius: ${theme.borderRadius.xl};
-  padding: ${theme.spacing['3xl']};
-  max-width: 500px;
+  border-radius: ${theme.borderRadius.md};
+  padding: ${theme.spacing.xl};
+  max-width: 360px;
   width: 100%;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6),
-              0 0 60px rgba(88, 166, 255, 0.2);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55),
+              0 0 30px rgba(88, 166, 255, 0.18);
   position: relative;
+
+  @media (max-width: 640px) {
+    padding: ${theme.spacing.md};
+    max-width: 92vw;
+    /* move popup a bit lower on small screens for better visibility */
+    margin-top: ${theme.spacing.xl};
+  }
   
   &::before {
     content: '';
@@ -269,34 +291,42 @@ const Popup = styled(motion.div)`
 `;
 
 const PopupTitle = styled.h3`
-  font-size: ${theme.fontSizes['2xl']};
+  font-size: ${theme.fontSizes.lg};
   font-weight: 700;
   background: ${theme.gradients.purple};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.md};
   text-align: center;
 `;
 
 const TimePickerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.lg};
-  margin-bottom: ${theme.spacing.xl};
+  gap: ${theme.spacing.sm};
+  margin-bottom: ${theme.spacing.md};
+  /* Center everything relative to the popup */
+  align-items: center;
 `;
 
 const TimeDisplay = styled.div`
-  font-size: ${theme.fontSizes['3xl']};
+  font-size: ${theme.fontSizes['2xl']};
   font-weight: 700;
   text-align: center;
   color: ${theme.colors.accent};
+
+  @media (max-width: 640px) {
+    font-size: ${theme.fontSizes.xl};
+  }
 `;
 
 const TimeSliderRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: ${theme.spacing.md};
+  width: 100%;
 `;
 
 const TimeSliderLabel = styled.span`
@@ -305,7 +335,9 @@ const TimeSliderLabel = styled.span`
 `;
 
 const TimeSlider = styled.input.attrs({ type: 'range', min: 0, max: 47, step: 1 })`
-  flex: 1;
+  flex: 0 0 220px;
+  width: 100%;
+  max-width: 220px;
   appearance: none;
   height: 6px;
   border-radius: 999px;
@@ -334,79 +366,47 @@ const TimeSlider = styled.input.attrs({ type: 'range', min: 0, max: 47, step: 1 
   }
 `;
 
-const SunMoonWrapper = styled.div`
+const FormFields = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: ${theme.spacing.sm};
+  margin-top: ${theme.spacing.md};
 `;
 
-const SunPath = styled.div`
-  position: relative;
-  width: 240px;
-  height: 120px;
-  border-bottom-left-radius: 240px;
-  border-bottom-right-radius: 240px;
-  border: 1px dashed rgba(148, 163, 184, 0.35);
-  border-top: none;
-  background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, 0.2), transparent 60%);
-  overflow: visible;
-`;
-
-const floatCloud = keyframes`
-  0% { transform: translateX(0); }
-  50% { transform: translateX(6px); }
-  100% { transform: translateX(0); }
-`;
-
-const SunMoonIcon = styled.div<{ $isDay: boolean; $x: number; $y: number }>`
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  left: ${props => `${props.$x}%`};
-  bottom: ${props => `${props.$y}%`};
-  transform: translate(-50%, 50%);
-  background: ${props => props.$isDay
-    ? 'radial-gradient(circle at 30% 30%, #facc15, #f97316)'
-    : 'radial-gradient(circle at 30% 30%, #e5e7eb, #1f2937)'};
-  box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
-  transition: left 0.4s ease-out, bottom 0.4s ease-out, box-shadow 0.4s ease-out;
-`;
-
-const Cloud = styled.div<{ $position: 'left' | 'right' }>`
-  position: absolute;
-  bottom: 8%;
-  left: ${props => (props.$position === 'left' ? '10%' : '70%')};
-  width: 70px;
-  height: 26px;
-  background: rgba(148, 163, 184, 0.92);
-  border-radius: 999px;
-  box-shadow:
-    -18px 4px 0 0 rgba(148, 163, 184, 0.9),
-    -4px -2px 0 0 rgba(209, 213, 219, 0.95),
-    18px 2px 0 0 rgba(148, 163, 184, 0.9);
-  opacity: 0.9;
-  filter: blur(0.2px);
-  animation: ${floatCloud} 8s ease-in-out infinite alternate;
-  z-index: 2;
-`;
-
-const SunMoonLabel = styled.span`
+const FieldLabel = styled.label`
   font-size: ${theme.fontSizes.sm};
   color: ${theme.colors.textSecondary};
 `;
 
+const TextInput = styled.input`
+  width: 100%;
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.border};
+  background: rgba(15, 23, 42, 0.9);
+  color: ${theme.colors.text};
+  font-size: ${theme.fontSizes.base};
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  &:focus {
+    border-color: ${theme.colors.accent};
+    box-shadow: 0 0 0 1px ${theme.colors.accent};
+    background: rgba(15, 23, 42, 1);
+  }
+`;
+
+
+
 const PopupButtons = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
-  margin-top: ${theme.spacing.xl};
+  gap: ${theme.spacing.sm};
+  margin-top: ${theme.spacing.lg};
 `;
 
 const PopupButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   flex: 1;
-  padding: ${theme.spacing.lg};
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
   border-radius: ${theme.borderRadius.md};
   font-weight: 700;
   font-size: ${theme.fontSizes.base};
@@ -484,6 +484,9 @@ export default function ContactCalendar() {
   const [selectedTime, setSelectedTime] = useState(() => formatTimeFromIndex(getInitialTimeIndex()));
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -511,7 +514,7 @@ export default function ContactCalendar() {
   };
 
   const handleTimeSubmit = async () => {
-    if (!selectedTime || !selectedDate) return;
+    if (!selectedTime || !selectedDate || !name || !email || !phone) return;
     
     setIsSubmitting(true);
     
@@ -524,6 +527,9 @@ export default function ContactCalendar() {
         body: JSON.stringify({
           date: selectedDate.toISOString(),
           time: selectedTime,
+          name,
+          email,
+          phone,
         }),
       });
 
@@ -535,6 +541,9 @@ export default function ContactCalendar() {
           setShowConfirmation(false);
           setSelectedDate(null);
           setSelectedTime('');
+          setName('');
+          setEmail('');
+          setPhone('');
         }, 5000);
       }
     } catch (error) {
@@ -686,38 +695,41 @@ export default function ContactCalendar() {
 
               <TimePickerWrapper>
                 <TimeDisplay>{selectedTime}</TimeDisplay>
-                <TimeSliderRow>
-                  <TimeSliderLabel>00:00</TimeSliderLabel>
+              <TimeSliderRow>
                   <TimeSlider
                     value={timeIndex}
                     onChange={handleSliderChange}
                   />
-                  <TimeSliderLabel>23:30</TimeSliderLabel>
                 </TimeSliderRow>
-                {(() => {
-                  const currentHour = Math.floor(timeIndex / 2);
-                  const isDay = currentHour >= 6 && currentHour < 18;
-                  const isCloudy = currentHour < 8 || currentHour >= 19;
-
-                  // Normalized position (0 at 00:00, 1 at 23:30)
-                  const t = timeIndex / 47;
-                  const x = 10 + t * 80; // 10% → 90%
-                  const y = 8 + Math.sin(Math.PI * t) * 70; // arc height
-
-                  return (
-                    <SunMoonWrapper>
-                      <SunPath>
-                        <SunMoonIcon $isDay={isDay} $x={x} $y={y} />
-                        {isCloudy && (
-                          <>
-                            <Cloud $position="left" />
-                            <Cloud $position="right" />
-                          </>
-                        )}
-                      </SunPath>
-                    </SunMoonWrapper>
-                  );
-                })()}
+                <FormFields>
+                  <FieldLabel>
+                    Meno
+                    <TextInput
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Vaše meno"
+                    />
+                  </FieldLabel>
+                  <FieldLabel>
+                    E-mail
+                    <TextInput
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="vas@email.sk"
+                    />
+                  </FieldLabel>
+                  <FieldLabel>
+                    Telefón
+                    <TextInput
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="+421 ..."
+                    />
+                  </FieldLabel>
+                </FormFields>
               </TimePickerWrapper>
               
               <PopupButtons>
@@ -726,6 +738,9 @@ export default function ContactCalendar() {
                   onClick={() => {
                     setShowTimePicker(false);
                     setSelectedTime('');
+                    setName('');
+                    setEmail('');
+                    setPhone('');
                   }}
                 >
                   Zrušiť

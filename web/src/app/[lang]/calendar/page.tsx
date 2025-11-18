@@ -32,11 +32,27 @@ const Container = styled.div`
   padding: 140px ${theme.spacing.xl} 80px;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 96px ${theme.spacing.lg} 64px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 88px ${theme.spacing.md} 56px;
+  }
 `;
 
 const HeaderSection = styled(motion.div)`
   text-align: center;
   margin-bottom: ${theme.spacing['4xl']};
+
+  @media (max-width: 768px) {
+    margin-bottom: ${theme.spacing['3xl']};
+  }
+
+  @media (max-width: 640px) {
+    margin-bottom: ${theme.spacing['2xl']};
+  }
 `;
 
 const Title = styled.h1`
@@ -68,6 +84,15 @@ const Subtitle = styled.p`
   margin: 0 auto ${theme.spacing.xl};
   line-height: 1.7;
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: ${theme.fontSizes.xl};
+  }
+
+  @media (max-width: 640px) {
+    font-size: ${theme.fontSizes.lg};
+    margin-bottom: ${theme.spacing.lg};
+  }
 `;
 
 const DecorLine = styled.div`
