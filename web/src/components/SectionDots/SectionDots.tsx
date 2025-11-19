@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const DotsContainer = styled.div`
   position: fixed;
-  right: 30px;
+  right: 18px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1000;
@@ -13,7 +13,7 @@ const DotsContainer = styled.div`
   gap: 16px;
   
   @media (max-width: ${props => props.theme.breakpoints.md}) {
-    right: 20px;
+    right: 10px;
     gap: 12px;
   }
 `;

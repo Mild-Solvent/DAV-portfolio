@@ -128,12 +128,23 @@ const Container = styled.div`
   padding: 0 ${props => props.theme.spacing.xl};
   position: relative;
   z-index: 1;
+
+  /* Tighter padding on smaller screens so cards sit fully in view */
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    padding: 0 ${props => props.theme.spacing.md};
+  }
 `;
 
 const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: ${props => props.theme.spacing['2xl']};
+
+  /* Force a single centered column on mobile */
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -143,6 +154,13 @@ const ProjectCard = styled(motion.div)`
   overflow: hidden;
   transition: all 0.2s ease;
   position: relative;
+
+  /* Keep card width reasonable and centered on narrow screens */
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
 
   &:hover {
     transform: translateY(-2px);
