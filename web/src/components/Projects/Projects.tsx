@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
 import { useTranslation } from '../../contexts/TranslationContext';
-import ProjectTabs from './ProjectTabs';
+import ProjectTabs from './ProjectTabsComponent';
 
 const ProjectsSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
@@ -12,7 +12,7 @@ const ProjectsSection = styled.section`
   overflow: hidden;
 `;
 
-const CalculatorButton = styled(motion.div)<{ $progress: number; $visible: boolean }>`
+const CalculatorButton = styled(motion.div) <{ $progress: number; $visible: boolean }>`
   position: fixed;
   right: 4rem;
   top: ${props => `calc(50% + ${props.$progress}px - 40px)`};
@@ -97,7 +97,7 @@ const RightGlow = styled.div`
 `;
 
 // Furball gradients with animations
-const FurballGradient = styled(motion.div)<{ $size: number; $top: string; $left: string; $delay: number }>`
+const FurballGradient = styled(motion.div) <{ $size: number; $top: string; $left: string; $delay: number }>`
   position: absolute;
   width: ${props => props.$size}px;
   height: ${props => props.$size}px;
@@ -154,7 +154,7 @@ const ProjectCard = styled(motion.div)`
 
 const ProjectImage = styled.div<{ $backgroundImage?: string }>`
   height: 200px;
-  background: ${props => props.$backgroundImage 
+  background: ${props => props.$backgroundImage
     ? `url(${props.$backgroundImage}) top/cover no-repeat`
     : `linear-gradient(135deg, ${props.theme.colors.primary}40, ${props.theme.colors.accent}40)`
   };
@@ -228,7 +228,7 @@ const GameCard = styled(motion.div)`
 
 const GameImage = styled.div<{ $backgroundImage?: string }>`
   height: 400px;
-  background: ${props => props.$backgroundImage 
+  background: ${props => props.$backgroundImage
     ? `url(${props.$backgroundImage}) center/cover no-repeat`
     : `linear-gradient(135deg, ${props.theme.colors.primary}40, ${props.theme.colors.accent}40)`
   };
@@ -278,42 +278,42 @@ const Projects: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isInSection, setIsInSection] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
-      
+
       const section = sectionRef.current;
       const rect = section.getBoundingClientRect();
       const sectionHeight = section.offsetHeight;
       const viewportHeight = window.innerHeight;
-      
+
       // Check if section is visible in viewport
       const sectionVisible = rect.top < viewportHeight && rect.bottom > 0;
       setIsInSection(sectionVisible);
-      
+
       // Calculate scroll progress within the section (moves down in pixels)
       // The button can move down as the user scrolls through the section
       const scrollableHeight = sectionHeight - viewportHeight;
       const scrolled = -rect.top;
       const maxMovement = 200; // Maximum pixels the button can move down
       const progress = Math.max(0, Math.min(maxMovement, (scrolled / scrollableHeight) * maxMovement));
-      
+
       setScrollProgress(progress);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial calculation
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const handleCalculatorClick = () => {
     // Navigate to calculator page
     const currentLang = window.location.pathname.split('/')[1] || 'en';
     window.location.href = `/${currentLang}/calculator`;
   };
-  
+
   // Web development projects data
   const webProjects = [
     {
@@ -381,7 +381,7 @@ const Projects: React.FC = () => {
       tags: ["web app", "SaaS platform", "React application"]
     }
   ];
-  
+
   // Mobile development projects data
   const mobileProjects = [
     {
@@ -401,7 +401,7 @@ const Projects: React.FC = () => {
       tags: ["event management", "responsive design"]
     }
   ];
-  
+
   // Game development projects data
   const gameProjects = [
     {
@@ -447,8 +447,8 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <ProjectsSection 
-      id="projects" 
+    <ProjectsSection
+      id="projects"
       ref={sectionRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -458,7 +458,7 @@ const Projects: React.FC = () => {
         $progress={scrollProgress}
         $visible={isInSection && isHovered}
         initial={{ opacity: 0, x: 20 }}
-        animate={{ 
+        animate={{
           opacity: (isInSection && isHovered) ? 1 : 0,
           x: (isInSection && isHovered) ? 0 : 20
         }}
@@ -467,37 +467,37 @@ const Projects: React.FC = () => {
       >
         <CircleButton>
           <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </CircleButton>
         <ButtonText>Calculate price</ButtonText>
       </CalculatorButton>
-      
+
       {/* Side glows */}
       <LeftGlow />
       <RightGlow />
-      
+
       {/* Floating furball gradients */}
-      <FurballGradient 
-        $size={120} 
-        $top="15%" 
-        $left="10%" 
+      <FurballGradient
+        $size={120}
+        $top="15%"
+        $left="10%"
         $delay={0}
         {...floatingAnimation}
       />
-      
-      <SmallFurball 
-        $size={80} 
-        $top="70%" 
-        $left="85%" 
+
+      <SmallFurball
+        $size={80}
+        $top="70%"
+        $left="85%"
         $delay={2}
         {...slowFloatingAnimation}
       />
-      
-      <FurballGradient 
-        $size={100} 
-        $top="45%" 
-        $left="5%" 
+
+      <FurballGradient
+        $size={100}
+        $top="45%"
+        $left="5%"
         $delay={4}
         animate={{
           y: [0, 25, -10, 0],
@@ -509,11 +509,11 @@ const Projects: React.FC = () => {
           repeat: Infinity,
         }}
       />
-      
-      <SmallFurball 
-        $size={60} 
-        $top="25%" 
-        $left="90%" 
+
+      <SmallFurball
+        $size={60}
+        $top="25%"
+        $left="90%"
         $delay={6}
         animate={{
           y: [0, -18, 12, 0],
@@ -525,7 +525,7 @@ const Projects: React.FC = () => {
           repeat: Infinity,
         }}
       />
-      
+
       <Container>
         <SectionHeading
           title={t('projects.title')}
@@ -547,11 +547,11 @@ const Projects: React.FC = () => {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                     >
                       <ProjectImage $backgroundImage={project.image} />
-                      
+
                       <ProjectContent>
                         <ProjectTitle>{project.title}</ProjectTitle>
                         <ProjectDescription>{project.description}</ProjectDescription>
-                        
+
                         <ProjectLinks>
                           <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                             {t('projects.visitWebsite')}
@@ -577,11 +577,11 @@ const Projects: React.FC = () => {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                     >
                       <ProjectImage $backgroundImage={project.image} />
-                      
+
                       <ProjectContent>
                         <ProjectTitle>{project.title}</ProjectTitle>
                         <ProjectDescription>{project.description}</ProjectDescription>
-                        
+
                         <ProjectLinks>
                           <ProjectLink href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                             {t('projects.visitWebsite')}
@@ -607,11 +607,11 @@ const Projects: React.FC = () => {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                     >
                       <GameImage $backgroundImage={game.image} />
-                      
+
                       <GameContent>
                         <GameTitle>{game.title}</GameTitle>
                         <GameDescription>{game.description}</GameDescription>
-                        
+
                         <GameLinks>
                           {game.downloadUrl ? (
                             <ProjectLink href={game.downloadUrl} target="_blank" rel="noopener noreferrer">
