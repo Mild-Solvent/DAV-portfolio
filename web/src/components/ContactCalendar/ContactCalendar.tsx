@@ -504,7 +504,7 @@ ${locationString}
     `.trim();
 
     try {
-      await fetch('https://formspree.io/f/mrbowvke', {
+      const response = await fetch('https://formspree.io/f/mrbowvke', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -514,7 +514,12 @@ ${locationString}
           message: message
         }),
       });
-      setStep('success');
+
+      if (response.ok) {
+        setStep('success');
+      } else {
+        throw new Error('Failed to send booking request');
+      }
     } catch (error) {
       console.error(error);
       alert('Something went wrong. Please try again.');
