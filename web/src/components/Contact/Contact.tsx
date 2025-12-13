@@ -58,87 +58,79 @@ const Container = styled.div`
 `;
 
 const ContactContent = styled(motion.div)`
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${props => props.theme.spacing['2xl']};
+  gap: ${props => props.theme.spacing.xl};
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const Description = styled.p`
-  font-size: ${props => props.theme.fontSizes.xl};
-  line-height: 1.8;
+  font-size: ${props => props.theme.fontSizes.lg};
+  line-height: 1.6;
   color: ${props => props.theme.colors.textSecondary};
-  max-width: 700px;
-  margin: 0 auto ${props => props.theme.spacing['2xl']};
+  text-align: center;
+  margin: 0;
 `;
 
 const ContactDetails = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: ${props => props.theme.spacing.xl};
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.spacing.md};
   width: 100%;
-  margin-bottom: ${props => props.theme.spacing['2xl']};
+  max-width: 500px;
+`;
+
+const ContactItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${props => props.theme.spacing.md} 0;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
   
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
+  &:last-child {
+    border-bottom: none;
   }
 `;
 
-const ContactCard = styled(motion.div)`
-  background: linear-gradient(145deg, rgba(22, 27, 34, 0.6) 0%, rgba(13, 17, 23, 0.8) 100%);
-  border: 1px solid rgba(88, 166, 255, 0.2);
-  border-radius: ${props => props.theme.borderRadius.lg};
-  padding: ${props => props.theme.spacing.xl};
-  transition: all 0.3s ease;
-  
-  &:hover {
-    border-color: rgba(88, 166, 255, 0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
-  }
-`;
-
-const ContactIcon = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: ${props => props.theme.spacing.md};
-`;
-
-const ContactLabel = styled.h4`
-  color: ${props => props.theme.colors.text};
-  margin-bottom: ${props => props.theme.spacing.xs};
-  font-size: ${props => props.theme.fontSizes.lg};
-  font-weight: 600;
-`;
-
-const ContactValue = styled.p`
+const ContactLabel = styled.span`
   color: ${props => props.theme.colors.textSecondary};
-  margin: 0;
+  font-size: ${props => props.theme.fontSizes.sm};
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`;
+
+const ContactValue = styled.span`
+  color: ${props => props.theme.colors.text};
   font-size: ${props => props.theme.fontSizes.base};
-  word-break: break-word;
+  font-weight: 500;
+  text-align: right;
+`;
+
+const ButtonWrapper = styled(motion.div)`
+  margin-top: ${props => props.theme.spacing.lg};
 `;
 
 const BookingButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: ${props => props.theme.spacing.md};
+  gap: ${props => props.theme.spacing.sm};
   background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 25%, #00b894 50%, #00cec9 75%, #0984e3 100%);
   color: ${props => props.theme.colors.white};
   border: none;
-  padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing['2xl']};
-  border-radius: ${props => props.theme.borderRadius.xl};
-  font-size: ${props => props.theme.fontSizes.xl};
-  font-weight: 700;
-  box-shadow: 0 8px 30px rgba(0, 210, 255, 0.4);
+  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};
+  border-radius: ${props => props.theme.borderRadius.md};
+  font-size: ${props => props.theme.fontSizes.base};
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 210, 255, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
   text-decoration: none;
-  margin-top: ${props => props.theme.spacing.xl};
   
   &::before {
     content: '';
@@ -150,19 +142,16 @@ const BookingButton = styled(Link)`
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.2),
       transparent
     );
-    transition: left 0.6s;
+    transition: left 0.5s;
   }
   
   &:hover {
     background: linear-gradient(135deg, #00b8d4 0%, #2962ff 25%, #00a085 50%, #00acc1 75%, #1565c0 100%);
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 
-      0 12px 40px rgba(0, 210, 255, 0.6),
-      0 0 30px rgba(0, 184, 148, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 210, 255, 0.4);
     
     &::before {
       left: 100%;
@@ -170,32 +159,13 @@ const BookingButton = styled(Link)`
   }
   
   &:active {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
-  }
-  
-  animation: pulse-glow 3s infinite;
-  
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 8px 30px rgba(0, 210, 255, 0.4);
-    }
-    50% {
-      box-shadow: 
-        0 8px 30px rgba(0, 210, 255, 0.6),
-        0 0 30px rgba(0, 184, 148, 0.3);
-    }
+    transform: translateY(0);
   }
 `;
 
 const ButtonIcon = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: inline-block;
-  transition: transform 0.3s ease;
-  
-  ${BookingButton}:hover & {
-    transform: scale(1.2) rotate(10deg);
-  }
 `;
 
 const Contact: React.FC = () => {
@@ -219,50 +189,33 @@ const Contact: React.FC = () => {
           </Description>
 
           <ContactDetails>
-            <ContactCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-            >
-              <ContactIcon>📧</ContactIcon>
+            <ContactItem>
               <ContactLabel>{t('contact.email')}</ContactLabel>
               <ContactValue>dav.development.official@gmail.com</ContactValue>
-            </ContactCard>
+            </ContactItem>
 
-            <ContactCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <ContactIcon>📱</ContactIcon>
+            <ContactItem>
               <ContactLabel>{t('contact.phone')}</ContactLabel>
               <ContactValue>+421 914 229 122</ContactValue>
-            </ContactCard>
+            </ContactItem>
 
-            <ContactCard
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-            >
-              <ContactIcon>📍</ContactIcon>
+            <ContactItem>
               <ContactLabel>{t('contact.location')}</ContactLabel>
               <ContactValue>{t('contact.locationValue')}</ContactValue>
-            </ContactCard>
+            </ContactItem>
           </ContactDetails>
 
-          <BookingButton
-            href={`/${language}/calendar`}
-            initial={{ opacity: 0, scale: 0.9 }}
+          <ButtonWrapper
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
-            <ButtonIcon>📅</ButtonIcon>
-            Book a Meeting
-          </BookingButton>
+            <BookingButton href={`/${language}/calendar`}>
+              <ButtonIcon>📅</ButtonIcon>
+              Book a Meeting
+            </BookingButton>
+          </ButtonWrapper>
         </ContactContent>
       </Container>
     </ContactSection>

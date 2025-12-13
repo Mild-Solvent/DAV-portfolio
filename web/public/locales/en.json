@@ -1,28 +1,25 @@
 {
   "header.home": "Home",
   "header.about": "About",
-  "header.projects": "Projects", 
+  "header.projects": "Projects",
   "header.services": "Services",
   "header.skills": "Skills",
   "header.contact": "Contact",
   "header.logo": "DAV Development",
-  
   "hero.title.before": "Creating ",
   "hero.title.highlight": "digital experiences",
   "hero.title.after": " of the future",
   "hero.subtitle": "We specialize in developing modern web applications and user interfaces with focus on performance, accessibility and great design.",
   "hero.cta.projects": "View Projects",
   "hero.cta.contact": "Contact",
-  
   "about.title": "About Us",
   "about.subtitle": "Web Development Team with passion for modern technologies",
   "about.description": "We create modern and responsive websites with focus on user experience and performance. We cover full stack development using the latest technologies and have extensive experience in designing and implementing complex web applications - from simple landing pages to complex enterprise systems. We constantly educate ourselves and follow the latest trends in web development to offer the best solutions for our clients.",
-  
-  "contact.title": "Contact Me",
+  "contact.title": "Contact Us",
   "contact.subtitle": "Let's work together",
   "contact.description": "Do you have an interesting project or need help with web development? Don't hesitate to contact us. We'd be happy to discuss your ideas and create something amazing together.",
   "contact.email": "Email",
-  "contact.phone": "Phone", 
+  "contact.phone": "Phone",
   "contact.location": "Location",
   "contact.locationValue": "Bratislava, Slovakia",
   "contact.form.name": "Name",
@@ -37,17 +34,14 @@
   "contact.form.sending": "Sending...",
   "contact.form.success": "Thank you! Your message has been sent successfully.",
   "contact.form.error": "Sorry, there was an error sending your message. Please try again.",
-  
   "language.current": "English",
   "language.select": "Select Language",
-  
   "skills.title": "Technical Skills",
   "skills.subtitle": "Technologies and tools we work with to build modern, scalable applications",
   "skills.frontend.title": "Frontend Development",
   "skills.backend.title": "Backend Development",
   "skills.cloud.title": "Cloud & DevOps",
   "skills.design.title": "Design & UX",
-  
   "projects.title": "My Projects",
   "projects.visitWebsite": "Visit website",
   "projects.tabs.web": "Web Development",
@@ -59,7 +53,6 @@
   "projects.games.loadingScreen.title": "Godot: You are the loading screen",
   "projects.games.loadingScreen.description": "Point and click adventure game set in alternative universe where you wake up inside a room with a computer that is running a citizen of the surrounding city.",
   "projects.games.loadingScreen.comingSoon": "Alpha coming soon...",
-  
   "calculator.title": "Service Price Calculator",
   "calculator.subtitle": "Get an estimate for your project",
   "calculator.description": "Select the services you need and get an instant price estimate. Our team will review your requirements and provide a detailed quote.",
@@ -101,11 +94,9 @@
   "calculator.note": "This is an estimated price. Final quote will be provided after consultation.",
   "calculator.additionalFeatures": "Additional Features or Requirements",
   "calculator.additionalFeaturesPlaceholder": "Describe any additional features, integrations, or specific requirements for your project...",
-  
   "calendar.title.before": "Schedule a ",
   "calendar.title.highlight": "Meeting",
   "calendar.subtitle": "Select a date to contact us and schedule your appointment",
-  
   "seo.title": "DAV Development - E-commerce, SaaS, Mobile Apps & Web Development Solutions",
   "seo.description": "Professional web development team specializing in e-commerce stores, SaaS platforms, mobile apps, online shops, and modern web applications. Expert developers for React, Vue.js, Next.js ecommerce, WordPress shops, custom shopping carts, enterprise SaaS, iOS/Android apps, UI/UX design, performance optimization, cloud deployment, and AI integration. Full-stack development from landing pages to complex enterprise systems.",
   "seo.keywords": "web development, e-commerce development, ecommerce website, SaaS development, SaaS platform, online store, web shop, eshop development, e-shop, shopping cart, WordPress ecommerce, React ecommerce, Vue.js development, Next.js development, online shopping platform, digital store, web store development, mobile app development, iOS app, Android app, cross-platform mobile, React Native, UI/UX design, Figma design, Adobe XD, responsive design, frontend development, backend development, full-stack developer, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL, REST API, TypeScript, JavaScript, Tailwind CSS, styled components, performance optimization, SEO optimization, cloud deployment, AWS, Docker, Kubernetes, DevOps, CI/CD, GitHub Actions, Vercel, Heroku, AI integration, machine learning, landing page, portfolio website, enterprise application, web application, custom software, digital solutions, software development, website builder, CMS development, database design, API development, microservices, scalable applications, modern web technologies",

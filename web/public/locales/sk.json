@@ -1,28 +1,25 @@
 {
   "header.home": "Domov",
   "header.about": "O nás",
-  "header.projects": "Projekty", 
+  "header.projects": "Projekty",
   "header.services": "Služby",
   "header.skills": "Zručnosti",
   "header.contact": "Kontakt",
   "header.logo": "DAV Development",
-  
   "hero.title.before": "Vytvárame ",
   "hero.title.highlight": "digitálne zážitky",
   "hero.title.after": " budúcnosti",
   "hero.subtitle": "Špecializujeme sa na vývoj moderných webových aplikácií a používateľských rozhraní so zameraním na výkon, dostupnosť a skvelý dizajn.",
   "hero.cta.projects": "Zobraziť projekty",
   "hero.cta.contact": "Kontakt",
-  
   "about.title": "O nás",
   "about.subtitle": "Tím webových vývojárov s vášňou pre moderné technológie",
   "about.description": "Vytvárame moderné a responzívne webové stránky so zameraním na používateľskú skúsenosť a výkon. Špecializujeme sa na frontend vývoj pomocou najnovších technológií a máme rozsiahle skúsenosti s navrhovaním a implementáciou komplexných webových aplikácií - od jednoduchých landing pages až po zložité podnikové systémy. Neustále sa vzdelávame a sledujeme najnovšie trendy vo webovom vývoji, aby sme mohli ponúknuť najlepšie riešenia pre našich klientov.",
-  
   "contact.title": "Kontakt",
   "contact.subtitle": "Poďme spolupracovať",
   "contact.description": "Máte zaujímavý projekt alebo potrebujete pomoc s webovým vývojom? Neváhajte nás kontaktovať. Rádi prediskutujeme vaše nápady a spoločne vytvoríme niečo úžasné.",
   "contact.email": "Email",
-  "contact.phone": "Telefón", 
+  "contact.phone": "Telefón",
   "contact.location": "Poloha",
   "contact.locationValue": "Bratislava, Slovensko",
   "contact.form.name": "Meno",
@@ -37,18 +34,15 @@
   "contact.form.sending": "Odosielam...",
   "contact.form.success": "Ďakujem! Vaša správa bola úspešne odoslaná.",
   "contact.form.error": "Ospravedlňujem sa, pri odosielaní správy sa vyskytla chyba. Skúste to prosím znovu.",
-  
   "language.current": "Slovenčina",
   "language.select": "Vybrať jazyk",
-  
   "skills.title": "Technické zručnosti",
   "skills.subtitle": "Technológie a nástroje, s ktorými pracújeme pri vytváraní moderných, škálovateľných aplikácií",
   "skills.frontend.title": "Frontend vývoj",
   "skills.backend.title": "Backend vývoj",
   "skills.cloud.title": "Cloud & DevOps",
   "skills.design.title": "Dizajn & UX",
-  
-  "projects.title": "Moje projekty",
+  "projects.title": "Projekty",
   "projects.visitWebsite": "Navštíviť stránku",
   "projects.tabs.web": "Webový vývoj",
   "projects.tabs.mobile": "Mobilný vývoj",
@@ -59,7 +53,6 @@
   "projects.games.loadingScreen.title": "Godot: You are the loading screen",
   "projects.games.loadingScreen.description": "Point and click adventúra odohravajúca sa v alternatívnom vesmíre, kde sa zobudíte v miestnosti s počítačom, ktorý riadi občana okolitého mesta.",
   "projects.games.loadingScreen.comingSoon": "Alpha už čoskoro...",
-  
   "calculator.title": "Kalkulačka ceny služieb",
   "calculator.subtitle": "Získajte odhad pre váš projekt",
   "calculator.description": "Vyberte služby, ktoré potrebujete a získajte okamžitý cenový odhad. Náš tím preskúma vaše požiadavky a poskytne detailnú cenovú ponuku.",
@@ -101,11 +94,9 @@
   "calculator.note": "Toto je odhadovaná cena. Finálna cenová ponuka bude poskytnutá po konzultácii.",
   "calculator.additionalFeatures": "Dodatočné funkcie alebo požiadavky",
   "calculator.additionalFeaturesPlaceholder": "Popíšte akékoľvek dodatočné funkcie, integrácie alebo špecifické požiadavky pre váš projekt...",
-  
   "calendar.title.before": "Naplánujte si ",
   "calendar.title.highlight": "stretnutie",
   "calendar.subtitle": "Vyberte dátum pre naplánovanie stretnutia",
-  
   "seo.title": "DAV Development - E-shop, SaaS, Mobilné Aplikácie & Vývoj Webov",
   "seo.description": "Profesionálny tím pre vývoj e-shopov, SaaS platforiem, mobilných aplikácií a webových stránok. Experti na React, Vue.js, Next.js e-commerce, WordPress obchody, vlastné nákupné košíky, enterprise SaaS, iOS/Android aplikácie, UI/UX dizajn, optimalizáciu výkonu, cloudové nasadenie a AI integráciu. Full-stack vývoj od landing pages po komplexné podnikové systémy.",
   "seo.keywords": "vývoj webov, vývoj e-shopu, e-commerce, eshop, SaaS vývoj, SaaS platforma, online obchod, webový obchod, internetový obchod, nákupný košík, WordPress eshop, React eshop, Vue.js vývoj, Next.js vývoj, online predaj, digitálny obchod, vývoj mobilných aplikácií, iOS aplikácia, Android aplikácia, cross-platform mobil, React Native, UI/UX dizajn, Figma dizajn, Adobe XD, responzívny dizajn, frontend vývoj, backend vývoj, full-stack vývojár, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL, REST API, TypeScript, JavaScript, Tailwind CSS, styled components, optimalizácia výkonu, SEO optimalizácia, cloudové nasadenie, AWS, Docker, Kubernetes, DevOps, CI/CD, GitHub Actions, Vercel, Heroku, AI integrácia, umelá inteligencia, landing page, portfólio web, podniková aplikácia, webová aplikácia, vlastný softvér, digitálne riešenia, vývoj softvéru, tvorba webov, CMS vývoj, návrh databázy, API vývoj, mikroslužby, škálovateľné aplikácie, moderné webové technológie",
