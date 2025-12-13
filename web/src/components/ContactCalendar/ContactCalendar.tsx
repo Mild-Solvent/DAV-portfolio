@@ -511,10 +511,7 @@ ${locationString}
           name: formData.name,
           email: formData.email,
           subject: `New Meeting: ${formData.name} @ ${formattedDate}`,
-          message: message,
-          date: formattedDate,
-          time: selectedTime,
-          type: meetingType
+          message: message
         }),
       });
       setStep('success');
