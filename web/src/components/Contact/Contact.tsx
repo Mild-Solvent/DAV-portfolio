@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { SectionHeading } from '../shared';
 import { useTranslation } from '../../contexts/TranslationContext';
+import Link from 'next/link';
 
 const ContactSection = styled.section`
   padding: ${props => props.theme.spacing['4xl']} 0;
   background: ${props => props.theme.colors.primary};
   min-height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
   
   &::after {
     content: '';
@@ -46,143 +49,96 @@ const ContactSection = styled.section`
 `;
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 ${props => props.theme.spacing.xl};
   position: relative;
   z-index: 1;
+  width: 100%;
 `;
 
-const ContactContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${props => props.theme.spacing['4xl']};
-  align-items: start;
-
-  @media (max-width: ${props => props.theme.breakpoints.lg}) {
-    grid-template-columns: 1fr;
-    gap: ${props => props.theme.spacing['2xl']};
-  }
+const ContactContent = styled(motion.div)`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${props => props.theme.spacing['2xl']};
 `;
 
-const ContactInfo = styled(motion.div)`
-  h3 {
-    color: ${props => props.theme.colors.primary};
-    margin-bottom: ${props => props.theme.spacing.xl};
-    font-size: ${props => props.theme.fontSizes['2xl']};
-  }
-
-  p {
-    font-size: ${props => props.theme.fontSizes.lg};
-    line-height: 1.6;
-    margin-bottom: ${props => props.theme.spacing.xl};
-  }
+const Description = styled.p`
+  font-size: ${props => props.theme.fontSizes.xl};
+  line-height: 1.8;
+  color: ${props => props.theme.colors.textSecondary};
+  max-width: 700px;
+  margin: 0 auto ${props => props.theme.spacing['2xl']};
 `;
 
 const ContactDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${props => props.theme.spacing.lg};
-`;
-
-const ContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${props => props.theme.spacing.md};
-`;
-
-
-const ContactText = styled.div`
-  h4 {
-    color: ${props => props.theme.colors.text};
-    margin-bottom: ${props => props.theme.spacing.xs};
-    font-size: ${props => props.theme.fontSizes.lg};
-  }
-
-  p {
-    color: ${props => props.theme.colors.textSecondary};
-    margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: ${props => props.theme.spacing.xl};
+  width: 100%;
+  margin-bottom: ${props => props.theme.spacing['2xl']};
+  
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const ContactForm = styled(motion.form)`
-  background: ${props => props.theme.colors.backgroundLight};
-  padding: ${props => props.theme.spacing['2xl']};
+const ContactCard = styled(motion.div)`
+  background: linear-gradient(145deg, rgba(22, 27, 34, 0.6) 0%, rgba(13, 17, 23, 0.8) 100%);
+  border: 1px solid rgba(88, 166, 255, 0.2);
   border-radius: ${props => props.theme.borderRadius.lg};
-  border: 1px solid ${props => props.theme.colors.border};
-  box-shadow: ${props => props.theme.shadows.md};
+  padding: ${props => props.theme.spacing.xl};
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: rgba(88, 166, 255, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
+  }
 `;
 
-const FormGroup = styled.div`
-  margin-bottom: ${props => props.theme.spacing.xl};
+const ContactIcon = styled.div`
+  font-size: 2.5rem;
+  margin-bottom: ${props => props.theme.spacing.md};
 `;
 
-const Label = styled.label`
-  display: block;
+const ContactLabel = styled.h4`
   color: ${props => props.theme.colors.text};
   margin-bottom: ${props => props.theme.spacing.xs};
-  font-weight: 500;
+  font-size: ${props => props.theme.fontSizes.lg};
+  font-weight: 600;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.backgroundLight};
-  border: 2px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.md};
-  color: ${props => props.theme.colors.text};
+const ContactValue = styled.p`
+  color: ${props => props.theme.colors.textSecondary};
+  margin: 0;
   font-size: ${props => props.theme.fontSizes.base};
-  transition: all 0.3s ease;
-
-  &:focus {
-    outline: none;
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.colors.textMuted};
-  }
+  word-break: break-word;
 `;
 
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: ${props => props.theme.spacing.md};
-  background: ${props => props.theme.colors.backgroundLight};
-  border: 2px solid transparent;
-  border-radius: ${props => props.theme.borderRadius.md};
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSizes.base};
-  min-height: 120px;
-  resize: vertical;
-  transition: all 0.3s ease;
-  font-family: inherit;
-
-  &:focus {
-    outline: none;
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.colors.textMuted};
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 100%;
+const BookingButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${props => props.theme.spacing.md};
   background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 25%, #00b894 50%, #00cec9 75%, #0984e3 100%);
   color: ${props => props.theme.colors.white};
   border: none;
-  padding: ${props => props.theme.spacing.lg} ${props => props.theme.spacing.xl};
-  border-radius: ${props => props.theme.borderRadius.lg};
-  font-size: ${props => props.theme.fontSizes.lg};
+  padding: ${props => props.theme.spacing.xl} ${props => props.theme.spacing['2xl']};
+  border-radius: ${props => props.theme.borderRadius.xl};
+  font-size: ${props => props.theme.fontSizes.xl};
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 210, 255, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  margin-top: ${props => props.theme.spacing.xl};
   
   &::before {
     content: '';
@@ -200,12 +156,12 @@ const SubmitButton = styled.button`
     transition: left 0.6s;
   }
   
-  &:hover:not(:disabled) {
+  &:hover {
     background: linear-gradient(135deg, #00b8d4 0%, #2962ff 25%, #00a085 50%, #00acc1 75%, #1565c0 100%);
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 
-      0 8px 25px rgba(0, 210, 255, 0.5),
-      0 0 20px rgba(0, 184, 148, 0.3),
+      0 12px 40px rgba(0, 210, 255, 0.6),
+      0 0 30px rgba(0, 184, 148, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
     
     &::before {
@@ -213,125 +169,37 @@ const SubmitButton = styled.button`
     }
   }
   
-  &:active:not(:disabled) {
-    transform: translateY(-1px) scale(1.01);
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.6);
-  }
-
-  &:disabled {
-    background: linear-gradient(135deg, #a4a4a4 0%, #757575 100%);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-    opacity: 0.7;
-    
-    &::before {
-      display: none;
-    }
+  &:active {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
   }
   
-  /* Pulsing animation for emphasis */
-  &:not(:disabled) {
-    animation: pulse-glow 3s infinite;
-  }
+  animation: pulse-glow 3s infinite;
   
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+      box-shadow: 0 8px 30px rgba(0, 210, 255, 0.4);
     }
     50% {
       box-shadow: 
-        0 4px 15px rgba(0, 210, 255, 0.6),
-        0 0 20px rgba(0, 184, 148, 0.2);
+        0 8px 30px rgba(0, 210, 255, 0.6),
+        0 0 30px rgba(0, 184, 148, 0.3);
     }
   }
 `;
 
-
-const StatusMessage = styled.div<{ status: 'success' | 'error' }>`
-  padding: ${props => props.theme.spacing.md};
-  border-radius: ${props => props.theme.borderRadius.md};
-  margin-bottom: ${props => props.theme.spacing.lg};
-  font-size: ${props => props.theme.fontSizes.sm};
-  font-weight: 500;
-  text-align: center;
-  animation: slideIn 0.3s ease-out;
+const ButtonIcon = styled.span`
+  font-size: 1.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
   
-  background: ${props => props.status === 'success' 
-    ? 'rgba(34, 197, 94, 0.1)' 
-    : 'rgba(239, 68, 68, 0.1)'};
-  color: ${props => props.status === 'success' 
-    ? '#22c55e' 
-    : '#ef4444'};
-  border: 1px solid ${props => props.status === 'success' 
-    ? 'rgba(34, 197, 94, 0.2)' 
-    : 'rgba(239, 68, 68, 0.2)'};
-    
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  ${BookingButton}:hover & {
+    transform: scale(1.2) rotate(10deg);
   }
 `;
 
 const Contact: React.FC = () => {
-  const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [submitMessage, setSubmitMessage] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-    
-    try {
-      const response = await fetch('https://formspree.io/f/mrbowvke', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setSubmitMessage(t('contact.form.success'));
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-      setSubmitMessage(t('contact.form.error'));
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-      // Clear status message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-        setSubmitMessage('');
-      }, 5000);
-    }
-  };
+  const { t, language } = useTranslation();
 
   return (
     <ContactSection id="contact">
@@ -340,112 +208,61 @@ const Contact: React.FC = () => {
           title={t('contact.title')}
         />
 
-        <ContactContent>
-          <ContactInfo
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3>{t('contact.subtitle')}</h3>
-            <p>
-              {t('contact.description')}
-            </p>
+        <ContactContent
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Description>
+            {t('contact.description')}
+          </Description>
 
-            <ContactDetails>
-              <ContactItem>
-                <ContactText>
-                  <h4>{t('contact.email')}</h4>
-                  <p>dav.development.official@gmail.com</p>
-                </ContactText>
-              </ContactItem>
-
-              <ContactItem>
-                <ContactText>
-                  <h4>{t('contact.phone')}</h4>
-                  <p>+421 914 229 122</p>
-                </ContactText>
-              </ContactItem>
-
-              <ContactItem>
-                <ContactText>
-                  <h4>{t('contact.location')}</h4>
-                  <p>{t('contact.locationValue')}</p>
-                </ContactText>
-              </ContactItem>
-            </ContactDetails>
-          </ContactInfo>
-
-          <ContactForm
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            onSubmit={handleSubmit}
-          >
-            {submitStatus !== 'idle' && submitMessage && (
-              <StatusMessage status={submitStatus as 'success' | 'error'}>
-                {submitMessage}
-              </StatusMessage>
-            )}
-            <FormGroup>
-              <Label htmlFor="name">{t('contact.form.name')}</Label>
-              <Input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.form.namePlaceholder')}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="email">{t('contact.form.email')}</Label>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.form.emailPlaceholder')}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="subject">{t('contact.form.subject')}</Label>
-              <Input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.form.subjectPlaceholder')}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="message">{t('contact.form.message')}</Label>
-              <TextArea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder={t('contact.form.messagePlaceholder')}
-              />
-            </FormGroup>
-
-            <SubmitButton
-              type="submit"
-              disabled={isSubmitting}
+          <ContactDetails>
+            <ContactCard
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
-              {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
-            </SubmitButton>
-          </ContactForm>
+              <ContactIcon>📧</ContactIcon>
+              <ContactLabel>{t('contact.email')}</ContactLabel>
+              <ContactValue>dav.development.official@gmail.com</ContactValue>
+            </ContactCard>
+
+            <ContactCard
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <ContactIcon>📱</ContactIcon>
+              <ContactLabel>{t('contact.phone')}</ContactLabel>
+              <ContactValue>+421 914 229 122</ContactValue>
+            </ContactCard>
+
+            <ContactCard
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+            >
+              <ContactIcon>📍</ContactIcon>
+              <ContactLabel>{t('contact.location')}</ContactLabel>
+              <ContactValue>{t('contact.locationValue')}</ContactValue>
+            </ContactCard>
+          </ContactDetails>
+
+          <BookingButton
+            href={`/${language}/calendar`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <ButtonIcon>📅</ButtonIcon>
+            Book a Meeting
+          </BookingButton>
         </ContactContent>
       </Container>
     </ContactSection>
