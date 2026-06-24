@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="body2" cx="38%" cy="32%" r="72%">
+      <stop offset="0%" stop-color="#FFE15A"/>
+      <stop offset="55%" stop-color="#FFC400"/>
+      <stop offset="100%" stop-color="#E89A00"/>
+    </radialGradient>
+    <radialGradient id="rim2" cx="50%" cy="90%" r="60%">
+      <stop offset="0%" stop-color="#B36F00" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#B36F00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="inner2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E89A00"/>
+      <stop offset="100%" stop-color="#FFC400"/>
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="6" result="off"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="100" cy="184" rx="62" ry="6" fill="#000" opacity="0.18"/>
+  <g filter="url(#shadow2)">
+    <!-- Frame 2: half-open mouth -->
+    <path d="M 100 100 L 186 72 A 86 86 0 1 1 186 128 Z" fill="url(#body2)"/>
+    <path d="M 100 100 L 186 72 A 86 86 0 1 1 186 128 Z" fill="url(#rim2)"/>
+    <!-- inner mouth depth -->
+    <path d="M 100 100 L 184 74 L 184 126 Z" fill="url(#inner2)" opacity="0.55"/>
+    <!-- glossy highlights -->
+    <ellipse cx="62" cy="52" rx="30" ry="20" fill="#FFFFFF" opacity="0.85" transform="rotate(-28 62 52)"/>
+    <ellipse cx="86" cy="42" rx="10" ry="6" fill="#FFFFFF" opacity="0.95" transform="rotate(-28 86 42)"/>
+    <!-- eye-area shine -->
+    <path d="M 122 50 Q 138 56 134 72 Q 124 64 122 50 Z" fill="#FFFFFF" opacity="0.7"/>
+  </g>
+</svg>

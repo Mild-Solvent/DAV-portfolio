@@ -183,29 +183,8 @@ const BottomGlow = styled.div`
   );
   pointer-events: none;
   z-index: 5;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 255, 136, 0.6) 20%,
-      rgba(64, 224, 255, 0.8) 50%,
-      rgba(0, 255, 136, 0.6) 80%,
-      transparent 100%
-    );
-    box-shadow: 
-      0 0 20px rgba(0, 255, 136, 0.4),
-      0 0 40px rgba(64, 224, 255, 0.3),
-      0 0 60px rgba(0, 200, 255, 0.2);
-  }
 `;
+
 
 // Particle container
 const ParticlesContainer = styled.div`
@@ -324,7 +303,7 @@ const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isCursorVisible, setIsCursorVisible] = useState(false);
-  
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });

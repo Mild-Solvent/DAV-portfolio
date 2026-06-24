@@ -10,6 +10,7 @@ import Footer from '../../components/Footer/Footer';
 import CookieBanner from '../../components/CookieBanner/CookieBanner';
 import SectionDots from '../../components/SectionDots/SectionDots';
 import ScrollToTop from '../../components/ScrollButton/ScrollButton';
+import PacmanDivider from '../../components/PacmanDivider/PacmanDivider';
 
 export default function LangHomeClient() {
   return (
@@ -28,6 +29,7 @@ export default function LangHomeClient() {
         flexDirection: 'column'
       }}>
         <div style={{ flex: '1' }}>
+          <PacmanDivider />
           <About />
           <Projects />
           <Skills />
