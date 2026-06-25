@@ -252,3 +252,31 @@
 ✓ Compiled in 41ms
  GET /en/ 200 in 200ms (next.js: 98ms, generate-params: 9ms, application-code: 102ms)
  GET /sk/ 200 in 50ms (next.js: 5ms, generate-params: 39µs, application-code: 45ms)
+ GET /sk/ 200 in 512ms (next.js: 15ms, generate-params: 9ms, application-code: 497ms)
+✓ Compiled in 36ms
+ GET /en/ 200 in 208ms (next.js: 100ms, generate-params: 9ms, application-code: 108ms)
+ GET /sk/ 200 in 48ms (next.js: 5ms, generate-params: 40µs, application-code: 43ms)
+✓ Compiled in 40ms
+ GET /en/ 200 in 204ms (next.js: 89ms, generate-params: 10ms, application-code: 115ms)
+ GET /sk/ 200 in 67ms (next.js: 6ms, generate-params: 39µs, application-code: 60ms)
+✓ Compiled in 39ms
+ GET /en/ 200 in 177ms (next.js: 88ms, generate-params: 9ms, application-code: 89ms)
+ GET /sk/ 200 in 39ms (next.js: 4ms, generate-params: 36µs, application-code: 35ms)
+ GET /sk/ 200 in 481ms (next.js: 14ms, generate-params: 9ms, application-code: 467ms)
+✓ Compiled in 40ms
+ GET /en/ 200 in 196ms (next.js: 98ms, generate-params: 11ms, application-code: 98ms)
+ GET /sk/ 200 in 43ms (next.js: 5ms, generate-params: 40µs, application-code: 38ms)
+ GET /sk/ 200 in 404ms (next.js: 15ms, generate-params: 10ms, application-code: 389ms)
+✓ Compiled in 45ms
+ GET /en/ 200 in 178ms (next.js: 86ms, generate-params: 9ms, application-code: 92ms)
+ GET /sk/ 200 in 48ms (next.js: 5ms, generate-params: 35µs, application-code: 43ms)
+ GET /sk/ 200 in 386ms (next.js: 12ms, generate-params: 8ms, application-code: 374ms)
+ GET /en/ 200 in 58ms (next.js: 17ms, generate-params: 12ms, application-code: 40ms)
+ GET /sk/ 200 in 51ms (next.js: 15ms, generate-params: 10ms, application-code: 36ms)
+ GET /en/ 200 in 433ms (next.js: 86ms, generate-params: 8ms, application-code: 347ms)
+ GET /sk/ 200 in 347ms (next.js: 5ms, generate-params: 31µs, application-code: 342ms)
+ GET /en/ 200 in 311ms (next.js: 5ms, generate-params: 52µs, application-code: 306ms)
+ GET /sk/ 200 in 264ms (next.js: 10ms, generate-params: 33µs, application-code: 255ms)
+ GET /en/ 200 in 96ms (next.js: 6ms, generate-params: 32µs, application-code: 90ms)
+ GET /sk/ 200 in 57ms (next.js: 13ms, generate-params: 8ms, application-code: 44ms)
+ GET /sk/ 200 in 376ms (next.js: 14ms, generate-params: 9ms, application-code: 362ms)

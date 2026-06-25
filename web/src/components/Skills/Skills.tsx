@@ -140,6 +140,16 @@ const SkillDivider = styled.div`
   }
 `;
 
+const RocketLandingPad = styled.div`
+  display: none;
+
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    display: block;
+    grid-column: 1 / -1;
+    height: 180px;
+  }
+`;
+
 const SkillImage = styled.img`
   height: 260px;
   width: auto;
@@ -252,6 +262,9 @@ const Skills: React.FC = () => {
                     <SkillDivider>
                       <SkillImage src="/pacman/frontend-backend.png" alt="" />
                     </SkillDivider>
+                  )}
+                  {skillKey === 'design' && (
+                    <RocketLandingPad id="rocket-landing-pad" />
                   )}
                   <SkillCard variants={cardVariants} $skillKey={skillKey}>
                     <SkillHeader>

@@ -221,69 +221,70 @@ const PacmanLoop: React.FC = () => {
       let isLanded = false;
       let isNearLanding = false;
 
+      // L-shaped 3-phase trajectory (both mobile and desktop):
+      //   Phase 1: vertical descent on the left
+      //   Phase 2: 90° turn → fly horizontally to the centre
+      //   Phase 3: vertical descent from the centre to the landing point
+      let turnY: number;
+      let centerX: number;
+      let targetX: number;
+      let targetY: number;
+
       if (isMobile) {
-        // Mobile: straight descent on the left side (unchanged).
-        const landingInset = 54;
-        const targetX = skillsRect.left + landingInset;
-        const targetY = skillsBottom - vh * 0.2;
-        const landingScroll = targetY - startViewportY;
-        const t = Math.min(
-          1,
-          Math.max(0, (scrollY - launchScroll) / Math.max(1, landingScroll - launchScroll))
-        );
-        docX = startX + (targetX - startX) * t;
-        docY = scrollY <= launchScroll
-          ? startY
-          : scrollY >= landingScroll
-            ? targetY
-            : scrollY + startViewportY;
-        isLanded = t >= 0.995;
+        const pad = document.getElementById('rocket-landing-pad');
+        const padRect = pad?.getBoundingClientRect();
+        const padTop = padRect ? padRect.top + scrollY : skillsBottom - vh * 0.2;
+        const padHeight = padRect?.height ?? 180;
+        const padCenterX = padRect
+          ? padRect.left + padRect.width / 2
+          : skillsRect.left + skillsRect.width / 2;
+        targetX = padCenterX;
+        targetY = padTop + padHeight / 2;
+        // Turn just above the landing pad so the rocket descends on the left
+        // through Backend/Cloud sections before swinging right.
+        turnY = padTop + vh * 0.02;
+        centerX = padCenterX;
       } else {
-        // Desktop: L-shaped 3-phase trajectory.
-        // Phase 1: vertical descent on the left.
-        // Phase 2: 90° turn → fly horizontally to the centre.
-        // Phase 3: vertical descent from the centre to the landing point
-        //          (between Cloud & DevOps and Dizajn & UX).
-        const turnY = skillsTop + skillsRect.height * 0.62;
-        const centerX = skillsRect.left + skillsRect.width / 2;
-        const targetX = centerX;
-        const targetY = skillsBottom - vh * 0.5;
+        turnY = skillsTop + skillsRect.height * 0.62;
+        centerX = skillsRect.left + skillsRect.width / 2;
+        targetX = centerX;
+        targetY = skillsBottom - vh * 0.5;
+      }
 
-        const phase1Len = Math.max(1, turnY - startY);
-        const phase2Len = Math.min(vh * 0.28, Math.max(120, (targetY - turnY) * 0.45));
-        const phase3Len = Math.max(1, (targetY - turnY) - phase2Len);
+      const phase1Len = Math.max(1, turnY - startY);
+      const phase2Len = Math.min(vh * 0.28, Math.max(120, (targetY - turnY) * 0.45));
+      const phase3Len = Math.max(1, (targetY - turnY) - phase2Len);
 
-        const phase1End = launchScroll + phase1Len;
-        const phase2End = phase1End + phase2Len;
-        const landingScroll = phase2End + phase3Len;
+      const phase1End = launchScroll + phase1Len;
+      const phase2End = phase1End + phase2Len;
+      const landingScroll = phase2End + phase3Len;
 
-        if (scrollY <= launchScroll) {
-          docX = startX;
-          docY = startY;
-          currentPhase = 1;
-        } else if (scrollY <= phase1End) {
-          currentPhase = 1;
-          const t = (scrollY - launchScroll) / phase1Len;
-          docX = startX;
-          docY = startY + (turnY - startY) * t;
-        } else if (scrollY <= phase2End) {
-          currentPhase = 2;
-          const t = (scrollY - phase1End) / phase2Len;
-          docX = startX + (centerX - startX) * t;
-          docY = turnY;
-        } else if (scrollY <= landingScroll) {
-          currentPhase = 3;
-          const t = (scrollY - phase2End) / phase3Len;
-          docX = centerX;
-          docY = turnY + (targetY - turnY) * t;
-          isNearLanding = t >= 0.7;
-        } else {
-          currentPhase = 3;
-          docX = targetX;
-          docY = targetY;
-          isLanded = true;
-          isNearLanding = true;
-        }
+      if (scrollY <= launchScroll) {
+        docX = startX;
+        docY = startY;
+        currentPhase = 1;
+      } else if (scrollY <= phase1End) {
+        currentPhase = 1;
+        const t = (scrollY - launchScroll) / phase1Len;
+        docX = startX;
+        docY = startY + (turnY - startY) * t;
+      } else if (scrollY <= phase2End) {
+        currentPhase = 2;
+        const t = (scrollY - phase1End) / phase2Len;
+        docX = startX + (centerX - startX) * t;
+        docY = turnY;
+      } else if (scrollY <= landingScroll) {
+        currentPhase = 3;
+        const t = (scrollY - phase2End) / phase3Len;
+        docX = centerX;
+        docY = turnY + (targetY - turnY) * t;
+        isNearLanding = t >= 0.7;
+      } else {
+        currentPhase = 3;
+        docX = targetX;
+        docY = targetY;
+        isLanded = true;
+        isNearLanding = true;
       }
 
       setFlight({

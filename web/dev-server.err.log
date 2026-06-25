@@ -221,3 +221,4 @@ Import traces:
 
     at <unknown> (Error: ./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
     at <unknown> (Error: (./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
