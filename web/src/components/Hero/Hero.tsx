@@ -48,7 +48,7 @@ const HeroContainer = styled.div`
 
 const HeroTitle = styled(motion.h1)`
   font-family: ${props => props.theme.fonts.display};
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: ${props => props.theme.spacing.xl};
   color: ${props => props.theme.colors.textEmphasis};
@@ -56,39 +56,10 @@ const HeroTitle = styled(motion.h1)`
   letter-spacing: -0.04em;
   position: relative;
   text-align: center;
-  -webkit-text-stroke: 0.5px;
-  -webkit-text-stroke-color: #e0ffe8;
-  
-  /* Subtle glow effect following letter shapes - shifted down and left */
-  text-shadow: 
-    /* Very subtle inner glow */
-    -1px 2px 3px rgba(0, 255, 136, 0.3),
-    -2px 3px 6px rgba(0, 255, 136, 0.2),
-    -2px 4px 10px rgba(0, 200, 255, 0.15),
-    -3px 5px 15px rgba(64, 224, 255, 0.1);
-  
-  /* Very light drop shadow filter - shifted down and left */
-  filter: 
-    drop-shadow(-1px 2px 4px rgba(0, 255, 136, 0.2))
-    drop-shadow(-2px 3px 8px rgba(0, 200, 255, 0.1));
-  
-  
+
   span {
     color: ${props => props.theme.colors.textEmphasis};
     display: inline-block;
-    -webkit-text-stroke: 0.5px;
-    -webkit-text-stroke-color: #e8f6ff;
-    
-    /* Subtle glow for the span text - shifted down and left */
-    text-shadow: 
-      -1px 2px 3px rgba(64, 224, 255, 0.4),
-      -2px 3px 6px rgba(64, 224, 255, 0.2),
-      -2px 4px 10px rgba(0, 200, 255, 0.15),
-      -3px 5px 15px rgba(0, 255, 136, 0.1);
-      
-    filter: 
-      drop-shadow(-1px 2px 4px rgba(64, 224, 255, 0.2))
-      drop-shadow(-2px 3px 8px rgba(0, 200, 255, 0.1));
   }
 `;
 

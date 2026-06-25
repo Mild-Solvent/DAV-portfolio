@@ -8,14 +8,13 @@ import Projects from '../../components/Projects/Projects';
 import Contact from '../../components/Contact/Contact';
 import Footer from '../../components/Footer/Footer';
 import CookieBanner from '../../components/CookieBanner/CookieBanner';
-import SectionDots from '../../components/SectionDots/SectionDots';
 import ScrollToTop from '../../components/ScrollButton/ScrollButton';
 import PacmanDivider from '../../components/PacmanDivider/PacmanDivider';
+import PacmanLoop from '../../components/PacmanDivider/PacmanLoop';
 
 export default function LangHomeClient() {
   return (
     <>
-      <SectionDots />
       <ScrollToTop />
       <Header />
       <Hero />
@@ -31,6 +30,7 @@ export default function LangHomeClient() {
         <div style={{ flex: '1' }}>
           <PacmanDivider />
           <About />
+          <PacmanLoop />
           <Projects />
           <Skills />
           <Contact />

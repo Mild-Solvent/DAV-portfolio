@@ -1,0 +1,63 @@
+[browser] Over 200 classes were generated for component Styled(Component) with the id of "sc-gSILEF".
+Consider using the attrs method, together with a style object for frequently changed styles.
+Example:
+  const Component = styled.div.attrs(props => ({
+    style: {
+      background: props.background,
+    },
+  }))`width: 100%;`
+
+  <Component />
+[browser] Over 200 classes were generated for component Styled(Component) with the id of "sc-gSILEF".
+Consider using the attrs method, together with a style object for frequently changed styles.
+Example:
+  const Component = styled.div.attrs(props => ({
+    style: {
+      background: props.background,
+    },
+  }))`width: 100%;`
+
+  <Component />
+[browser] Uncaught ReferenceError: lastScrollYRef is not defined
+    at PacmanLoop.useEffect (src/components/PacmanDivider/PacmanLoop.tsx:137:5)
+    at LangHomeClient (src/app/[lang]/page-wrapper.tsx:33:22)
+    at LangHome (src\app\[lang]\page.tsx:10:10)
+  135 |
+  136 |   useEffect(() => {
+> 137 |     lastScrollYRef.current = window.scrollY;
+      |     ^
+  138 |
+  139 |     const update = () => {
+  140 |       const el = ref.current;
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Uncaught ReferenceError: lastScrollYRef is not defined
+    at PacmanLoop.useEffect.update (src/components/PacmanDivider/PacmanLoop.tsx:150:37)
+    at PacmanLoop.useEffect (src/components/PacmanDivider/PacmanLoop.tsx:206:5)
+    at LangHomeClient (src/app/[lang]/page-wrapper.tsx:34:11)
+    at LangHome (src\app\[lang]\page.tsx:10:10)
+  148 |       const skillsRect = skills.getBoundingClientRect();
+  149 |       const scrollY = window.scrollY;
+> 150 |       const scrollDelta = scrollY - lastScrollYRef.current;
+      |                                     ^
+  151 |       if (Math.abs(scrollDelta) > 2) {
+  152 |         scrollDirectionRef.current = scrollDelta > 0 ? 1 : -1;
+  153 |         lastScrollYRef.current = scrollY;
+[browser] Uncaught ReferenceError: lastScrollYRef is not defined
+    at PacmanLoop.useEffect.update (src/components/PacmanDivider/PacmanLoop.tsx:150:37)
+    at PacmanLoop.useEffect (src/components/PacmanDivider/PacmanLoop.tsx:206:5)
+    at LangHomeClient (src/app/[lang]/page-wrapper.tsx:33:11)
+    at LangHome (src\app\[lang]\page.tsx:10:10)
+  148 |       const skillsRect = skills.getBoundingClientRect();
+  149 |       const scrollY = window.scrollY;
+> 150 |       const scrollDelta = scrollY - lastScrollYRef.current;
+      |                                     ^
+  151 |       if (Math.abs(scrollDelta) > 2) {
+  152 |         scrollDirectionRef.current = scrollDelta > 0 ? 1 : -1;
+  153 |         lastScrollYRef.current = scrollY;
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior

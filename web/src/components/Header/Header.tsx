@@ -357,38 +357,19 @@ const HeaderWithMobileState: React.FC<HeaderWithMobileStateProps> = ({
 };
 
 
-// Floating Language Switch positioned outside header
-interface FloatingLanguageSwitchProps {
-  $isMobileMenuOpen: boolean;
-}
-
-const FloatingLanguageSwitch = styled(motion.div)<FloatingLanguageSwitchProps>`
+const FloatingLanguageSwitch = styled(motion.div)`
   position: fixed;
-  top: calc(${props => props.theme.spacing.lg} * 2 + 80px); /* Extra space to avoid header animation */
-  right: ${props => props.theme.spacing['2xl']};
-  z-index: ${props => props.theme.zIndex.dropdown + 10}; /* Above all dropdowns */
-  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  @media (max-width: ${props => props.theme.breakpoints.lg}) {
-    right: ${props => props.theme.spacing.xl};
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    right: ${props => props.theme.spacing.lg};
-    top: calc(${props => props.theme.spacing.lg} * 2 + 70px); /* Extra space on mobile */
-  }
-  
-  /* When mobile menu is open on smaller screens, move below the dropdown */
-  @media (max-width: 1400px) {
-    top: ${props => props.$isMobileMenuOpen 
-      ? `calc(${props.theme.spacing.lg} * 2 + 80px + 300px)` /* Below mobile menu */
-      : `calc(${props.theme.spacing.lg} * 2 + 80px)`}; /* Normal position */
-  }
-  
-  @media (max-width: ${props => props.theme.breakpoints.md}) {
-    top: ${props => props.$isMobileMenuOpen 
-      ? `calc(${props.theme.spacing.lg} * 2 + 70px + 280px)` /* Below mobile menu on mobile */
-      : `calc(${props.theme.spacing.lg} * 2 + 70px)`}; /* Normal position on mobile */
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: ${props => props.theme.zIndex.dropdown + 10};
+
+  button {
+    min-width: auto;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+    border-radius: 999px 0 0 999px;
   }
 `;
 
@@ -397,15 +378,14 @@ const HeaderWithLanguageSwitch: React.FC = () => {
 
   return (
     <>
-      <HeaderWithMobileState 
-        isMobileMenuOpen={isMobileMenuOpen} 
-        setIsMobileMenuOpen={setIsMobileMenuOpen} 
+      <HeaderWithMobileState
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
       />
-      <FloatingLanguageSwitch 
-        $isMobileMenuOpen={isMobileMenuOpen}
-        initial={{ opacity: 0, y: -20 }}
+      <FloatingLanguageSwitch
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.3 }} // Delay to appear after header animation
+        transition={{ duration: 0.3, delay: 0.3 }}
       >
         <LanguageSwitch />
       </FloatingLanguageSwitch>

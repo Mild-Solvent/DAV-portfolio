@@ -7,8 +7,8 @@ const PELLET = '#FFB897';
 const FRAME_SEQ = [0, 1, 2, 1]; // 0,1,2,1,0,1,2,1...
 const FRAME_MS = 110;
 const GHOST_POSITIONS = [40, 60, 80]; // %  — two in middle, one on right
-const PAC_SIZE = 36;
-const GHOST_SIZE = 30;
+const PAC_SIZE = 64;
+const GHOST_SIZE = 44;
 
 const powerPulse = keyframes`
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -23,10 +23,10 @@ const ghostBob = keyframes`
 const Wrap = styled.div`
   position: relative;
   width: 100%;
-  height: 44px;
+  height: 72px;
   pointer-events: none;
   z-index: 20;
-  margin: 0 0 -22px 0; /* overlap About so the pellet line sits on About's top edge */
+  margin: 0 0 -36px 0;
 `;
 
 const Track = styled.div`
@@ -34,20 +34,7 @@ const Track = styled.div`
   inset: 0;
 `;
 
-const MazeLine = styled.div<{ $progress: number }>`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 3px;
-  border-radius: 2px;
-  background: #2121DE;
-  box-shadow: 0 0 6px rgba(33, 33, 222, 0.55);
-  clip-path: inset(0 0 0 ${p => p.$progress * 100}%);
-`;
-
-const Pellets = styled.div<{ $progress: number }>`
+const Pellets = styled.div`
   position: absolute;
   left: 0;
   right: 0;
@@ -58,7 +45,6 @@ const Pellets = styled.div<{ $progress: number }>`
   justify-content: space-between;
   align-items: center;
   padding: 0 2.5%;
-  clip-path: inset(0 0 0 ${p => p.$progress * 100}%);
 `;
 
 const Pellet = styled.span<{ $power?: boolean }>`
@@ -83,10 +69,9 @@ const Ghost = styled.img<{ $left: number; $eaten: boolean }>`
   image-rendering: -webkit-optimize-contrast;
 `;
 
-const Pac = styled.img<{ $progress: number }>`
+const Pac = styled.img`
   position: absolute;
   top: 50%;
-  left: ${p => p.$progress * 100}%;
   width: ${PAC_SIZE}px;
   height: ${PAC_SIZE}px;
   transform: translate(-50%, -50%);
@@ -127,8 +112,7 @@ const PacmanDivider: React.FC = () => {
   return (
     <Wrap ref={ref}>
       <Track>
-        <MazeLine $progress={progress} />
-        <Pellets $progress={progress}>
+        <Pellets style={{ clipPath: `inset(0 0 0 ${progress * 100}%)` }}>
           {pellets.map(i => <Pellet key={i} $power={i % 7 === 3} />)}
         </Pellets>
 
@@ -142,7 +126,11 @@ const PacmanDivider: React.FC = () => {
           />
         ))}
 
-        <Pac src={`/pacman/phase${phaseIdx}.png`} alt="Pac-Man" $progress={progress} />
+        <Pac
+          src={`/pacman/phase${phaseIdx}.png`}
+          alt="Pac-Man"
+          style={{ left: `${progress * 100}%` }}
+        />
       </Track>
     </Wrap>
   );
