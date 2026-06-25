@@ -315,54 +315,78 @@ export default function TermsAndConditions() {
           </Header>
           
           <Content>
-            <h2>Acceptance of Terms</h2>
+            <h2>1. Provider</h2>
             <p>
-              By accessing and using this portfolio website, you accept and agree to be bound by the terms and provision of this agreement.
+              These Terms &amp; Conditions (&quot;Terms&quot;) govern the use of the website <strong>davdev.eu</strong> and the services offered by <strong>DAV Development</strong>, based in Bratislava, Slovakia (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;). Contact: <a href="mailto:dav.development.official@gmail.com">dav.development.official@gmail.com</a>, phone: +421 918 139 035.
             </p>
 
-            <h2>Use of the Website</h2>
+            <h2>2. Acceptance of Terms</h2>
             <p>
-              This website is a personal portfolio showcasing professional work and skills. You may:
+              By accessing the website or submitting a contact / booking form, you confirm that you have read, understood and agree to be bound by these Terms. If you do not agree, please do not use the website.
             </p>
+
+            <h2>3. Services Offered</h2>
+            <p>
+              The website presents information about the services we provide, including but not limited to: web development, mobile application development, UI/UX design, SaaS development, e-commerce solutions, hosting and DevOps. The website itself is informational; concrete services are delivered only on the basis of a separate written or electronic agreement (e.g. via email confirmation, signed contract or order).
+            </p>
+
+            <h2>4. Inquiries, Quotes and Contracts</h2>
             <ul>
-              <li>Browse and view the content for personal or professional purposes</li>
-              <li>Share links to the website</li>
-              <li>Contact us through the provided contact methods</li>
+              <li>Information published on the website (including the price calculator) is for guidance only and does not constitute a binding offer within the meaning of §43a of the Slovak Civil Code.</li>
+              <li>A binding contract is concluded only after we confirm the order or specification in writing (including email).</li>
+              <li>For consumers (Act No. 102/2014 Coll.) we will provide all statutory pre-contractual information, including the right of withdrawal where applicable.</li>
             </ul>
 
-            <h2>Intellectual Property</h2>
+            <h2>5. Permitted Use of the Website</h2>
+            <p>You may browse the website for personal and lawful business purposes. You agree not to:</p>
+            <ul>
+              <li>use the website in any way that violates applicable law;</li>
+              <li>attempt to gain unauthorised access, scrape, mass-download, or disrupt the site;</li>
+              <li>submit false, misleading, illegal or harmful content through forms;</li>
+              <li>introduce viruses, malware, or other harmful code.</li>
+            </ul>
+
+            <h2>6. Intellectual Property</h2>
             <p>
-              The content displayed on this website, including but not limited to text, graphics, photographs, images, and code examples, is the property of the website owner unless otherwise stated. Unauthorized use is prohibited.
+              All content on this website (texts, graphics, layout, logo, source code, animations, illustrations, calculator logic, etc.) is the intellectual property of DAV Development or its licensors and is protected by Slovak Act No. 185/2015 Coll. (Copyright Act) and applicable EU and international law. Any reproduction, distribution, modification, or commercial use without prior written consent is prohibited.
+            </p>
+            <p>
+              Third-party trademarks, logos and product names mentioned on the site (e.g. React, Next.js, Vue.js, Figma) remain the property of their respective owners and are used only descriptively.
             </p>
 
-            <h2>Hosting and Availability</h2>
+            <h2>7. External Links</h2>
             <p>
-              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>. We make no guarantees about the availability, reliability, or uptime of the website. GitHub&apos;s terms of service also apply to the hosting of this site.
+              The website may contain links to third-party websites. We are not responsible for the content, availability, or privacy practices of any third-party websites and do not endorse them.
             </p>
 
-            <h2>No Data Collection</h2>
+            <h2>8. Availability and Changes</h2>
             <p>
-              <strong>This website does not collect personal data.</strong> We do not use tracking cookies, analytics, or any form of data collection. Your privacy is respected and protected.
+              We strive to keep the website available, but we provide no guarantee of uninterrupted, error-free or fully secure operation. We reserve the right to modify, suspend or discontinue any part of the website (or change these Terms) at any time, without prior notice.
             </p>
 
-            <h2>External Links</h2>
+            <h2>9. Limitation of Liability</h2>
             <p>
-              This website may contain links to external websites. We are not responsible for the content, privacy policies, or practices of third-party websites.
+              To the maximum extent permitted by law, DAV Development is not liable for any indirect, incidental, consequential or punitive damages arising out of or in connection with the use of (or inability to use) the website or the information published on it. Nothing in these Terms limits our liability for damage caused intentionally or by gross negligence, or for any liability that cannot be excluded under Slovak law.
             </p>
 
-            <h2>Limitation of Liability</h2>
+            <h2>10. Personal Data</h2>
             <p>
-              This website is provided &quot;as is&quot; without any representations or warranties. We shall not be liable for any damages arising from the use of this website.
+              Processing of personal data submitted through the website is described in our <a href="./privacy-policy">Privacy Policy</a> and is performed in accordance with the GDPR and Slovak Act No. 18/2018 Coll.
             </p>
 
-            <h2>Contact Information</h2>
+            <h2>11. Consumer Dispute Resolution (ARS)</h2>
             <p>
-              If you have any questions about these terms and conditions, please contact us through the contact form on our website.
+              If you are a consumer and you believe your rights have been violated, you may turn to the alternative dispute resolution body, such as the <strong>Slovak Trade Inspection (SOI)</strong>, Bajkalská 21/A, 827 99 Bratislava, <a href="https://www.soi.sk" target="_blank" rel="noopener noreferrer">www.soi.sk</a>, or use the EU Online Dispute Resolution platform: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>.
             </p>
 
-            <h2>Changes to Terms</h2>
+            <h2>12. Governing Law &amp; Jurisdiction</h2>
             <p>
-              We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting on this page.
+              These Terms are governed by the laws of the Slovak Republic. Any disputes arising out of or in connection with these Terms shall fall under the jurisdiction of the competent Slovak courts, unless mandatory consumer-protection legislation provides otherwise.
+            </p>
+
+            <h2>13. Contact</h2>
+            <p>
+              For any questions regarding these Terms please contact us at <a href="mailto:dav.development.official@gmail.com">dav.development.official@gmail.com</a> or +421 918 139 035.
             </p>
           </Content>
         </ContentCard>

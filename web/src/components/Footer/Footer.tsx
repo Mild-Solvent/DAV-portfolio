@@ -1,6 +1,8 @@
+"use client";
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useTranslation } from '../../contexts/TranslationContext';
 
 const FooterContainer = styled.footer`
   background: #000000;
@@ -65,15 +67,16 @@ const FooterButton = styled(Link)`
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
+  const { language } = useTranslation();
+
   return (
     <FooterContainer>
       <Container>
         <FooterLinks>
-          <FooterButton href="/privacy-policy">
+          <FooterButton href={`/${language}/privacy-policy`}>
             Privacy Policy
           </FooterButton>
-          <FooterButton href="/terms-and-conditions">
+          <FooterButton href={`/${language}/terms-and-conditions`}>
             Terms & Conditions
           </FooterButton>
         </FooterLinks>

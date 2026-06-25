@@ -293,34 +293,91 @@ export default function PrivacyPolicy() {
           </Header>
           
           <Content>
-            <h2>Data Collection</h2>
+            <h2>1. Data Controller</h2>
             <p>
-              <strong>We do not collect any personal data.</strong> This portfolio website is designed with privacy in mind and operates without tracking, analytics, or data collection of any kind.
+              <strong>DAV Development</strong>, based in Bratislava, Slovakia (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is the controller of personal data processed through this website (davdev.eu). Contact: <a href="mailto:dav.development.official@gmail.com">dav.development.official@gmail.com</a>, phone: +421 918 139 035.
             </p>
 
-            <h2>Hosting</h2>
+            <h2>2. What Data We Collect</h2>
             <p>
-              This website is hosted on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> using GitHub Pages. GitHub may collect certain technical information as part of their hosting service. Please refer to <a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub&apos;s Privacy Policy</a> for information about their data practices.
+              We only process personal data that you voluntarily provide to us:
+            </p>
+            <ul>
+              <li><strong>Contact form / booking form:</strong> name, email address, phone number (optional), subject, message content and any project details you submit.</li>
+              <li><strong>Communication data:</strong> the content of emails or messages you send to us directly.</li>
+              <li><strong>Technical data:</strong> language preference stored in your browser&apos;s local storage solely to remember your language choice.</li>
+            </ul>
+            <p>
+              We do <strong>not</strong> use marketing cookies, advertising trackers, or third-party analytics scripts (such as Google Analytics, Meta Pixel, etc.).
             </p>
 
-            <h2>Cookies</h2>
+            <h2>3. Legal Basis &amp; Purpose</h2>
             <p>
-              This website does not use cookies for tracking or analytics. Any cookies that may be present are solely for essential website functionality.
+              We process your personal data on the following legal bases under Regulation (EU) 2016/679 (GDPR) and Slovak Act No. 18/2018 Coll. on the Protection of Personal Data:
+            </p>
+            <ul>
+              <li><strong>Art. 6(1)(b) GDPR – performance of a contract / pre-contractual steps:</strong> to respond to your inquiry, prepare a quote, or deliver our services.</li>
+              <li><strong>Art. 6(1)(f) GDPR – legitimate interest:</strong> to maintain security of the website and respond to legitimate business communication.</li>
+              <li><strong>Art. 6(1)(c) GDPR – legal obligation:</strong> to comply with accounting, tax and other statutory obligations.</li>
+            </ul>
+
+            <h2>4. Storage Period</h2>
+            <p>
+              We keep personal data only as long as necessary for the purpose for which it was collected:
+            </p>
+            <ul>
+              <li>Inquiries that do not lead to a contract: up to 6 months.</li>
+              <li>Inquiries that lead to a contract: for the duration of the contract and up to 10 years afterwards (statutory accounting period under Slovak law).</li>
+              <li>Language preference (local storage): until you clear your browser data.</li>
+            </ul>
+
+            <h2>5. Recipients of Data</h2>
+            <p>
+              Personal data may be shared with the following categories of recipients, only to the extent strictly necessary:
+            </p>
+            <ul>
+              <li><strong>Email and hosting providers</strong> (e.g. Google Workspace / Gmail) used to receive and store your messages.</li>
+              <li><strong>Hosting and infrastructure providers</strong> for the website itself.</li>
+              <li><strong>Accountants, tax advisors and legal advisors</strong> bound by professional confidentiality.</li>
+              <li><strong>Public authorities</strong> where required by law.</li>
+            </ul>
+            <p>
+              We do not sell your personal data and do not transfer it outside the EU/EEA unless an appropriate safeguard under Chapter V of the GDPR is in place (e.g. EU Standard Contractual Clauses).
             </p>
 
-            <h2>Third-Party Services</h2>
+            <h2>6. Your Rights</h2>
             <p>
-              We do not integrate with third-party tracking services, analytics platforms, or advertising networks. The website operates as a static site without external data sharing.
+              Under the GDPR you have the following rights, which you can exercise at any time by writing to <a href="mailto:dav.development.official@gmail.com">dav.development.official@gmail.com</a>:
+            </p>
+            <ul>
+              <li>Right of access (Art. 15)</li>
+              <li>Right to rectification (Art. 16)</li>
+              <li>Right to erasure / &quot;right to be forgotten&quot; (Art. 17)</li>
+              <li>Right to restriction of processing (Art. 18)</li>
+              <li>Right to data portability (Art. 20)</li>
+              <li>Right to object to processing (Art. 21)</li>
+              <li>Right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal</li>
+              <li>Right to lodge a complaint with the supervisory authority: <strong>Úrad na ochranu osobných údajov SR</strong>, Hraničná 12, 820 07 Bratislava 27, <a href="https://dataprotection.gov.sk" target="_blank" rel="noopener noreferrer">dataprotection.gov.sk</a></li>
+            </ul>
+
+            <h2>7. Cookies &amp; Local Storage</h2>
+            <p>
+              This website uses only technically necessary local storage to remember your language preference. It does not place advertising or analytics cookies. No consent is required for strictly necessary storage under §55(5) of the Slovak Electronic Communications Act.
             </p>
 
-            <h2>Contact</h2>
+            <h2>8. Security</h2>
             <p>
-              If you have any questions about this privacy policy, please contact us through the contact form on our website.
+              We implement appropriate technical and organisational measures (TLS encryption, access controls, regular updates) to protect your personal data against unauthorised access, loss or disclosure.
             </p>
 
-            <h2>Changes to This Policy</h2>
+            <h2>9. Children</h2>
             <p>
-              We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated &quot;last modified&quot; date.
+              Our services are not directed to children under 16. We do not knowingly process personal data of children without parental consent.
+            </p>
+
+            <h2>10. Changes to This Policy</h2>
+            <p>
+              We may update this policy from time to time. The current version is always available on this page with the &quot;Last updated&quot; date above. Material changes will be communicated where appropriate.
             </p>
           </Content>
         </ContentCard>

@@ -196,7 +196,7 @@ const Contact: React.FC = () => {
 
             <ContactItem>
               <ContactLabel>{t('contact.phone')}</ContactLabel>
-              <ContactValue>+421 914 229 122</ContactValue>
+              <ContactValue>+421 918 139 035</ContactValue>
             </ContactItem>
 
             <ContactItem>
@@ -212,7 +212,6 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <BookingButton href={`/${language}/calendar`}>
-              <ButtonIcon>📅</ButtonIcon>
               Book a Meeting
             </BookingButton>
           </ButtonWrapper>

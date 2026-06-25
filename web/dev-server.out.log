@@ -280,3 +280,11 @@
  GET /en/ 200 in 96ms (next.js: 6ms, generate-params: 32µs, application-code: 90ms)
  GET /sk/ 200 in 57ms (next.js: 13ms, generate-params: 8ms, application-code: 44ms)
  GET /sk/ 200 in 376ms (next.js: 14ms, generate-params: 9ms, application-code: 362ms)
+✓ Compiled in 38ms
+ GET /en/ 200 in 150ms (next.js: 95ms, generate-params: 9ms, application-code: 55ms)
+✓ Compiled in 53ms
+ GET /en/ 200 in 146ms (next.js: 93ms, generate-params: 9ms, application-code: 53ms)
+✓ Compiled in 43ms
+ GET /en/ 200 in 130ms (next.js: 80ms, generate-params: 8ms, application-code: 49ms)
+✓ Compiled in 71ms
+ GET /en/ 200 in 138ms (next.js: 94ms, generate-params: 9ms, application-code: 44ms)
