@@ -11,7 +11,6 @@ const PAC_SIZE = 64;
 const GHOST_SIZE = 44;
 
 type RocketFlight = {
-  rotation: number;
   x: number;
   y: number;
 };
@@ -122,18 +121,67 @@ const Rocket = styled.img`
   height: 92px;
   width: auto;
   transform-origin: center;
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   image-rendering: -webkit-optimize-contrast;
   filter: drop-shadow(0 0 14px rgba(86, 211, 100, 0.55));
 `;
 
+const cloudFloat = keyframes`
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4px, -6px); }
+`;
+
+const CloudLayer = styled.div<{ $visible: boolean }>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 140px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: ${p => p.$visible ? 1 : 0};
+  transition: opacity 0.5s ease-out;
+  z-index: -1;
+`;
+
+const Cloud = styled.div<{ $top: string; $left: string; $size: number; $delay: number; $opacity: number }>`
+  position: absolute;
+  top: ${p => p.$top};
+  left: ${p => p.$left};
+  width: ${p => p.$size}px;
+  opacity: ${p => p.$opacity};
+  animation: ${cloudFloat} 4.5s ${p => p.$delay}s infinite ease-in-out;
+  filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.18));
+
+  svg { display: block; width: 100%; height: auto; }
+`;
+
+const CloudSVG: React.FC = () => (
+  <svg viewBox="0 0 140 80" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="35" cy="50" rx="28" ry="20" fill="#f5f7fa" />
+    <ellipse cx="65" cy="36" rx="34" ry="24" fill="#ffffff" />
+    <ellipse cx="100" cy="46" rx="30" ry="22" fill="#f5f7fa" />
+    <ellipse cx="70" cy="62" rx="46" ry="16" fill="#ffffff" />
+  </svg>
+);
+
+type Direction = 'down' | 'up';
+
 const PacmanLoop: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+  const lastDirection = useRef<Direction>('down');
   const [progress, setProgress] = useState(0);
-  const [flight, setFlight] = useState<RocketFlight>({ rotation: 0, x: 0, y: 0 });
+  const [flight, setFlight] = useState<RocketFlight>({ x: 0, y: 0 });
+  const [direction, setDirection] = useState<Direction>('down');
+  const [landed, setLanded] = useState(false);
+  const [phase, setPhase] = useState<1 | 2 | 3>(1);
+  const [nearLanding, setNearLanding] = useState(false);
   const [frame, setFrame] = useState(0);
 
   useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
     const update = () => {
       const el = ref.current;
       if (!el) return;
@@ -142,62 +190,112 @@ const PacmanLoop: React.FC = () => {
       const p = (vh - rect.top) / (vh * 0.5);
       setProgress(Math.min(1, Math.max(0, p)));
 
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      if (Math.abs(delta) > 1) {
+        const next: Direction = delta > 0 ? 'down' : 'up';
+        if (next !== lastDirection.current) {
+          lastDirection.current = next;
+          setDirection(next);
+        }
+      }
+      lastScrollY.current = currentY;
+
       const skills = document.getElementById('skills');
       if (!skills) return;
 
       const skillsRect = skills.getBoundingClientRect();
-      const scrollY = window.scrollY;
+      const scrollY = currentY;
       const dividerTop = rect.top + scrollY;
       const skillsTop = skillsRect.top + scrollY;
+      const skillsBottom = skillsTop + skillsRect.height;
       const launchScroll = dividerTop - vh * 0.52;
-      const rotationEndScroll = launchScroll + vh * 1.15;
-      const landingScroll = skillsTop - vh * 0.05;
-      const landingRotationStart = landingScroll - vh * 0.65;
-      const rotationProgress = Math.min(
-        1,
-        Math.max(0, (scrollY - launchScroll) / Math.max(1, rotationEndScroll - launchScroll))
-      );
-      const landingRotationProgress = Math.min(
-        1,
-        Math.max(
-          0,
-          (scrollY - landingRotationStart) / Math.max(1, landingScroll - landingRotationStart)
-        )
-      );
-      const cruiseProgress = Math.min(
-        1,
-        Math.max(0, (scrollY - rotationEndScroll) / Math.max(1, landingScroll - rotationEndScroll))
-      );
-
       const startX = rect.left + rect.width * 0.04;
       const startY = dividerTop + rect.height / 2;
-      const landingInset = window.innerWidth <= 768 ? 54 : 84;
-      const targetX = skillsRect.left + landingInset;
-      const targetY = skillsTop + vh * 0.28;
-
+      const isMobile = window.innerWidth <= 768;
       const startViewportY = startY - launchScroll;
-      const targetViewportY = targetY - landingScroll;
-      const trackedViewportY = startViewportY
-        + (targetViewportY - startViewportY) * cruiseProgress;
-      const trackedDocumentY = scrollY
-        + trackedViewportY;
-      const currentY = scrollY <= launchScroll
-        ? startY
-        : scrollY >= landingScroll
-          ? targetY
-          : trackedDocumentY;
 
-      // Phase 1: rotate while holding the same viewport position.
-      // Phase 2: travel with the user's scroll position.
-      // Phase 3: lock to the Technical Skills landing point.
-      const baseRotation = (rotationProgress + landingRotationProgress) * 180;
+      let docX: number;
+      let docY: number;
+      let currentPhase: 1 | 2 | 3 = 1;
+      let isLanded = false;
+      let isNearLanding = false;
+
+      if (isMobile) {
+        // Mobile: straight descent on the left side (unchanged).
+        const landingInset = 54;
+        const targetX = skillsRect.left + landingInset;
+        const targetY = skillsBottom - vh * 0.2;
+        const landingScroll = targetY - startViewportY;
+        const t = Math.min(
+          1,
+          Math.max(0, (scrollY - launchScroll) / Math.max(1, landingScroll - launchScroll))
+        );
+        docX = startX + (targetX - startX) * t;
+        docY = scrollY <= launchScroll
+          ? startY
+          : scrollY >= landingScroll
+            ? targetY
+            : scrollY + startViewportY;
+        isLanded = t >= 0.995;
+      } else {
+        // Desktop: L-shaped 3-phase trajectory.
+        // Phase 1: vertical descent on the left.
+        // Phase 2: 90° turn → fly horizontally to the centre.
+        // Phase 3: vertical descent from the centre to the landing point
+        //          (between Cloud & DevOps and Dizajn & UX).
+        const turnY = skillsTop + skillsRect.height * 0.62;
+        const centerX = skillsRect.left + skillsRect.width / 2;
+        const targetX = centerX;
+        const targetY = skillsBottom - vh * 0.5;
+
+        const phase1Len = Math.max(1, turnY - startY);
+        const phase2Len = Math.min(vh * 0.28, Math.max(120, (targetY - turnY) * 0.45));
+        const phase3Len = Math.max(1, (targetY - turnY) - phase2Len);
+
+        const phase1End = launchScroll + phase1Len;
+        const phase2End = phase1End + phase2Len;
+        const landingScroll = phase2End + phase3Len;
+
+        if (scrollY <= launchScroll) {
+          docX = startX;
+          docY = startY;
+          currentPhase = 1;
+        } else if (scrollY <= phase1End) {
+          currentPhase = 1;
+          const t = (scrollY - launchScroll) / phase1Len;
+          docX = startX;
+          docY = startY + (turnY - startY) * t;
+        } else if (scrollY <= phase2End) {
+          currentPhase = 2;
+          const t = (scrollY - phase1End) / phase2Len;
+          docX = startX + (centerX - startX) * t;
+          docY = turnY;
+        } else if (scrollY <= landingScroll) {
+          currentPhase = 3;
+          const t = (scrollY - phase2End) / phase3Len;
+          docX = centerX;
+          docY = turnY + (targetY - turnY) * t;
+          isNearLanding = t >= 0.7;
+        } else {
+          currentPhase = 3;
+          docX = targetX;
+          docY = targetY;
+          isLanded = true;
+          isNearLanding = true;
+        }
+      }
 
       setFlight({
-        rotation: baseRotation,
-        x: (targetX - startX) * cruiseProgress,
-        y: currentY - startY,
+        x: docX - startX,
+        y: docY - startY,
       });
+
+      setPhase(currentPhase);
+      setLanded(isLanded);
+      setNearLanding(isNearLanding);
     };
+
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
@@ -214,9 +312,16 @@ const PacmanLoop: React.FC = () => {
 
   const pellets = Array.from({ length: 28 }, (_, i) => i);
   const phaseIdx = FRAME_SEQ[frame];
-  const pacX = (1 - progress) * 100; // right → left
+  const pacX = (1 - progress) * 100;
   const reachedRocket = pacX <= 4;
   const rocketSrc = reachedRocket ? '/pacman/rocket-pacman.png' : '/pacman/rocket.png';
+
+  // rocket.png points up by default → 0deg = up, 180deg = down, 90deg = right, -90deg = left
+  const rotation = (() => {
+    if (landed) return 0;
+    if (phase === 2) return direction === 'down' ? 90 : -90;
+    return direction === 'down' ? 180 : 0;
+  })();
 
   return (
     <Wrap ref={ref}>
@@ -227,11 +332,25 @@ const PacmanLoop: React.FC = () => {
             transform: `translate(calc(-50% + ${reachedRocket ? flight.x : 0}px), calc(-50% + ${reachedRocket ? flight.y : 0}px))`,
           }}
         >
+          <CloudLayer $visible={reachedRocket && nearLanding}>
+            <Cloud $top="5%" $left="-15%" $size={62} $delay={0} $opacity={0.85}>
+              <CloudSVG />
+            </Cloud>
+            <Cloud $top="18%" $left="70%" $size={55} $delay={0.5} $opacity={0.75}>
+              <CloudSVG />
+            </Cloud>
+            <Cloud $top="58%" $left="-10%" $size={68} $delay={1} $opacity={0.8}>
+              <CloudSVG />
+            </Cloud>
+            <Cloud $top="62%" $left="68%" $size={58} $delay={1.5} $opacity={0.7}>
+              <CloudSVG />
+            </Cloud>
+          </CloudLayer>
           <Rocket
             src={rocketSrc}
             alt="DAV rocket"
             style={{
-              transform: `rotate(${reachedRocket ? flight.rotation : 0}deg)`,
+              transform: `rotate(${reachedRocket ? rotation : 0}deg)`,
             }}
           />
         </RocketPosition>

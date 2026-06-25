@@ -86,16 +86,16 @@ const SkillsWrapper = styled.div`
 
 const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr auto 1fr;
   gap: ${props => props.theme.spacing['2xl']};
-  
+
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr;
     gap: ${props => props.theme.spacing.xl};
   }
 `;
 
-const SkillCard = styled(motion.div)`
+const SkillCard = styled(motion.div)<{ $skillKey?: string }>`
   background: transparent;
   border: none;
   border-radius: ${props => props.theme.borderRadius.md};
@@ -103,9 +103,16 @@ const SkillCard = styled(motion.div)`
   transition: all 0.3s ease;
   position: relative;
   z-index: 3;
-  
+
   &:hover {
     transform: translateY(-2px);
+  }
+
+  @media (min-width: calc(${props => props.theme.breakpoints.md} + 1px)) {
+    ${props => props.$skillKey === 'backend' && 'grid-column: 1; grid-row: 1;'}
+    ${props => props.$skillKey === 'frontend' && 'grid-column: 3; grid-row: 1;'}
+    ${props => props.$skillKey === 'cloud' && 'grid-column: 1; grid-row: 2;'}
+    ${props => props.$skillKey === 'design' && 'grid-column: 3; grid-row: 2;'}
   }
 `;
 
@@ -114,6 +121,30 @@ const SkillHeader = styled.div`
   align-items: center;
   gap: ${props => props.theme.spacing.md};
   margin-bottom: ${props => props.theme.spacing.lg};
+`;
+
+const SkillDivider = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
+    grid-column: 1 / -1;
+    margin: calc(-1 * ${props => props.theme.spacing.xl}) 0;
+  }
+
+  @media (min-width: calc(${props => props.theme.breakpoints.md} + 1px)) {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+`;
+
+const SkillImage = styled.img`
+  height: 260px;
+  width: auto;
+  max-width: 100%;
+  image-rendering: -webkit-optimize-contrast;
 `;
 
 
@@ -216,26 +247,33 @@ const Skills: React.FC = () => {
           <SkillsWrapper>
             <SkillsGrid>
               {Object.entries(portfolioContent.skills).map(([skillKey, skillCategory], index) => (
-                <SkillCard key={index} variants={cardVariants}>
-                  <SkillHeader>
-                    <SkillTitle>{getSkillTitle(skillKey, skillCategory.title)}</SkillTitle>
-                  </SkillHeader>
-                  
-                  <SkillTechnologies>
-                    {skillCategory.technologies.map((tech, techIndex) => (
-                      <TechnologyTag
-                        key={techIndex}
-                        variants={tagVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        transition={{ delay: techIndex * 0.1 }}
-                      >
-                        {tech}
-                      </TechnologyTag>
-                    ))}
-                  </SkillTechnologies>
-                </SkillCard>
+                <React.Fragment key={index}>
+                  {skillKey === 'backend' && (
+                    <SkillDivider>
+                      <SkillImage src="/pacman/frontend-backend.png" alt="" />
+                    </SkillDivider>
+                  )}
+                  <SkillCard variants={cardVariants} $skillKey={skillKey}>
+                    <SkillHeader>
+                      <SkillTitle>{getSkillTitle(skillKey, skillCategory.title)}</SkillTitle>
+                    </SkillHeader>
+
+                    <SkillTechnologies>
+                      {skillCategory.technologies.map((tech, techIndex) => (
+                        <TechnologyTag
+                          key={techIndex}
+                          variants={tagVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                          transition={{ delay: techIndex * 0.1 }}
+                        >
+                          {tech}
+                        </TechnologyTag>
+                      ))}
+                    </SkillTechnologies>
+                  </SkillCard>
+                </React.Fragment>
               ))}
             </SkillsGrid>
           </SkillsWrapper>

@@ -61,3 +61,163 @@ Example:
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+⨯ ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  [90m190 |[0m       [90m// initial viewport-Y (at launch) to its final viewport-Y (at landing),[0m
+  [90m191 |[0m       [90m// then convert back to document-Y. Keeps the rocket visible during cruise.[0m
+[31m[1m>[0m [90m192 |[0m       [36mconst[0m startViewportY = startY - launchScroll;
+  [90m    |[0m             [31m[1m^^^^^^^^^^^^^^[0m
+  [90m193 |[0m       [36mconst[0m targetViewportY = targetY - landingScroll;
+  [90m194 |[0m       [36mconst[0m trackedViewportY = startViewportY
+  [90m195 |[0m         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+⨯ ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  [90m190 |[0m       [90m// initial viewport-Y (at launch) to its final viewport-Y (at landing),[0m
+  [90m191 |[0m       [90m// then convert back to document-Y. Keeps the rocket visible during cruise.[0m
+[31m[1m>[0m [90m192 |[0m       [36mconst[0m startViewportY = startY - launchScroll;
+  [90m    |[0m             [31m[1m^^^^^^^^^^^^^^[0m
+  [90m193 |[0m       [36mconst[0m targetViewportY = targetY - landingScroll;
+  [90m194 |[0m       [36mconst[0m trackedViewportY = startViewportY
+  [90m195 |[0m         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+⨯ ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  [90m190 |[0m       [90m// initial viewport-Y (at launch) to its final viewport-Y (at landing),[0m
+  [90m191 |[0m       [90m// then convert back to document-Y. Keeps the rocket visible during cruise.[0m
+[31m[1m>[0m [90m192 |[0m       [36mconst[0m startViewportY = startY - launchScroll;
+  [90m    |[0m             [31m[1m^^^^^^^^^^^^^^[0m
+  [90m193 |[0m       [36mconst[0m targetViewportY = targetY - landingScroll;
+  [90m194 |[0m       [36mconst[0m trackedViewportY = startViewportY
+  [90m195 |[0m         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+⨯ ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  [90m190 |[0m       [90m// initial viewport-Y (at launch) to its final viewport-Y (at landing),[0m
+  [90m191 |[0m       [90m// then convert back to document-Y. Keeps the rocket visible during cruise.[0m
+[31m[1m>[0m [90m192 |[0m       [36mconst[0m startViewportY = startY - launchScroll;
+  [90m    |[0m             [31m[1m^^^^^^^^^^^^^^[0m
+  [90m193 |[0m       [36mconst[0m targetViewportY = targetY - landingScroll;
+  [90m194 |[0m       [36mconst[0m trackedViewportY = startViewportY
+  [90m195 |[0m         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  190 |       // initial viewport-Y (at launch) to its final viewport-Y (at landing),
+  191 |       // then convert back to document-Y. Keeps the rocket visible during cruise.
+> 192 |       const startViewportY = startY - launchScroll;
+      |             ^^^^^^^^^^^^^^
+  193 |       const targetViewportY = targetY - landingScroll;
+  194 |       const trackedViewportY = startViewportY
+  195 |         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
+    at <unknown> (Error: (./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
+[browser] Uncaught Error: ./src/components/PacmanDivider/PacmanLoop.tsx:192:13
+the name `startViewportY` is defined multiple times
+  190 |       // initial viewport-Y (at launch) to its final viewport-Y (at landing),
+  191 |       // then convert back to document-Y. Keeps the rocket visible during cruise.
+> 192 |       const startViewportY = startY - launchScroll;
+      |             ^^^^^^^^^^^^^^
+  193 |       const targetViewportY = targetY - landingScroll;
+  194 |       const trackedViewportY = startViewportY
+  195 |         + (targetViewportY - startViewportY) * cruiseProgress;
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component Browser]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/PacmanDivider/PacmanLoop.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Client Component SSR]
+    ./src/app/[lang]/page-wrapper.tsx [Server Component]
+    ./src/app/[lang]/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
+    at <unknown> (Error: (./src/components/PacmanDivider/PacmanLoop.tsx:192:13)
