@@ -288,3 +288,10 @@
  GET /en/ 200 in 130ms (next.js: 80ms, generate-params: 8ms, application-code: 49ms)
 ✓ Compiled in 71ms
  GET /en/ 200 in 138ms (next.js: 94ms, generate-params: 9ms, application-code: 44ms)
+ GET / 200 in 209ms (next.js: 88ms, application-code: 121ms)
+ GET /en/ 200 in 47ms (next.js: 13ms, generate-params: 8ms, application-code: 34ms)
+ GET /en/privacy-policy/ 200 in 1670ms (next.js: 1633ms, generate-params: 450ms, application-code: 37ms)
+ GET / 200 in 37ms (next.js: 5ms, application-code: 32ms)
+ GET /en/ 200 in 87ms (next.js: 12ms, generate-params: 8ms, application-code: 75ms)
+ GET /en/ 200 in 34ms (next.js: 4ms, generate-params: 29µs, application-code: 30ms)
+ GET /en/terms-and-conditions/ 200 in 1268ms (next.js: 1232ms, generate-params: 426ms, application-code: 36ms)
